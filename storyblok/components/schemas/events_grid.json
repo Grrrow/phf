@@ -1,0 +1,20 @@
+{
+  "component": {
+    "name": "events_grid",
+    "display_name": "Events Grid",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true
+      },
+      "description": {
+        "type": "textarea",
+        "pos": 1,
+        "translatable": true
+      }
+    }
+  }
+}

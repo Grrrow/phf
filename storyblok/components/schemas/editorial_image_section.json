@@ -1,0 +1,105 @@
+{
+  "component": {
+    "name": "editorial_image_section",
+    "display_name": "Editorial Image Section",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "image": {
+        "type": "asset",
+        "pos": 0,
+        "translatable": false,
+        "description": "Sube una imagen o fotografía en alta resolución."
+      },
+      "image_alt": {
+        "type": "text",
+        "pos": 1,
+        "translatable": true,
+        "description": "Texto alternativo para SEO."
+      },
+      "image_is_decorative": {
+        "type": "boolean",
+        "pos": 2,
+        "default_value": false,
+        "translatable": false,
+        "description": "Marcar si no tiene valor semántico."
+      },
+      "caption": {
+        "type": "text",
+        "pos": 3,
+        "translatable": true,
+        "description": "Pie de foto opcional visible bajo la imagen."
+      },
+      "image_width": {
+        "type": "option",
+        "pos": 4,
+        "use_uuid": true,
+        "options": [
+          { "value": "narrow", "name": "Narrow (Estrecha)" },
+          { "value": "medium", "name": "Medium (Media)" },
+          { "value": "wide", "name": "Wide (Ancha)" },
+          { "value": "full", "name": "Full Width (Lado a lado)" }
+        ],
+        "default_value": "medium",
+        "translatable": false,
+        "description": "Controla cuánto ancho ocupará la imagen en pantalla grande."
+      },
+      "image_treatment": {
+        "type": "option",
+        "pos": 5,
+        "use_uuid": true,
+        "options": [
+          { "value": "default", "name": "Color Original" },
+          { "value": "black_white", "name": "Blanco y Negro" },
+          { "value": "warm", "name": "Tono Cálido" }
+        ],
+        "default_value": "default",
+        "translatable": false,
+        "description": "Filtro visual."
+      },
+      "aspect_ratio": {
+        "type": "option",
+        "pos": 6,
+        "use_uuid": true,
+        "options": [
+          { "value": "auto", "name": "Original (Auto)" },
+          { "value": "landscape", "name": "Horizontal (16:9)" },
+          { "value": "portrait", "name": "Vertical (4:5)" },
+          { "value": "square", "name": "Cuadrado (1:1)" },
+          { "value": "cinema", "name": "Cine (21:9)" }
+        ],
+        "default_value": "landscape",
+        "translatable": false,
+        "description": "Proporción de recorte forzado. Elige 'Auto' para no recortar."
+      },
+      "spacing_top": {
+        "type": "option",
+        "pos": 7,
+        "use_uuid": true,
+        "options": [
+          { "value": "none", "name": "Ninguno" },
+          { "value": "small", "name": "Pequeño" },
+          { "value": "medium", "name": "Medio" },
+          { "value": "large", "name": "Grande" }
+        ],
+        "default_value": "large",
+        "translatable": false,
+        "description": "Espaciado (aire) por arriba."
+      },
+      "spacing_bottom": {
+        "type": "option",
+        "pos": 8,
+        "use_uuid": true,
+        "options": [
+          { "value": "none", "name": "Ninguno" },
+          { "value": "small", "name": "Pequeño" },
+          { "value": "medium", "name": "Medio" },
+          { "value": "large", "name": "Grande" }
+        ],
+        "default_value": "medium",
+        "translatable": false,
+        "description": "Espaciado (aire) por abajo."
+      }
+    }
+  }
+}

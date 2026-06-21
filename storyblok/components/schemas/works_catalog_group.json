@@ -1,0 +1,50 @@
+{
+  "component": {
+    "name": "works_catalog_group",
+    "display_name": "Works Catalog Group",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true,
+        "description": "Título del grupo (ej. 'Operas', 'Symphonic'). Aparece en la columna izquierda."
+      },
+      "description": {
+        "type": "textarea",
+        "pos": 1,
+        "translatable": true,
+        "description": "Descripción opcional del grupo."
+      },
+      "items": {
+        "type": "bloks",
+        "pos": 2,
+        "translatable": false,
+        "restrict_components": true,
+        "component_whitelist": [
+          "work_catalog_item"
+        ],
+        "description": "Lista de obras que pertenecen a esta categoría."
+      },
+      "anchor_id": {
+        "type": "text",
+        "pos": 3,
+        "translatable": false,
+        "description": "ID opcional para enlaces internos (ej. 'operas')."
+      },
+      "layout_variant": {
+        "type": "option",
+        "pos": 4,
+        "use_uuid": true,
+        "options": [
+          { "value": "editorial_list", "name": "Editorial List (2 Columns)" },
+          { "value": "compact_list", "name": "Compact List (1 Column Stacked)" }
+        ],
+        "default_value": "editorial_list",
+        "translatable": false,
+        "description": "Variante visual del grupo."
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "component": {
+    "name": "seo",
+    "display_name": "SEO Settings",
+    "component_group_name": "Global",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "meta_title": {
+        "type": "text",
+        "translatable": true,
+        "pos": 0
+      },
+      "meta_description": {
+        "type": "textarea",
+        "translatable": true,
+        "pos": 1
+      },
+      "canonical_url": {
+        "type": "text",
+        "pos": 2
+      },
+      "og_title": {
+        "type": "text",
+        "translatable": true,
+        "pos": 3
+      },
+      "og_description": {
+        "type": "textarea",
+        "translatable": true,
+        "pos": 4
+      },
+      "og_image": {
+        "type": "asset",
+        "pos": 5
+      },
+      "twitter_title": {
+        "type": "text",
+        "translatable": true,
+        "pos": 6
+      },
+      "twitter_description": {
+        "type": "textarea",
+        "translatable": true,
+        "pos": 7
+      },
+      "twitter_image": {
+        "type": "asset",
+        "pos": 8
+      },
+      "noindex": {
+        "type": "boolean",
+        "pos": 9
+      },
+      "nofollow": {
+        "type": "boolean",
+        "pos": 10
+      },
+      "structured_data_type": {
+        "type": "option",
+        "options": [
+          {
+            "name": "WebPage",
+            "value": "WebPage"
+          },
+          {
+            "name": "Person",
+            "value": "Person"
+          },
+          {
+            "name": "Organization",
+            "value": "Organization"
+          },
+          {
+            "name": "Event",
+            "value": "Event"
+          },
+          {
+            "name": "MusicEvent",
+            "value": "MusicEvent"
+          },
+          {
+            "name": "Article",
+            "value": "Article"
+          },
+          {
+            "name": "CreativeWork",
+            "value": "CreativeWork"
+          }
+        ],
+        "pos": 11
+      },
+      "focus_keyword": {
+        "type": "text",
+        "translatable": true,
+        "pos": 12
+      },
+      "secondary_keywords": {
+        "type": "textarea",
+        "translatable": true,
+        "pos": 13
+      },
+      "seo_notes": {
+        "type": "textarea",
+        "translatable": true,
+        "pos": 14
+      }
+    }
+  }
+}

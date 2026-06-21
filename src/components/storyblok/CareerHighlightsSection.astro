@@ -1,0 +1,121 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+
+const { blok } = Astro.props;
+
+const theme = blok.theme || 'light';
+const showLine = typeof blok.show_decorative_line === 'boolean' ? blok.show_decorative_line : true;
+const layoutVariant = blok.layout_variant || 'editorial_timeline';
+
+const themeClass = theme === 'dark' ? 'highlight-theme-dark' : 'highlight-theme-light';
+---
+
+<section {...storyblokEditable(blok)} class={`career-highlights-section ${themeClass}`}>
+  <div class="container">
+    
+    <header class="section-header">
+      {blok.eyebrow && <span class="eyebrow">{blok.eyebrow}</span>}
+      {blok.title && <h2 class="title">{blok.title}</h2>}
+      
+      {showLine && <div class="decorative-line" aria-hidden="true"></div>}
+      
+      {blok.subtitle && <p class="subtitle">{blok.subtitle}</p>}
+    </header>
+
+    {blok.items && blok.items.length > 0 && (
+      <div class={`highlights-list variant-${layoutVariant}`}>
+        {blok.items.map((itemBlok: any) => (
+          <StoryblokComponent blok={itemBlok} />
+        ))}
+      </div>
+    )}
+
+  </div>
+</section>
+
+<style>
+  .career-highlights-section {
+    width: 100%;
+    padding: 6rem 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .highlight-theme-light {
+    /* Transparent assumes it takes the page_theme background */
+    background-color: transparent;
+  }
+
+  .highlight-theme-dark {
+    background-color: var(--primary, #111);
+    color: var(--surface-bright, #FAFAFA);
+  }
+
+  .container {
+    max-width: var(--container-max, 1200px);
+    margin: 0 auto;
+    padding: 0 var(--margin-x, 1.5rem);
+  }
+
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 4rem;
+    max-width: 800px;
+    margin-inline: auto;
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-gold, #CBA052);
+    margin-bottom: 0.5rem;
+  }
+
+  .title {
+    font-family: var(--font-serif, serif);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0 0 1.5rem 0;
+    color: inherit;
+  }
+
+  .decorative-line {
+    width: 40px;
+    height: 1px;
+    background-color: var(--border-light, #CCC);
+    margin: 0 auto 1.5rem auto;
+  }
+
+  .highlight-theme-dark .decorative-line {
+    background-color: rgba(255,255,255,0.2);
+  }
+
+  .subtitle {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--on-surface-variant, #666);
+    margin: 0;
+  }
+
+  .highlight-theme-dark .subtitle {
+    color: var(--on-primary-variant, #CCC);
+  }
+
+  .highlights-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    /* Allows items to stack cleanly with their own borders */
+  }
+
+</style>

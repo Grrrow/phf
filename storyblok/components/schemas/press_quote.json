@@ -1,0 +1,20 @@
+{
+  "component": {
+    "name": "press_quote",
+    "display_name": "Press Quote",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true
+      },
+      "description": {
+        "type": "textarea",
+        "pos": 1,
+        "translatable": true
+      }
+    }
+  }
+}

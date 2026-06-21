@@ -1,0 +1,24 @@
+{
+  "component": {
+    "name": "navigation_menu",
+    "display_name": "Navigation Menu",
+    "component_group_name": "Global",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "menu_name": {
+        "type": "text",
+        "translatable": true,
+        "pos": 0
+      },
+      "items": {
+        "type": "bloks",
+        "restrict_components": true,
+        "component_whitelist": [
+          "navigation_item"
+        ],
+        "pos": 1
+      }
+    }
+  }
+}

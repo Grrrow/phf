@@ -1,0 +1,158 @@
+---
+import { type LocaleCode } from '../../i18n/config';
+import { getLocalizedPath } from '../../i18n/utils';
+
+export interface Props {
+  currentLocale: LocaleCode;
+  currentPath: string;
+  alternates?: { href: string; hreflang: string }[];
+}
+
+const { currentLocale, currentPath, alternates = [] } = Astro.props;
+
+const localesList: LocaleCode[] = ['en', 'es'];
+
+function getTargetHref(target: LocaleCode) {
+  const altLink = alternates.find(a => a.hreflang === target);
+  let href = '';
+  if (altLink) {
+    try {
+      href = altLink.href.startsWith('http') 
+        ? new URL(altLink.href).pathname 
+        : altLink.href;
+    } catch {
+      href = altLink.href;
+    }
+  } else {
+    href = getLocalizedPath(currentPath, target);
+  }
+  
+  // Ensure href has trailing slash if it is not / or /es
+  if (href !== '/' && href !== '/es' && !href.endsWith('/')) {
+    href += '/';
+  }
+  return href;
+}
+---
+
+<div class="lang-dropdown">
+  <button class="lang-btn" aria-haspopup="true" aria-expanded="false">
+    {currentLocale.toUpperCase()}
+    <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </button>
+  <div class="lang-menu">
+    {localesList.map(loc => (
+      <a 
+        href={getTargetHref(loc)} 
+        class={`lang-menu-item ${currentLocale === loc ? 'active' : ''}`}
+      >
+        {loc.toUpperCase()}
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .lang-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #1a1a1a;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .lang-btn:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+    color: #cca43b;
+  }
+
+  .chevron {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .lang-dropdown:hover .chevron {
+    transform: rotate(180deg);
+  }
+
+  .lang-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    min-width: 100px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px) scale(0.96);
+    transform-origin: top right;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0;
+  }
+
+  .lang-dropdown:hover .lang-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  .lang-menu-item {
+    position: relative;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #767676;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lang-menu-item:hover {
+    color: #1a1a1a;
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+
+  .lang-menu-item.active {
+    color: #cca43b;
+    font-weight: 600;
+    background-color: transparent;
+  }
+
+  /* Pequeño punto indicador para el idioma seleccionado */
+  .lang-menu-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0.75rem;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #cca43b;
+  }
+</style>

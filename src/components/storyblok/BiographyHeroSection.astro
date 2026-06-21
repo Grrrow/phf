@@ -1,0 +1,166 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import StoryblokImage from '../media/StoryblokImage.astro';
+
+const { blok } = Astro.props;
+
+// Extract logic variables
+const headingLevel = blok.heading_level || 'h1';
+const imagePosition = blok.image_position || 'right';
+const isLcp = typeof blok.is_lcp === 'boolean' ? blok.is_lcp : true;
+const imageTreatment = blok.image_treatment || 'black_white';
+
+const TitleTag = headingLevel as any;
+const isDecorative = blok.image_is_decorative === true;
+const altText = isDecorative ? "" : (blok.image_alt || blok.title || "Pedro Halffter");
+
+const hasImage = !!blok.image?.filename;
+---
+
+<section {...storyblokEditable(blok)} class={`biography-hero-section pos-${imagePosition}`}>
+  <div class="container">
+    <div class="hero-grid">
+      
+      <div class="hero-text-col">
+        {blok.eyebrow && <span class="eyebrow">{blok.eyebrow}</span>}
+        {blok.title && <TitleTag class="title">{blok.title}</TitleTag>}
+        {blok.intro && <p class="intro">{blok.intro}</p>}
+      </div>
+
+      {hasImage && (
+        <div class={`hero-image-col treatment-${imageTreatment}`}>
+          <div class="image-wrapper">
+            <StoryblokImage
+              src={blok.image.filename}
+              alt={altText}
+              width={800}
+              height={1000}
+              aspectRatio="4:5"
+              loading={isLcp ? 'eager' : 'lazy'}
+              fetchpriority={isLcp ? 'high' : 'auto'}
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              class="hero-img"
+            />
+          </div>
+        </div>
+      )}
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .biography-hero-section {
+    width: 100%;
+    padding: var(--section-stack, 8rem) 0 4rem 0;
+  }
+
+  .container {
+    max-width: var(--container-max, 1200px);
+    margin: 0 auto;
+    padding: 0 var(--margin-x, 1.5rem);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+    }
+    
+    /* Handle position reversal in desktop */
+    :global(.pos-left) .hero-text-col {
+      order: 2;
+    }
+    :global(.pos-left) .hero-image-col {
+      order: 1;
+    }
+  }
+
+  .hero-text-col {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-gold, #CBA052);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .title {
+    font-family: var(--font-serif, serif);
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0 0 2rem 0;
+    color: inherit;
+    letter-spacing: -0.02em;
+  }
+
+  .intro {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--on-surface-variant, #444);
+    margin: 0;
+  }
+
+  :global(.theme-dark) .intro {
+    color: var(--on-primary-variant, #CCC);
+  }
+
+  .hero-image-col {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-image-col {
+      justify-content: flex-end;
+    }
+    :global(.pos-left) .hero-image-col {
+      justify-content: flex-start;
+    }
+  }
+
+  .image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    background-color: var(--surface-light, #EFEFEF);
+    /* Soft border as requested in "Imagen rectangular con marco/borde claro" */
+    border: 8px solid #FFFFFF;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+
+  :global(.theme-dark) .image-wrapper {
+    border-color: #222;
+    background-color: #111;
+  }
+
+  .hero-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* Image Treatments */
+  .treatment-black_white .hero-img {
+    filter: grayscale(100%) contrast(1.1);
+  }
+</style>

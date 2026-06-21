@@ -1,0 +1,106 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+
+const { blok } = Astro.props;
+---
+
+<section {...storyblokEditable(blok)} class="works-catalog-group" id={blok.anchor_id || undefined}>
+  
+  <div class="group-header">
+    {blok.title && <h2 class="group-title">{blok.title}</h2>}
+    <div class="group-divider" aria-hidden="true"></div>
+    {blok.description && <p class="group-description">{blok.description}</p>}
+  </div>
+
+  <div class="group-content">
+    {blok.items && blok.items.length > 0 && (
+      <ul class="items-list">
+        {blok.items.map((itemBlok: any) => (
+          <li>
+            <StoryblokComponent blok={itemBlok} />
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+
+</section>
+
+<style>
+  .works-catalog-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .works-catalog-group {
+      grid-template-columns: 280px 1fr;
+      gap: 4rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .works-catalog-group {
+      grid-template-columns: 320px 1fr;
+      gap: 6rem;
+    }
+  }
+
+  .group-header {
+    display: flex;
+    flex-direction: column;
+    /* In desktop, keep the header sticky so it stays visible as you scroll long lists */
+    position: relative;
+  }
+
+  @media (min-width: 768px) {
+    .group-header {
+      position: sticky;
+      top: 120px;
+      align-self: start;
+    }
+  }
+
+  .group-title {
+    font-family: var(--font-serif, serif);
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0 0 1rem 0;
+    color: inherit;
+  }
+
+  .group-divider {
+    width: 100%;
+    height: 1px;
+    background-color: var(--border-light, #E5E5E5);
+    margin: 0 0 1.5rem 0;
+  }
+
+  :global(.theme-dark) .group-divider {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .group-description {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--on-surface-variant, #666);
+    margin: 0;
+  }
+
+  :global(.theme-dark) .group-description {
+    color: var(--on-primary-variant, #CCC);
+  }
+
+  .items-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+</style>

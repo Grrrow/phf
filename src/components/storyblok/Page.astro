@@ -1,0 +1,128 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import { getLocaleFromUrl } from "../../i18n/utils";
+import { useTranslations } from "../../i18n/ui";
+
+const { blok } = Astro.props;
+
+// Comprobamos si es la ruta de la Home (soporta idioma base y /es/)
+const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "/es/";
+const currentLocale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(currentLocale);
+---
+
+<main {...storyblokEditable(blok)}>
+  {
+    blok.body?.map((nestedBlok: any) => {
+      return <StoryblokComponent blok={nestedBlok} />;
+    })
+  }
+
+  {
+    isHome && (
+      <section class="home-contact-section">
+        <div class="contact-container">
+          <h2 class="contact-title">{t("contact.title")}</h2>
+          <p class="contact-subtitle">{t("contact.subtitle")}</p>
+
+          <div class="contact-single-wrapper">
+            <div class="contact-card">
+              <span class="contact-eyebrow">{t("contact.general")}</span>
+              <h3 class="contact-name">Pedro Halffter</h3>
+              <p class="contact-detail">Madrid, Spain</p>
+              <a href="mailto:contact@pedrohalffter.com" class="contact-action">
+                contact@pedrohalffter.com
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+</main>
+
+<style>
+  .home-contact-section {
+    padding: 6rem 1.5rem;
+    background-color: var(--surface-bright, #fafafa);
+    border-top: 1px solid var(--border-light, #e5e5e5);
+  }
+
+  .contact-container {
+    max-width: var(--container-max, 1200px);
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .contact-title {
+    font-family: var(--font-serif, serif);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 400;
+    color: var(--primary, #111);
+    margin-bottom: 1rem;
+  }
+
+  .contact-subtitle {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 1.1rem;
+    color: var(--on-surface-variant, #555);
+    max-width: 600px;
+    margin: 0 auto 4rem auto;
+    line-height: 1.6;
+  }
+
+  .contact-single-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .contact-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-eyebrow {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-gold, #cba052);
+    margin-bottom: 1rem;
+  }
+
+  .contact-name {
+    font-family: var(--font-serif, serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--primary, #111);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .contact-detail {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.9rem;
+    color: var(--on-surface-variant, #666);
+    margin: 0 0 1.5rem 0;
+  }
+
+  .contact-action {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--primary, #111);
+    text-decoration: none;
+    border-bottom: 1px solid var(--primary, #111);
+    padding-bottom: 0.2rem;
+    transition: all 0.3s ease;
+  }
+
+  .contact-action:hover {
+    color: var(--accent-gold, #cba052);
+    border-bottom-color: var(--accent-gold, #cba052);
+  }
+</style>

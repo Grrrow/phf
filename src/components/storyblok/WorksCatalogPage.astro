@@ -1,0 +1,95 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+
+const { blok } = Astro.props;
+
+// Determine theme classes
+const themeMapping: Record<string, string> = {
+  light: 'theme-light',
+  dark: 'theme-dark',
+  editorial: 'theme-editorial'
+};
+const themeClass = themeMapping[blok.page_theme || 'editorial'];
+---
+
+<main {...storyblokEditable(blok)} class={`works-catalog-page ${themeClass}`}>
+  <div class="page-container">
+    
+    <header class="page-header">
+      {blok.title && <h1 class="page-title">{blok.title}</h1>}
+      {blok.intro && <p class="page-intro">{blok.intro}</p>}
+    </header>
+
+    {blok.groups && blok.groups.length > 0 && (
+      <div class="catalog-groups">
+        {blok.groups.map((groupBlok: any) => (
+          <StoryblokComponent blok={groupBlok} />
+        ))}
+      </div>
+    )}
+
+  </div>
+</main>
+
+<style>
+  .works-catalog-page {
+    width: 100%;
+    min-height: 100vh;
+    padding: var(--section-stack, 8rem) 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Themes */
+  .theme-editorial {
+    background-color: var(--surface-bright, #FAFAFA); /* Off-white / light gray */
+    color: var(--primary, #111);
+  }
+  .theme-light {
+    background-color: #FFFFFF;
+    color: var(--primary, #111);
+  }
+  .theme-dark {
+    background-color: var(--primary, #111);
+    color: var(--surface-bright, #FAFAFA);
+  }
+
+  .page-container {
+    max-width: var(--container-max, 1200px);
+    margin: 0 auto;
+    padding: 0 var(--margin-x, 1.5rem);
+  }
+
+  .page-header {
+    max-width: 800px;
+    margin-bottom: 6rem;
+  }
+
+  .page-title {
+    font-family: var(--font-serif, serif);
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.02em;
+  }
+
+  .page-intro {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--on-surface-variant, #444);
+    margin: 0;
+    max-width: 650px;
+  }
+
+  .theme-dark .page-intro {
+    color: var(--on-primary-variant, #CCC);
+  }
+
+  .catalog-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
+</style>

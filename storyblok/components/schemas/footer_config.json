@@ -1,0 +1,73 @@
+{
+  "component": {
+    "name": "footer_config",
+    "display_name": "Footer Config",
+    "component_group_name": "Global",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "footer_logo": {
+        "type": "asset",
+        "pos": 0
+      },
+      "footer_logo_alt": {
+        "type": "text",
+        "translatable": true,
+        "pos": 1
+      },
+      "brand_text": {
+        "type": "text",
+        "translatable": true,
+        "pos": 2
+      },
+      "footer_text": {
+        "type": "textarea",
+        "translatable": true,
+        "pos": 3
+      },
+      "navigation": {
+        "type": "bloks",
+        "restrict_components": true,
+        "component_whitelist": [
+          "navigation_item"
+        ],
+        "pos": 4
+      },
+      "legal_links": {
+        "type": "bloks",
+        "restrict_components": true,
+        "component_whitelist": [
+          "navigation_item",
+          "legal_links"
+        ],
+        "pos": 5
+      },
+      "social_links": {
+        "type": "bloks",
+        "restrict_components": true,
+        "component_whitelist": [
+          "social_profile_link"
+        ],
+        "pos": 6
+      },
+      "copyright_text": {
+        "type": "text",
+        "translatable": true,
+        "pos": 7
+      },
+      "contact_email": {
+        "type": "text",
+        "pos": 8
+      },
+      "contact_phone": {
+        "type": "text",
+        "pos": 9
+      },
+      "show_language_switcher": {
+        "type": "boolean",
+        "default_value": true,
+        "pos": 10
+      }
+    }
+  }
+}

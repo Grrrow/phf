@@ -1,0 +1,24 @@
+{
+  "component": {
+    "name": "legal_links",
+    "display_name": "Legal Links",
+    "component_group_name": "Global",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "title": {
+        "type": "text",
+        "translatable": true,
+        "pos": 0
+      },
+      "links": {
+        "type": "bloks",
+        "restrict_components": true,
+        "component_whitelist": [
+          "navigation_item"
+        ],
+        "pos": 1
+      }
+    }
+  }
+}

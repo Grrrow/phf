@@ -1,0 +1,166 @@
+---
+import { useStoryblokApi, getLiveStory } from '@storyblok/astro';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getLocaleFromUrl } from '../i18n/utils';
+import { defaultLocale, locales } from '../i18n/config';
+import { buildAbsoluteUrl } from '../utils/urls';
+import { mergeSeo } from '../utils/seo';
+
+export async function getStaticPaths() {
+  const storyblokApi = useStoryblokApi();
+  let links = [];
+  try {
+    const { data } = await storyblokApi.get('cdn/links', {
+      version: import.meta.env.DEV ? 'draft' : 'published',
+    });
+    links = Object.values(data.links);
+  } catch (error) {
+    console.warn('Failed to fetch Storyblok links for static paths. Using fallback.');
+  }
+
+  const paths: any[] = [];
+  links.forEach((link: any) => {
+    if (link.is_folder) return;
+    
+    // Base slug
+    let slug = link.slug === 'home' ? undefined : link.slug;
+    paths.push({ params: { slug } });
+    
+    // Spanish version
+    let esSlug = slug ? `es/${slug}` : 'es';
+    paths.push({ params: { slug: esSlug } });
+
+    // For Storyblok preview, we need /home and /es/home to resolve
+    if (link.slug === 'home') {
+      paths.push({ params: { slug: 'home' } });
+      paths.push({ params: { slug: 'es/home' } });
+    }
+  });
+
+  if (paths.length === 0) {
+    paths.push({ params: { slug: undefined } });
+    paths.push({ params: { slug: 'es' } });
+    paths.push({ params: { slug: 'home' } });
+    paths.push({ params: { slug: 'es/home' } });
+  }
+
+  return paths;
+}
+
+// Extract the path from the slug parameter
+const slug = Astro.params.slug || 'home';
+const url = new URL(Astro.request.url);
+const currentLocale = getLocaleFromUrl(url);
+
+// In Storyblok, if the default language is Spanish (at the root space), we fetch it without a language parameter.
+// If it's English, we use the `language` parameter.
+const languageParam = currentLocale === defaultLocale ? 'default' : currentLocale;
+
+const isPreview = url.searchParams.has('_storyblok') || import.meta.env.DEV;
+const version = isPreview ? 'draft' : 'published';
+
+const storyblokApi = useStoryblokApi();
+
+let story;
+let globalConfig;
+
+try {
+  // Clean up the slug for Storyblok API (remove leading 'es/' if present)
+  let cleanSlug = slug;
+  if (cleanSlug.startsWith('es/')) {
+    cleanSlug = cleanSlug.replace(/^es\//, '') || 'home';
+  } else if (cleanSlug === 'es') {
+    cleanSlug = 'home';
+  }
+
+  // Attempt to get the story via Live Preview first
+  const liveStory = await getLiveStory(Astro);
+  
+  // Ensure the live story matches the current route
+  if (liveStory && liveStory.slug === (cleanSlug === 'home' ? 'home' : cleanSlug)) {
+    story = liveStory;
+  } else {
+    // Fallback to standard API fetch
+    const { data } = await storyblokApi.get(`cdn/stories/${cleanSlug}`, {
+      version: version,
+      language: languageParam,
+    });
+    story = data.story;
+  }
+
+  // Ideally, fetch the global config separately if it's a singleton
+  try {
+    const configData = await storyblokApi.get('cdn/stories/settings/global-config', {
+      version: version,
+      language: languageParam,
+    });
+    globalConfig = configData.data.story.content;
+  } catch (e) {
+    // Suppress warning if not found, we fallback to empty
+    globalConfig = {};
+  }
+} catch (error: any) {
+  if (error.response?.status === 404) {
+    return Astro.redirect('/404');
+  }
+  // Let the error bubble up in development, otherwise 404
+  if (import.meta.env.PROD) {
+    return Astro.redirect('/404');
+  } else {
+    throw error;
+  }
+}
+
+if (!story) {
+  return Astro.redirect('/404');
+}
+
+// Prepare alternates for hreflang
+// Storyblok provides alternate links in the response if configured
+const alternates = Object.values(locales).map((loc) => {
+  let altPath = story.full_slug; // Fallback to current slug logic
+  // A proper implementation would use story.alternates from Storyblok API
+  if (loc.code === 'es') {
+    altPath = `es/${story.slug === 'home' ? '' : story.slug}`;
+  } else {
+    altPath = story.slug === 'home' ? '' : story.slug;
+  }
+  
+  return {
+    href: buildAbsoluteUrl(altPath),
+    hreflang: loc.code
+  };
+});
+
+// Merge SEO data
+// Assuming SEO block is a single block in an array field called 'seo'
+const pageSeo = story.content.seo ? story.content.seo[0] : {};
+const mergedSeo = mergeSeo(pageSeo, globalConfig);
+
+const currentPath = url.pathname;
+---
+
+<BaseLayout
+  locale={currentLocale}
+  currentPath={currentPath}
+  seo={{
+    ...mergedSeo,
+    canonical: buildAbsoluteUrl(currentPath),
+  }}
+  globalConfig={globalConfig}
+  alternates={alternates}
+>
+  {
+    (slug === 'home' || slug === 'es/home') && (
+      <script is:inline>
+        const cleanPath = window.location.pathname.replace(/\/$/, '');
+        if ((cleanPath === '/home' || cleanPath === '/es/home') && !window.location.search.includes('_storyblok') && window.self === window.top) {
+          const isEs = cleanPath.startsWith('/es');
+          window.location.replace(isEs ? '/es/' : '/');
+        }
+      </script>
+    )
+  }
+  <StoryblokComponent blok={story.content} />
+</BaseLayout>

@@ -1,0 +1,83 @@
+{
+  "component": {
+    "name": "site_identity",
+    "display_name": "Site Identity",
+    "component_group_name": "Global",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "site_name": {
+        "type": "text",
+        "translatable": true,
+        "pos": 0
+      },
+      "site_tagline": {
+        "type": "text",
+        "translatable": true,
+        "pos": 1
+      },
+      "logo": {
+        "type": "asset",
+        "pos": 2
+      },
+      "logo_dark": {
+        "type": "asset",
+        "pos": 3
+      },
+      "favicon": {
+        "type": "asset",
+        "pos": 4
+      },
+      "default_og_image": {
+        "type": "asset",
+        "pos": 5
+      },
+      "brand_color": {
+        "type": "text",
+        "pos": 6
+      },
+      "organization_name": {
+        "type": "text",
+        "translatable": true,
+        "pos": 7
+      },
+      "organization_type": {
+        "type": "option",
+        "options": [
+          {
+            "name": "Person",
+            "value": "Person"
+          },
+          {
+            "name": "Organization",
+            "value": "Organization"
+          },
+          {
+            "name": "PerformingGroup",
+            "value": "PerformingGroup"
+          },
+          {
+            "name": "MusicGroup",
+            "value": "MusicGroup"
+          }
+        ],
+        "pos": 8
+      },
+      "person_name": {
+        "type": "text",
+        "translatable": true,
+        "pos": 9
+      },
+      "person_job_title": {
+        "type": "text",
+        "translatable": true,
+        "pos": 10
+      },
+      "short_bio": {
+        "type": "textarea",
+        "translatable": true,
+        "pos": 11
+      }
+    }
+  }
+}

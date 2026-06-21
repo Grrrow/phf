@@ -1,0 +1,126 @@
+{
+  "component": {
+    "name": "work_highlight_card",
+    "display_name": "Work Highlight Card",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "category": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true,
+        "description": "Categoría editorial libre (ej. 'Symphonic Suite', 'Opera', 'Latest Release')."
+      },
+      "title": {
+        "type": "text",
+        "pos": 1,
+        "translatable": true,
+        "description": "El nombre de la obra, proyecto o disco."
+      },
+      "description": {
+        "type": "textarea",
+        "pos": 2,
+        "translatable": true,
+        "description": "Breve descripción contextual de la obra."
+      },
+      "media_type": {
+        "type": "option",
+        "pos": 3,
+        "use_uuid": true,
+        "options": [
+          { "value": "none", "name": "None" },
+          { "value": "image", "name": "Image" },
+          { "value": "audio", "name": "Audio" },
+          { "value": "video", "name": "Video" },
+          { "value": "release", "name": "Release" }
+        ],
+        "default_value": "image",
+        "translatable": false,
+        "description": "Define el tipo principal de media de la tarjeta. 'Audio' / 'Video' mostrarán un icono de Play."
+      },
+      "image": {
+        "type": "asset",
+        "pos": 4,
+        "translatable": false,
+        "description": "Sube aquí la portada o imagen de partitura. Se optimizará automáticamente."
+      },
+      "image_alt": {
+        "type": "text",
+        "pos": 5,
+        "translatable": true,
+        "description": "Texto descriptivo de la imagen para accesibilidad (SEO / invidentes)."
+      },
+      "image_is_decorative": {
+        "type": "boolean",
+        "pos": 6,
+        "default_value": false,
+        "translatable": false,
+        "description": "Marca esto si la imagen es solo estética y no necesita leerse en lectores de pantalla."
+      },
+      "audio_url": {
+        "type": "text",
+        "pos": 7,
+        "translatable": false,
+        "description": "URL del audio (opcional por ahora, usará cta_link por defecto para navegar)."
+      },
+      "video_url": {
+        "type": "text",
+        "pos": 8,
+        "translatable": false,
+        "description": "URL del vídeo (opcional por ahora, usará cta_link por defecto para navegar)."
+      },
+      "duration_label": {
+        "type": "text",
+        "pos": 9,
+        "translatable": true,
+        "description": "Etiqueta técnica (ej. '05:42', 'Full Album'). Aparecerá sobre la imagen si hay media."
+      },
+      "cta_label": {
+        "type": "text",
+        "pos": 10,
+        "translatable": true,
+        "description": "Texto del enlace de la tarjeta (ej. 'Explore Work' o 'Listen Now')."
+      },
+      "cta_link": {
+        "type": "multilink",
+        "pos": 11,
+        "translatable": false,
+        "description": "Enlace de destino al pulsar la tarjeta entera."
+      },
+      "card_size": {
+        "type": "option",
+        "pos": 12,
+        "use_uuid": true,
+        "options": [
+          { "value": "large", "name": "Large (2 columns)" },
+          { "value": "medium", "name": "Medium (1 column)" },
+          { "value": "small", "name": "Small (1 column compact)" }
+        ],
+        "default_value": "medium",
+        "translatable": false,
+        "description": "Tamaño de la tarjeta en el grid. 'Large' es ideal para la obra principal del bloque."
+      },
+      "card_style": {
+        "type": "option",
+        "pos": 13,
+        "use_uuid": true,
+        "options": [
+          { "value": "media_feature", "name": "Media Feature" },
+          { "value": "text_card", "name": "Text Card" },
+          { "value": "release_card", "name": "Release Card" },
+          { "value": "placeholder_card", "name": "Placeholder Card" }
+        ],
+        "default_value": "media_feature",
+        "translatable": false,
+        "description": "Aspecto visual. 'Text Card' ignora la imagen, 'Release' fuerza una proporción cuadrada (1:1)."
+      },
+      "open_in_new_tab": {
+        "type": "boolean",
+        "pos": 14,
+        "default_value": false,
+        "translatable": false,
+        "description": "Marca esta casilla para que el enlace se abra en una nueva pestaña del navegador."
+      }
+    }
+  }
+}

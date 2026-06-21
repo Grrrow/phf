@@ -1,0 +1,20 @@
+{
+  "component": {
+    "name": "event_card",
+    "display_name": "Event Card",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true
+      },
+      "description": {
+        "type": "textarea",
+        "pos": 1,
+        "translatable": true
+      }
+    }
+  }
+}

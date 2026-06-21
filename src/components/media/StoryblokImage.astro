@@ -1,0 +1,162 @@
+---
+import {
+  normalizeStoryblokImageUrl,
+  getStoryblokImageFocalPoint,
+  getStoryblokImageDimensions,
+  getStoryblokImageAlt,
+  getStoryblokImageUrl,
+  buildStoryblokImageSrcSet,
+  buildStoryblokImageSizes
+} from '../../utils/storyblok-image';
+
+export interface Props {
+  image?: any;
+  src?: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+  sizes?: string | Record<string, string>;
+  widths?: number[];
+  quality?: number;
+  format?: 'webp' | 'avif' | 'jpg' | 'png';
+  loading?: 'lazy' | 'eager';
+  decoding?: 'async' | 'sync' | 'auto';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  class?: string;
+  aspectRatio?: string | number;
+  objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+  crop?: 'smart' | 'focal' | 'manual';
+  focalPoint?: string;
+  isLcp?: boolean;
+  decorative?: boolean;
+  [key: string]: any;
+}
+
+const {
+  image,
+  src,
+  alt: altOverride,
+  width,
+  height,
+  sizes,
+  widths,
+  quality,
+  format = 'webp',
+  loading,
+  decoding = 'async',
+  fetchpriority,
+  class: className,
+  aspectRatio,
+  objectFit,
+  crop,
+  focalPoint,
+  isLcp = false,
+  decorative = false,
+  ...rest
+} = Astro.props;
+
+// Resolve target URL
+const rawUrl = src || (typeof image === 'string' ? image : image?.filename);
+const imageUrl = normalizeStoryblokImageUrl(rawUrl);
+
+if (!imageUrl) {
+  return null;
+}
+
+// Resolve metadata from Storyblok image object
+const storyblokAlt = getStoryblokImageAlt(image, '');
+const storyblokFocal = getStoryblokImageFocalPoint(image);
+
+// Establish dimensions
+const dimensions = getStoryblokImageDimensions(imageUrl);
+const originalWidth = dimensions?.width;
+const originalHeight = dimensions?.height;
+
+let renderWidth = width;
+let renderHeight = height;
+
+// Keep aspect ratio dynamically if only one dimension is supplied
+if (!renderWidth && !renderHeight && originalWidth && originalHeight) {
+  renderWidth = originalWidth;
+  renderHeight = originalHeight;
+} else if (renderWidth && !renderHeight && originalWidth && originalHeight) {
+  renderHeight = Math.round((renderWidth / originalWidth) * originalHeight);
+} else if (!renderWidth && renderHeight && originalWidth && originalHeight) {
+  renderWidth = Math.round((renderHeight / originalHeight) * originalWidth);
+}
+
+// Determine default quality
+// Heros/LCP default to 80; non-critical defaults to 78
+const defaultQuality = isLcp ? 80 : 78;
+const renderQuality = quality ?? defaultQuality;
+
+// Determine crop strategy and focal point
+const resolvedFocal = focalPoint || storyblokFocal;
+const resolvedCrop = crop || (resolvedFocal ? 'focal' : 'smart');
+
+// Build optimized image URL
+const optimizedUrl = getStoryblokImageUrl({
+  src: imageUrl,
+  width: renderWidth,
+  height: renderHeight,
+  quality: renderQuality,
+  format,
+  fit: objectFit === 'contain' ? 'contain' : 'cover',
+  crop: resolvedCrop as any,
+  focalPoint: resolvedFocal
+});
+
+// Build responsive srcset
+const srcSet = widths && widths.length > 0
+  ? buildStoryblokImageSrcSet({
+      src: imageUrl,
+      widths,
+      quality: renderQuality,
+      format,
+      fit: objectFit === 'contain' ? 'contain' : 'cover',
+      crop: resolvedCrop as any,
+      focalPoint: resolvedFocal
+    })
+  : undefined;
+
+// Build sizes attribute
+const sizesAttr = buildStoryblokImageSizes(sizes);
+
+// Determine loading and fetchpriority attributes
+const renderLoading = isLcp ? 'eager' : (loading || 'lazy');
+const renderPriority = isLcp ? 'high' : fetchpriority;
+
+// Resolve Alt Text
+let finalAlt = '';
+if (decorative) {
+  finalAlt = '';
+} else {
+  finalAlt = altOverride ?? storyblokAlt ?? '';
+}
+
+// Build styles for layout stability (CLS prevention)
+const styles: Record<string, string> = {};
+if (aspectRatio) {
+  styles['aspect-ratio'] = String(aspectRatio);
+}
+if (objectFit) {
+  styles['object-fit'] = objectFit;
+}
+const styleString = Object.entries(styles)
+  .map(([k, v]) => `${k}: ${v}`)
+  .join('; ');
+---
+<img
+  src={optimizedUrl}
+  alt={finalAlt}
+  width={renderWidth}
+  height={renderHeight}
+  srcset={srcSet || undefined}
+  sizes={srcSet ? sizesAttr : undefined}
+  loading={renderLoading}
+  decoding={decoding}
+  {...(renderPriority ? { fetchpriority: renderPriority } : {})}
+  class={className}
+  style={styleString || undefined}
+  {...rest}
+/>

@@ -1,0 +1,75 @@
+{
+  "component": {
+    "name": "agenda_events_section",
+    "display_name": "Agenda Events Section",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "eyebrow": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true,
+        "description": "Texto pequeño opcional (super-título)."
+      },
+      "title": {
+        "type": "text",
+        "pos": 1,
+        "translatable": true,
+        "description": "Título opcional interno de la sección de eventos."
+      },
+      "subtitle": {
+        "type": "textarea",
+        "pos": 2,
+        "translatable": true,
+        "description": "Subtítulo opcional interno."
+      },
+      "items": {
+        "type": "bloks",
+        "pos": 3,
+        "translatable": false,
+        "restrict_components": true,
+        "component_whitelist": [
+          "event_highlight_item"
+        ],
+        "description": "Lista de eventos. Añade bloques 'Event Highlight Item'."
+      },
+      "empty_state_text": {
+        "type": "textarea",
+        "pos": 4,
+        "translatable": true,
+        "description": "Texto a mostrar si no hay eventos activos."
+      },
+      "layout_variant": {
+        "type": "option",
+        "pos": 5,
+        "use_uuid": true,
+        "options": [
+          { "value": "full_agenda_list", "name": "Full Agenda List" },
+          { "value": "compact_list", "name": "Compact List" }
+        ],
+        "default_value": "full_agenda_list",
+        "translatable": false,
+        "description": "Variante visual de la lista de eventos."
+      },
+      "show_past_events": {
+        "type": "boolean",
+        "pos": 6,
+        "default_value": false,
+        "translatable": false,
+        "description": "Forzar mostrar eventos pasados (por defecto se ocultan programáticamente si está implementado)."
+      },
+      "theme": {
+        "type": "option",
+        "pos": 7,
+        "use_uuid": true,
+        "options": [
+          { "value": "light", "name": "Light" },
+          { "value": "dark", "name": "Dark" }
+        ],
+        "default_value": "light",
+        "translatable": false,
+        "description": "Color base de la sección contenedora."
+      }
+    }
+  }
+}

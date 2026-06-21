@@ -1,0 +1,93 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+const { blok } = Astro.props;
+---
+
+<article {...storyblokEditable(blok)} class="career-highlight-item">
+  <div class="item-grid">
+    
+    <div class="date-col">
+      {blok.date_label && <span class="date-label">{blok.date_label}</span>}
+    </div>
+
+    <div class="content-col">
+      {blok.role_label && <span class="role-label">{blok.role_label}</span>}
+      {blok.description && <p class="description">{blok.description}</p>}
+    </div>
+
+  </div>
+</article>
+
+<style>
+  .career-highlight-item {
+    width: 100%;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--border-light, #E5E5E5);
+  }
+
+  /* Make sure the last element doesn't bleed if it shouldn't, 
+     or first element doesn't have double border */
+  :global(.highlights-list > :first-child) .career-highlight-item {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  :global(.highlight-theme-dark) .career-highlight-item {
+    border-color: rgba(255,255,255,0.15);
+  }
+
+  .item-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .item-grid {
+      grid-template-columns: 200px 1fr;
+      gap: 3rem;
+      align-items: baseline;
+    }
+  }
+
+  .date-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .date-label {
+    font-family: var(--font-serif, serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: inherit;
+    line-height: 1.2;
+  }
+
+  .content-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .role-label {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent-gold, #CBA052);
+    margin-bottom: 0.5rem;
+  }
+
+  .description {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--on-surface-variant, #555);
+    margin: 0;
+  }
+
+  :global(.highlight-theme-dark) .description {
+    color: var(--on-primary-variant, #CCC);
+  }
+</style>

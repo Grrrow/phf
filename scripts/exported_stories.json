@@ -1,0 +1,834 @@
+[
+  {
+    "name": "Agenda",
+    "parent_id": 0,
+    "group_id": "dbb9d895-968c-48ef-9b31-0a6ad9bd962e",
+    "alternates": [],
+    "created_at": "2026-06-14T16:55:48.460Z",
+    "deleted_at": null,
+    "sort_by_date": null,
+    "tag_list": [],
+    "updated_at": "2026-06-14T17:03:44.408Z",
+    "published_at": null,
+    "id": 187459782522746,
+    "uuid": "63e9befe-e41a-430a-8cdd-2bdc6c44ff24",
+    "is_folder": false,
+    "content": {
+      "_uid": "db199d8b-0623-4132-9214-0b05c9bc2ef6",
+      "component": "agenda_page",
+      "events_section": [
+        {
+          "_uid": "27615e46-117d-4761-9be0-02594d4fba5d",
+          "items": [
+            {
+              "_uid": "3f83407a-7d3e-48cb-918a-a412b51ee415",
+              "title": "Mahler: Symphony No. 9",
+              "status": "upcoming",
+              "subtitle": "Orquesta Sinfónica de Madrid",
+              "component": "event_highlight_item",
+              "date_label": "Oct 12",
+              "details_link": {
+                "cached_url": "https://example.com"
+              },
+              "date_sublabel": "2024 · 20:00",
+              "details_label": "Tickets / Info",
+              "location_label": "Teatro Real, Madrid"
+            },
+            {
+              "_uid": "085e59b6-af9b-4f00-9c28-729d7c23b5e0",
+              "title": "Wagner: Tristan und Isolde (Prelude) & Bruckner 7",
+              "status": "upcoming",
+              "subtitle": "Rundfunk-Sinfonieorchester Berlin",
+              "component": "event_highlight_item",
+              "date_label": "Nov 05",
+              "details_link": {
+                "cached_url": "https://example.com"
+              },
+              "date_sublabel": "2024 · 19:30",
+              "details_label": "Tickets / Info",
+              "location_label": "Philharmonie Berlin"
+            },
+            {
+              "_uid": "fbf885a6-80d8-4374-83a9-bfafd0610f9b",
+              "title": "Contemporary Works: Halffter & Ligeti",
+              "status": "upcoming",
+              "subtitle": "Ensemble Intercontemporain",
+              "component": "event_highlight_item",
+              "date_label": "Dec 18",
+              "details_link": {
+                "cached_url": "https://example.com"
+              },
+              "date_sublabel": "2024 · 20:00",
+              "details_label": "Tickets / Info",
+              "location_label": "Cité de la Musique, Paris"
+            },
+            {
+              "_uid": "d5b7fc53-beda-41b4-812e-fa38c6093300",
+              "title": "Strauss: Elektra",
+              "status": "sold_out",
+              "subtitle": "Bayerisches Staatsorchester",
+              "component": "event_highlight_item",
+              "date_label": "Jan 22",
+              "date_sublabel": "2025 · 19:00",
+              "details_label": "Sold Out",
+              "location_label": "Nationaltheater, Munich"
+            }
+          ],
+          "component": "agenda_events_section",
+          "layout_variant": "full_agenda_list"
+        }
+      ]
+    },
+    "published": false,
+    "slug": "agenda",
+    "path": null,
+    "full_slug": "agenda",
+    "default_root": null,
+    "disble_fe_editor": false,
+    "disable_fe_editor": false,
+    "parent": null,
+    "is_startpage": false,
+    "unpublished_changes": true,
+    "meta_data": null,
+    "imported_at": null,
+    "preview_token": {
+      "token": "f8657d762be4dd9f505b44e7e95e5b08198bfca2",
+      "timestamp": "1782079567"
+    },
+    "pinned": false,
+    "breadcrumbs": [],
+    "publish_at": null,
+    "expire_at": null,
+    "first_published_at": null,
+    "last_author": {
+      "id": 134635,
+      "userid": "borja.godoy.gago@gmail.com",
+      "friendly_name": "Borja Godoy Gago"
+    },
+    "last_author_id": 134635,
+    "user_ids": [],
+    "space_role_ids": [],
+    "translated_slugs": [],
+    "localized_paths": [
+      {
+        "path": "agenda",
+        "name": null,
+        "lang": "es",
+        "published": null
+      }
+    ],
+    "position": -40,
+    "translated_stories": [],
+    "can_not_view": false,
+    "is_scheduled": null,
+    "scheduled_dates": null,
+    "ideas": [],
+    "current_version_id": 187460584032490,
+    "variant_type": null,
+    "experiment_ids": [],
+    "stage": null,
+    "stages": [],
+    "favourite_for_user_ids": []
+  },
+  {
+    "name": "Works",
+    "parent_id": 0,
+    "group_id": "1284b936-1851-4b81-9e68-799208a69d11",
+    "alternates": [],
+    "created_at": "2026-06-14T16:55:48.332Z",
+    "deleted_at": null,
+    "sort_by_date": null,
+    "tag_list": [],
+    "updated_at": "2026-06-14T17:03:44.166Z",
+    "published_at": null,
+    "id": 187459781994361,
+    "uuid": "48ec64a3-4c62-4ca5-bf97-1a4a23903405",
+    "is_folder": false,
+    "content": {
+      "_uid": "272f7013-d1b1-47cb-be47-c164d0a7bfef",
+      "groups": [
+        {
+          "_uid": "435b2480-22bc-4ee1-b2af-9b1d6a6c6307",
+          "items": [
+            {
+              "_uid": "ae6dcc2a-0008-4825-a0a7-e94dac582a95",
+              "year": "2022",
+              "title": "Klara",
+              "duration": "60'",
+              "component": "work_catalog_item",
+              "instrumentation": "Soprano, 2 Pianos and Percussion"
+            },
+            {
+              "_uid": "b0fef106-a545-4855-a938-f1de4c967597",
+              "year": "2013",
+              "title": "Schachnovelle",
+              "duration": "120'",
+              "component": "work_catalog_item",
+              "instrumentation": "Full Orchestra and Choir"
+            }
+          ],
+          "title": "Operas",
+          "component": "works_catalog_group"
+        },
+        {
+          "_uid": "7658efe9-3d9a-4e82-9164-6fb948bd0fe9",
+          "items": [
+            {
+              "_uid": "f6dbc7b1-3442-4f9e-af7f-cefd2081c159",
+              "year": "2006",
+              "title": "Diferencias sobre dos temas de Falla",
+              "duration": "18'",
+              "component": "work_catalog_item",
+              "instrumentation": "Symphony Orchestra"
+            },
+            {
+              "_uid": "84b06a2f-b332-43aa-8a82-e59869a97248",
+              "year": "1999",
+              "title": "Fantasía sobre una sonoridad de G.F. Handel",
+              "duration": "12'",
+              "component": "work_catalog_item",
+              "instrumentation": "Orchestra"
+            }
+          ],
+          "title": "Symphonic Works",
+          "component": "works_catalog_group"
+        }
+      ],
+      "component": "works_catalog_page"
+    },
+    "published": false,
+    "slug": "works",
+    "path": null,
+    "full_slug": "works",
+    "default_root": null,
+    "disble_fe_editor": false,
+    "disable_fe_editor": false,
+    "parent": null,
+    "is_startpage": false,
+    "unpublished_changes": true,
+    "meta_data": null,
+    "imported_at": null,
+    "preview_token": {
+      "token": "f8657d762be4dd9f505b44e7e95e5b08198bfca2",
+      "timestamp": "1782079567"
+    },
+    "pinned": false,
+    "breadcrumbs": [],
+    "publish_at": null,
+    "expire_at": null,
+    "first_published_at": null,
+    "last_author": {
+      "id": 134635,
+      "userid": "borja.godoy.gago@gmail.com",
+      "friendly_name": "Borja Godoy Gago"
+    },
+    "last_author_id": 134635,
+    "user_ids": [],
+    "space_role_ids": [],
+    "translated_slugs": [],
+    "localized_paths": [
+      {
+        "path": "works",
+        "name": null,
+        "lang": "es",
+        "published": null
+      }
+    ],
+    "position": -30,
+    "translated_stories": [],
+    "can_not_view": false,
+    "is_scheduled": null,
+    "scheduled_dates": null,
+    "ideas": [],
+    "current_version_id": 187461730946625,
+    "variant_type": null,
+    "experiment_ids": [],
+    "stage": null,
+    "stages": [],
+    "favourite_for_user_ids": []
+  },
+  {
+    "name": "Biography",
+    "parent_id": 0,
+    "group_id": "a1be1cf3-5a59-42f6-8021-67eb4efe2ecf",
+    "alternates": [],
+    "created_at": "2026-06-14T16:55:48.177Z",
+    "deleted_at": null,
+    "sort_by_date": null,
+    "tag_list": [],
+    "updated_at": "2026-06-14T17:03:43.184Z",
+    "published_at": "2026-06-14T17:00:17.422Z",
+    "id": 187459781359480,
+    "uuid": "285d6e2c-2c47-4557-a901-a23e92784217",
+    "is_folder": false,
+    "content": {
+      "_uid": "7403c003-3a44-4bf0-91e5-d7276b4d4d1b",
+      "body": [
+        {
+          "_uid": "de134708-faf4-4174-8af1-3d9f556e6bfe",
+          "intro": "Pedro Halffter is a renowned conductor and composer, recognized internationally for his passionate interpretations and profound musical understanding.",
+          "title": "A Life in Movement.",
+          "is_lcp": true,
+          "component": "biography_hero_section",
+          "heading_level": "h1",
+          "image_position": "right",
+          "image_treatment": "black_white"
+        },
+        {
+          "_uid": "68fd0ef6-4417-4e03-99de-4404a8544ffe",
+          "text": {
+            "type": "doc",
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "text": "Born in Madrid, Pedro Halffter Caro has forged an international career conducting some of the world's most prestigious orchestras. His meticulous attention to detail and ability to breathe new life into classic masterpieces has earned him critical acclaim globally.",
+                    "type": "text"
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "text": "Beyond the podium, his work as a composer reveals a deeply emotional connection to contemporary narratives, exploring the limits of orchestral colors.",
+                    "type": "text"
+                  }
+                ]
+              }
+            ]
+          },
+          "title": "The Architect of Sound",
+          "alignment": "left",
+          "component": "editorial_text_section",
+          "text_width": "medium"
+        },
+        {
+          "_uid": "0b50d10f-5b2f-4db8-911d-700fb588d379",
+          "items": [
+            {
+              "_uid": "79b6d76b-3496-46a3-aab4-ffe10c985780",
+              "component": "career_highlight_item",
+              "date_label": "2001 - 2004",
+              "role_label": "Principal Guest Conductor",
+              "description": "Nürnberger Symphoniker"
+            },
+            {
+              "_uid": "8a47eb58-b3ac-479b-9057-5c5a41012a36",
+              "component": "career_highlight_item",
+              "date_label": "2004 - 2014",
+              "role_label": "Artistic Director",
+              "description": "Orquesta Filarmónica de Gran Canaria"
+            },
+            {
+              "_uid": "87e65777-45fe-49c1-b057-ee748d5637d4",
+              "component": "career_highlight_item",
+              "date_label": "2004 - 2018",
+              "role_label": "Artistic Director",
+              "description": "Real Orquesta Sinfónica de Sevilla"
+            }
+          ],
+          "title": "Career Highlights",
+          "component": "career_highlights_section"
+        }
+      ],
+      "component": "biography_page"
+    },
+    "published": true,
+    "slug": "biography",
+    "path": null,
+    "full_slug": "biography",
+    "default_root": null,
+    "disble_fe_editor": false,
+    "disable_fe_editor": false,
+    "parent": null,
+    "is_startpage": false,
+    "unpublished_changes": true,
+    "meta_data": null,
+    "imported_at": null,
+    "preview_token": {
+      "token": "7a75e44384081e12125fecf97430339e88388fea",
+      "timestamp": "1782079568"
+    },
+    "pinned": false,
+    "breadcrumbs": [],
+    "publish_at": null,
+    "expire_at": null,
+    "first_published_at": "2026-06-14T17:00:17.422Z",
+    "last_author": {
+      "id": 134635,
+      "userid": "borja.godoy.gago@gmail.com",
+      "friendly_name": "Borja Godoy Gago"
+    },
+    "last_author_id": 134635,
+    "user_ids": [],
+    "space_role_ids": [],
+    "translated_slugs": [],
+    "localized_paths": [
+      {
+        "path": "biography",
+        "name": null,
+        "lang": "es",
+        "published": null
+      }
+    ],
+    "position": -20,
+    "translated_stories": [],
+    "can_not_view": false,
+    "is_scheduled": null,
+    "scheduled_dates": null,
+    "ideas": [],
+    "current_version_id": 187461726924345,
+    "variant_type": null,
+    "experiment_ids": [],
+    "stage": null,
+    "stages": [],
+    "favourite_for_user_ids": []
+  },
+  {
+    "name": "Settings",
+    "parent_id": 0,
+    "group_id": "b667400d-15b5-4824-b807-031abcc54372",
+    "alternates": [],
+    "created_at": "2026-06-14T14:40:34.167Z",
+    "deleted_at": null,
+    "sort_by_date": null,
+    "tag_list": [],
+    "updated_at": "2026-06-14T14:40:34.167Z",
+    "published_at": null,
+    "id": 187426546372024,
+    "uuid": "4060ff4a-bbaa-49f8-ab7a-0d74d1be2cc2",
+    "is_folder": true,
+    "content": {
+      "body": [],
+      "component": "page"
+    },
+    "published": false,
+    "slug": "settings",
+    "path": null,
+    "full_slug": "settings",
+    "default_root": "page",
+    "disble_fe_editor": false,
+    "disable_fe_editor": false,
+    "parent": null,
+    "is_startpage": false,
+    "unpublished_changes": false,
+    "meta_data": null,
+    "imported_at": null,
+    "preview_token": {
+      "token": "7a75e44384081e12125fecf97430339e88388fea",
+      "timestamp": "1782079568"
+    },
+    "pinned": false,
+    "breadcrumbs": [],
+    "publish_at": null,
+    "expire_at": null,
+    "first_published_at": null,
+    "last_author": {
+      "id": 134635,
+      "userid": "borja.godoy.gago@gmail.com",
+      "friendly_name": "Borja Godoy Gago"
+    },
+    "last_author_id": 134635,
+    "user_ids": [],
+    "space_role_ids": [],
+    "translated_slugs": [],
+    "localized_paths": [
+      {
+        "path": "settings",
+        "name": null,
+        "lang": "es",
+        "published": null
+      }
+    ],
+    "position": -10,
+    "translated_stories": [],
+    "can_not_view": false,
+    "is_scheduled": null,
+    "scheduled_dates": null,
+    "ideas": [],
+    "current_version_id": 187426546456818,
+    "variant_type": null,
+    "experiment_ids": [],
+    "stage": null,
+    "stages": [],
+    "favourite_for_user_ids": []
+  },
+  {
+    "name": "Global Config",
+    "parent_id": 187426546372024,
+    "group_id": "ffd30b7d-5812-4d58-807d-7a8c4eebec14",
+    "alternates": [],
+    "created_at": "2026-06-14T14:40:34.282Z",
+    "deleted_at": null,
+    "sort_by_date": null,
+    "tag_list": [],
+    "updated_at": "2026-06-14T17:03:09.993Z",
+    "published_at": null,
+    "id": 187426546843065,
+    "uuid": "da2abb1c-5948-4a39-96a7-94cb474f55c3",
+    "is_folder": false,
+    "content": {
+      "_uid": "de24841b-0606-4ae5-9023-e09bf64ed5d2",
+      "footer": [],
+      "header": [
+        {
+          "_uid": "4c217f69-3a5b-4aa0-8bb1-bc6c7f2f42b8",
+          "logo": {
+            "id": null,
+            "alt": null,
+            "name": "",
+            "focus": null,
+            "title": null,
+            "source": null,
+            "filename": "",
+            "copyright": null,
+            "fieldtype": "asset",
+            "meta_data": {}
+          },
+          "cta_link": {
+            "id": "",
+            "url": "",
+            "linktype": "story",
+            "fieldtype": "multilink",
+            "cached_url": ""
+          },
+          "logo_alt": "",
+          "component": "header_config",
+          "cta_label": "",
+          "brand_text": "",
+          "navigation": [
+            {
+              "rel": "",
+              "_uid": "f4e2a71d-204c-40d3-b41a-678dbf62f34b",
+              "link": {
+                "id": "a627bcda-0709-4b81-b226-cd639f73fac8",
+                "url": "",
+                "linktype": "story",
+                "fieldtype": "multilink",
+                "cached_url": "home"
+              },
+              "label": "Home",
+              "children": [],
+              "component": "navigation_item",
+              "open_in_new_tab": false
+            },
+            {
+              "_uid": "44cf7956-d94e-428b-a339-09b38001c8d2",
+              "link": {
+                "linktype": "story",
+                "cached_url": "biography"
+              },
+              "label": "Biography",
+              "component": "navigation_item"
+            },
+            {
+              "_uid": "80e22cc4-c65f-4f8f-8820-da4d588fe0ec",
+              "link": {
+                "linktype": "story",
+                "cached_url": "works"
+              },
+              "label": "Works",
+              "component": "navigation_item"
+            },
+            {
+              "_uid": "390137ee-1296-417c-bb85-8664ce4d67ef",
+              "link": {
+                "linktype": "story",
+                "cached_url": "agenda"
+              },
+              "label": "Agenda",
+              "component": "navigation_item"
+            }
+          ],
+          "sticky_header": true,
+          "show_language_switcher": true
+        }
+      ],
+      "component": "global_config",
+      "analytics_id": "",
+      "contact_info": [],
+      "seo_defaults": [],
+      "site_identity": [],
+      "default_locale": "es",
+      "enable_indexing": true,
+      "social_profiles": [],
+      "enable_language_switcher": true,
+      "google_site_verification": ""
+    },
+    "published": false,
+    "slug": "global-config",
+    "path": null,
+    "full_slug": "settings/global-config",
+    "default_root": null,
+    "disble_fe_editor": false,
+    "disable_fe_editor": false,
+    "parent": {
+      "id": 187426546372024,
+      "uuid": "4060ff4a-bbaa-49f8-ab7a-0d74d1be2cc2",
+      "name": "Settings",
+      "slug": "settings",
+      "disble_fe_editor": false
+    },
+    "is_startpage": false,
+    "unpublished_changes": true,
+    "meta_data": null,
+    "imported_at": null,
+    "preview_token": {
+      "token": "7a75e44384081e12125fecf97430339e88388fea",
+      "timestamp": "1782079568"
+    },
+    "pinned": false,
+    "breadcrumbs": [
+      {
+        "id": 187426546372024,
+        "name": "Settings",
+        "parent_id": 0,
+        "disble_fe_editor": false,
+        "disable_fe_editor": false,
+        "path": null,
+        "slug": "settings",
+        "translated_slugs": []
+      }
+    ],
+    "publish_at": null,
+    "expire_at": null,
+    "first_published_at": null,
+    "last_author": {
+      "id": 134635,
+      "userid": "borja.godoy.gago@gmail.com",
+      "friendly_name": "Borja Godoy Gago"
+    },
+    "last_author_id": 134635,
+    "user_ids": [],
+    "space_role_ids": [],
+    "translated_slugs": [],
+    "localized_paths": [
+      {
+        "path": "settings/global-config",
+        "name": null,
+        "lang": "es",
+        "published": null
+      }
+    ],
+    "position": 0,
+    "translated_stories": [],
+    "can_not_view": false,
+    "is_scheduled": null,
+    "scheduled_dates": null,
+    "ideas": [],
+    "current_version_id": 187461590957501,
+    "variant_type": null,
+    "experiment_ids": [],
+    "stage": null,
+    "stages": [],
+    "favourite_for_user_ids": []
+  },
+  {
+    "name": "Home",
+    "parent_id": 0,
+    "group_id": "ef1da3b3-a3c8-4619-8d7e-2dce766ca012",
+    "alternates": [],
+    "created_at": "2026-06-14T12:35:56.326Z",
+    "deleted_at": null,
+    "sort_by_date": null,
+    "tag_list": [],
+    "updated_at": "2026-06-21T21:58:11.142Z",
+    "published_at": "2026-06-21T21:57:32.844Z",
+    "id": 187395917129058,
+    "uuid": "a627bcda-0709-4b81-b226-cd639f73fac8",
+    "is_folder": false,
+    "content": {
+      "seo": [
+        {
+          "_uid": "bbceffb0-1373-40a8-ad05-875a5869e4a0",
+          "og_title": "Pedro Halffter | Conductor & Composer",
+          "component": "seo",
+          "meta_title": "Pedro Halffter | Conductor & Composer",
+          "focus_keyword": "Pedro Halffter",
+          "og_description": "Official website of Pedro Halffter, Spanish conductor and composer.",
+          "meta_description": "Official website of Pedro Halffter, Spanish conductor and composer. Discover his symphonic works, operas, biography, and upcoming performances.",
+          "secondary_keywords": "Conductor, Composer, Spanish classical music, Opera",
+          "structured_data_type": "Person"
+        }
+      ],
+      "_uid": "0247be43-260a-4422-9feb-b826b930210f",
+      "body": [
+        {
+          "_uid": "9a5ba074-a380-4e66-b33d-f3dd58a1f994",
+          "image": {
+            "id": 187442290811626,
+            "alt": "Pedro Halfter conducting",
+            "name": "",
+            "focus": "",
+            "title": "",
+            "source": "",
+            "filename": "https://a.storyblok.com/f/293187221511990/720x488/fb410251ed/pedro_halffter.jpg",
+            "copyright": "",
+            "fieldtype": "asset",
+            "meta_data": {
+              "alt": "Pedro Halfter conducting",
+              "title": "",
+              "source": "",
+              "copyright": ""
+            },
+            "is_external_url": false
+          },
+          "title": "Orchestrating Silence & Sound",
+          "cta_link": {
+            "linktype": "story",
+            "cached_url": "biography"
+          },
+          "cta_text": "",
+          "component": "home_hero_section",
+          "description": "Alongside his career as a conductor, Pedro Halffter has developed a distinguished profile as a composer. His works have been premiered by ensembles such as the Massachusetts Symphony Orchestra, the Deutsche Kammerakademie, the Stuttgart Chamber Orchestra, Ensemble Intercontemporain, the Schleswig-Holstein Festival Orchestra and the New Japan Philharmonic Orchestra, in venues including Carnegie Hall in New York, the Auditorio Nacional de Música in Madrid and the Konzerthaus Dortmund.\n\nHis catalogue reflects a deep interest in the dialogue between music, memory and other artistic disciplines. He has devoted particular attention to the legacy of Viktor Ullmann, creating arrangements and new works connected to Der Kaiser von Atlantis, as well as homage pieces such as Dalí and Beethoven, Homage to Beethoven, Thank You, Mr. Joyce and Proteo, premiered in 2022 by the Madrid Symphony Orchestra."
+        },
+        {
+          "_uid": "148e1134-f056-4a2f-a73b-e5b89e582c79",
+          "items": [
+            {
+              "_uid": "f595e131-7f67-4b1c-b109-b64dac9a7910",
+              "title": "La Lettre au général Franco",
+              "status": "upcoming",
+              "subtitle": "Rehersall",
+              "component": "event_highlight_item",
+              "sort_date": "2026-06-12 00:00",
+              "date_label": "8 - 13 Jun",
+              "details_link": {
+                "linktype": "story",
+                "cached_url": "agenda"
+              },
+              "date_sublabel": "2026",
+              "details_label": "",
+              "location_label": "Montreal"
+            },
+            {
+              "_uid": "d534db2c-8b29-41e6-bd8f-0577db8bc2ce",
+              "title": "Entrega de premios fronteras del conocimiento BBVA",
+              "status": "past",
+              "subtitle": "Jury in ópera & Music",
+              "component": "event_highlight_item",
+              "sort_date": "2026-06-17 00:00",
+              "date_label": "17, 18 Jun",
+              "details_link": {
+                "id": "",
+                "url": "calendar.google.com/calendar/u/0/r?tab=mc&pli=1",
+                "linktype": "url",
+                "fieldtype": "multilink",
+                "cached_url": "calendar.google.com/calendar/u/0/r?tab=mc&pli=1"
+              },
+              "date_sublabel": "2026",
+              "details_label": "See the gala",
+              "location_label": "BERLIN, GERMANY",
+              "open_in_new_tab": true
+            },
+            {
+              "_uid": "00e6de5d-a6bd-40d1-aac7-695944173450",
+              "title": "Orchestrezentrum NRW - Pedro Halffter- richard Strauss I",
+              "status": "available",
+              "subtitle": "Richard Strauss | Don Quixote“ op. 35 (recomposed by Pedro Halffter) / Pedro Halffter | Klavierquartett \"Hommage an Dali und Beethoven\"",
+              "component": "event_highlight_item",
+              "sort_date": "2026-06-25 00:00",
+              "date_label": "25 Jun",
+              "details_link": {
+                "id": "",
+                "url": "https://www.orchesterzentrum.de/veranstaltungen.html",
+                "linktype": "url",
+                "fieldtype": "multilink",
+                "cached_url": "https://www.orchesterzentrum.de/veranstaltungen.html"
+              },
+              "date_sublabel": "2026",
+              "details_label": "Details",
+              "location_label": "Konzerthaus Dortmund",
+              "open_in_new_tab": true
+            },
+            {
+              "_uid": "314f3a8c-c4ae-4da8-87de-5c862afbde9c",
+              "title": "Orchestrezentrum NRW - Pedro Halffter - Richard Strauss II",
+              "status": "available",
+              "subtitle": "Pedro Halffter | Winterreise (recomposed by Pedro Halffter)  - Richard Strauss | Metamorphosen",
+              "component": "event_highlight_item",
+              "sort_date": "2026-06-25 00:00",
+              "date_label": "26 Jun",
+              "details_link": {
+                "id": "",
+                "url": "https://www.orchesterzentrum.de/veranstaltungen.html",
+                "linktype": "url",
+                "fieldtype": "multilink",
+                "cached_url": "https://www.orchesterzentrum.de/veranstaltungen.html"
+              },
+              "date_sublabel": "2026",
+              "details_label": "Details",
+              "location_label": "Konzerthaus Dortmund",
+              "open_in_new_tab": true
+            }
+          ],
+          "theme": "",
+          "title": "Upcoming Highlights",
+          "cta_link": {
+            "linktype": "story",
+            "cached_url": "agenda"
+          },
+          "subtitle": "Selected performances and engagements.",
+          "component": "upcoming_highlights_section",
+          "cta_label": "",
+          "layout_variant": ""
+        }
+      ],
+      "title": "",
+      "component": "page",
+      "description": ""
+    },
+    "published": true,
+    "slug": "home",
+    "path": null,
+    "full_slug": "home",
+    "default_root": null,
+    "disble_fe_editor": false,
+    "disable_fe_editor": false,
+    "parent": null,
+    "is_startpage": false,
+    "unpublished_changes": true,
+    "meta_data": null,
+    "imported_at": null,
+    "preview_token": {
+      "token": "42f26df41b2dd19ca9937a888a98c7c12f5b7fd0",
+      "timestamp": "1782079569"
+    },
+    "pinned": false,
+    "breadcrumbs": [],
+    "publish_at": null,
+    "expire_at": null,
+    "first_published_at": "2026-06-14T15:44:43.001Z",
+    "last_author": {
+      "id": 134635,
+      "userid": "borja.godoy.gago@gmail.com",
+      "friendly_name": "Borja Godoy Gago"
+    },
+    "last_author_id": 134635,
+    "user_ids": [],
+    "space_role_ids": [],
+    "translated_slugs": [],
+    "localized_paths": [
+      {
+        "path": "home",
+        "name": null,
+        "lang": "es",
+        "published": null
+      }
+    ],
+    "position": 0,
+    "translated_stories": [],
+    "can_not_view": false,
+    "is_scheduled": null,
+    "scheduled_dates": null,
+    "ideas": [],
+    "current_version_id": 190011355673065,
+    "variant_type": null,
+    "experiment_ids": [],
+    "stage": null,
+    "stages": [],
+    "favourite_for_user_ids": []
+  }
+]

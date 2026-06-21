@@ -1,0 +1,202 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+
+const { blok } = Astro.props;
+
+// Helper for CTA
+const hasCta = blok.cta_label && blok.cta_link?.cached_url;
+const ctaHref = blok.cta_link?.cached_url ? (blok.cta_link.cached_url.startsWith('http') ? blok.cta_link.cached_url : `/${blok.cta_link.cached_url.replace(/^\/|\/$/g, '')}/`) : '#';
+
+// Handle items and max_items limit natively
+let itemsToRender = blok.items || [];
+if (blok.max_items && parseInt(blok.max_items) > 0) {
+  itemsToRender = itemsToRender.slice(0, parseInt(blok.max_items));
+}
+
+const themeClass = blok.theme === 'dark' ? 'theme-dark' : 'theme-light';
+const layoutClass = `layout-${blok.layout_variant || 'editorial_list'}`;
+---
+
+<section {...storyblokEditable(blok)} class={`upcoming-highlights-section ${themeClass} ${layoutClass}`}>
+  <div class="highlights-container">
+    
+    <header class="highlights-header">
+      <div class="header-content">
+        {blok.eyebrow && <span class="header-eyebrow">{blok.eyebrow}</span>}
+        {blok.title && <h2 class="header-title">{blok.title}</h2>}
+        {blok.subtitle && <p class="header-subtitle">{blok.subtitle}</p>}
+      </div>
+      
+      {hasCta && (
+        <div class="header-action">
+          <a href={ctaHref} class="header-cta">
+            {blok.cta_label}
+          </a>
+        </div>
+      )}
+    </header>
+
+    {itemsToRender.length > 0 && (
+      <ul class="highlights-list">
+        {itemsToRender.map((itemBlok, index) => (
+          <li class="reveal-item" style={`transition-delay: ${index * 150}ms`}>
+            <StoryblokComponent blok={itemBlok} />
+          </li>
+        ))}
+      </ul>
+    )}
+
+  </div>
+</section>
+
+<script>
+  function initHighlightsObserver() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+    document.querySelectorAll('.upcoming-highlights-section .reveal-item').forEach((el) => {
+      observer.observe(el);
+    });
+  }
+
+  // Run on first load
+  initHighlightsObserver();
+  // Support Astro view transitions if enabled later
+  document.addEventListener('astro:page-load', initHighlightsObserver);
+</script>
+
+<style>
+  .upcoming-highlights-section {
+    width: 100%;
+    padding: var(--section-stack, 5rem) 0;
+    background-color: var(--surface-bright, #FAFAFA);
+  }
+
+  .upcoming-highlights-section.theme-dark {
+    background-color: var(--primary, #111);
+    color: var(--surface-bright, #FAFAFA);
+  }
+
+  .highlights-container {
+    max-width: var(--container-max, 1200px);
+    margin: 0 auto;
+    padding: 0 var(--margin-x, 1.5rem);
+  }
+
+  .highlights-header {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-bottom: 1rem;
+    margin-bottom: 0;
+  }
+
+  .theme-dark .highlights-header {
+    /* Optional dark theme adjustments */
+  }
+
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 600px;
+  }
+
+  .header-eyebrow {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent-slate, #666);
+    margin-bottom: 1rem;
+  }
+
+  .theme-dark .header-eyebrow {
+    color: var(--on-primary-variant, #AAA);
+  }
+
+  .header-title {
+    font-family: var(--font-serif, serif);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: inherit;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .header-subtitle {
+    font-family: var(--font-serif, serif);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--on-surface-variant, #444);
+    margin: 0;
+  }
+
+  .theme-dark .header-subtitle {
+    color: var(--on-primary-variant, #CCC);
+  }
+
+  .header-action {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .header-cta {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .header-cta:hover {
+    color: var(--accent-gold, #CBA052);
+  }
+
+  .highlights-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .highlights-list li {
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Reveal Animations */
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-item.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Desktop Header Layout */
+  @media (min-width: 768px) {
+    .highlights-header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+  }
+</style>

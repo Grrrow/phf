@@ -1,0 +1,45 @@
+{
+  "component": {
+    "name": "contact_info",
+    "display_name": "Contact Info",
+    "component_group_name": "Global",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "email": {
+        "type": "text",
+        "pos": 0
+      },
+      "phone": {
+        "type": "text",
+        "pos": 1
+      },
+      "management_name": {
+        "type": "text",
+        "translatable": true,
+        "pos": 2
+      },
+      "management_email": {
+        "type": "text",
+        "pos": 3
+      },
+      "booking_email": {
+        "type": "text",
+        "pos": 4
+      },
+      "press_email": {
+        "type": "text",
+        "pos": 5
+      },
+      "address_text": {
+        "type": "textarea",
+        "translatable": true,
+        "pos": 6
+      },
+      "contact_page_link": {
+        "type": "multilink",
+        "pos": 7
+      }
+    }
+  }
+}

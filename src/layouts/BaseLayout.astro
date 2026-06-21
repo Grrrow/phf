@@ -1,0 +1,50 @@
+---
+import SeoHead from '../components/seo/SeoHead.astro';
+import SplashScreen from '../components/global/SplashScreen.astro';
+import Header from '../components/global/Header.astro';
+import Footer from '../components/global/Footer.astro';
+import type { LocaleCode } from '../i18n/config';
+import '../styles/global.css';
+
+export interface Props {
+  locale: LocaleCode;
+  currentPath: string;
+  seo?: any;
+  globalConfig?: any;
+  alternates?: { href: string; hreflang: string }[];
+  jsonLd?: string;
+}
+
+const {
+  locale,
+  currentPath,
+  seo = {},
+  globalConfig = {},
+  alternates = [],
+  jsonLd,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="/favico.png" />
+    <meta name="generator" content={Astro.generator} />
+    <SeoHead
+      {...seo}
+      locale={locale}
+      alternates={alternates}
+      jsonLd={jsonLd}
+    />
+  </head>
+  <body>
+    <SplashScreen />
+    <Header locale={locale} currentPath={currentPath} globalConfig={globalConfig} alternates={alternates} />
+    <main>
+      <slot />
+    </main>
+    <Footer locale={locale} currentPath={currentPath} globalConfig={globalConfig} alternates={alternates} />
+  </body>
+</html>

@@ -1,0 +1,83 @@
+{
+  "component": {
+    "name": "social_profile_link",
+    "display_name": "Social Profile Link",
+    "component_group_name": "Global",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "platform": {
+        "type": "option",
+        "options": [
+          {
+            "name": "Instagram",
+            "value": "instagram"
+          },
+          {
+            "name": "Facebook",
+            "value": "facebook"
+          },
+          {
+            "name": "X (Twitter)",
+            "value": "x"
+          },
+          {
+            "name": "LinkedIn",
+            "value": "linkedin"
+          },
+          {
+            "name": "YouTube",
+            "value": "youtube"
+          },
+          {
+            "name": "Spotify",
+            "value": "spotify"
+          },
+          {
+            "name": "Apple Music",
+            "value": "apple_music"
+          },
+          {
+            "name": "SoundCloud",
+            "value": "soundcloud"
+          },
+          {
+            "name": "Wikipedia",
+            "value": "wikipedia"
+          },
+          {
+            "name": "IMDb",
+            "value": "imdb"
+          },
+          {
+            "name": "Official Website",
+            "value": "official_website"
+          },
+          {
+            "name": "Other",
+            "value": "other"
+          }
+        ],
+        "pos": 0
+      },
+      "label": {
+        "type": "text",
+        "translatable": true,
+        "pos": 1
+      },
+      "url": {
+        "type": "text",
+        "pos": 2
+      },
+      "icon": {
+        "type": "asset",
+        "pos": 3
+      },
+      "open_in_new_tab": {
+        "type": "boolean",
+        "default_value": true,
+        "pos": 4
+      }
+    }
+  }
+}

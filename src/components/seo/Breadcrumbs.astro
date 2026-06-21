@@ -1,0 +1,39 @@
+---
+export interface Props {
+  items: { label: string; url: string }[];
+}
+const { items } = Astro.props;
+---
+<nav aria-label="Breadcrumb">
+  <ol>
+    {items.map((item, index) => (
+      <li>
+        {index < items.length - 1 ? (
+          <a href={item.url}>{item.label}</a>
+        ) : (
+          <span aria-current="page">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  nav[aria-label="Breadcrumb"] ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  nav[aria-label="Breadcrumb"] li {
+    display: flex;
+    align-items: center;
+  }
+  nav[aria-label="Breadcrumb"] li:not(:last-child)::after {
+    content: "/";
+    margin-left: 0.5rem;
+    color: #666;
+  }
+</style>

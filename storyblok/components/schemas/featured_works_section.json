@@ -1,0 +1,97 @@
+{
+  "component": {
+    "name": "featured_works_section",
+    "display_name": "Featured Works Section",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "eyebrow": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true,
+        "description": "Texto pequeño opcional que aparece encima del título principal (ej. 'HIGHLIGHTS')."
+      },
+      "title": {
+        "type": "text",
+        "pos": 1,
+        "translatable": true,
+        "description": "Título principal de la sección (ej. 'Featured Works')."
+      },
+      "show_decorative_line": {
+        "type": "boolean",
+        "pos": 2,
+        "default_value": true,
+        "translatable": false,
+        "description": "Muestra una sutil línea dorada decorativa debajo del título."
+      },
+      "subtitle": {
+        "type": "textarea",
+        "pos": 3,
+        "translatable": true,
+        "description": "Párrafo opcional debajo del título para dar contexto."
+      },
+      "items": {
+        "type": "bloks",
+        "pos": 4,
+        "translatable": false,
+        "restrict_components": true,
+        "component_whitelist": [
+          "work_highlight_card"
+        ],
+        "description": "Añade aquí las tarjetas de obras ('Work Highlight Card'). Combina tamaños grandes y pequeños para un mejor efecto visual."
+      },
+      "cta_label": {
+        "type": "text",
+        "pos": 5,
+        "translatable": true,
+        "description": "Texto para el botón general inferior (ej. 'Explore all works')."
+      },
+      "cta_link": {
+        "type": "multilink",
+        "pos": 6,
+        "translatable": false,
+        "description": "Enlace de destino para el botón inferior."
+      },
+      "layout_variant": {
+        "type": "option",
+        "pos": 7,
+        "use_uuid": true,
+        "options": [
+          {
+            "value": "editorial_grid",
+            "name": "Editorial Grid"
+          },
+          {
+            "value": "compact_grid",
+            "name": "Compact Grid"
+          },
+          {
+            "value": "masonry",
+            "name": "Masonry"
+          }
+        ],
+        "default_value": "editorial_grid",
+        "translatable": false,
+        "description": "Controla la estructura del grid. 'Editorial Grid' es la recomendada para diseños asimétricos."
+      },
+      "theme": {
+        "type": "option",
+        "pos": 8,
+        "use_uuid": true,
+        "options": [
+          {
+            "value": "light",
+            "name": "Light Theme"
+          },
+          {
+            "value": "dark",
+            "name": "Dark Theme"
+          }
+        ],
+        "default_value": "light",
+        "translatable": false,
+        "description": "Define si el fondo de la sección entera será claro u oscuro."
+      }
+    }
+  }
+}

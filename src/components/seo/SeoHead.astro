@@ -1,0 +1,85 @@
+---
+import {
+  getRobotsContent,
+  normalizeMetaTitle,
+  normalizeMetaDescription,
+} from "../../utils/seo";
+import type { LocaleCode } from "../../i18n/config";
+
+const getLanguageFromUrl = (url: URL) => {
+  if (url.pathname.startsWith('/es/') || url.pathname === '/es') return 'es';
+  return 'en';
+};
+
+export interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  noindex?: boolean;
+  nofollow?: boolean;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  twitterImage?: string;
+  locale?: LocaleCode;
+  alternates?: { href: string; hreflang: string }[];
+  jsonLd?: string;
+  siteName?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  noindex = false,
+  nofollow = false,
+  ogTitle,
+  ogDescription,
+  ogImage,
+  twitterTitle,
+  twitterDescription,
+  twitterImage,
+  locale = "es",
+  alternates = [],
+  jsonLd,
+  siteName = "Site Name",
+} = Astro.props;
+
+const finalTitle = normalizeMetaTitle(title, siteName);
+const finalDescription = normalizeMetaDescription(description);
+const robotsContent = getRobotsContent(noindex, nofollow);
+---
+
+<title>{finalTitle}</title>
+<meta name="description" content={finalDescription} />
+<meta name="robots" content={robotsContent} />
+
+{canonical && <link rel="canonical" href={canonical} />}
+
+{/* Open Graph */}
+<meta property="og:title" content={ogTitle || finalTitle} />
+<meta property="og:description" content={ogDescription || finalDescription} />
+<meta property="og:locale" content={locale} />
+<meta property="og:type" content="website" />
+{ogImage && <meta property="og:image" content={ogImage} />}
+
+{/* Twitter Card */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={twitterTitle || ogTitle || finalTitle} />
+<meta
+  name="twitter:description"
+  content={twitterDescription || ogDescription || finalDescription}
+/>
+{twitterImage && <meta name="twitter:image" content={twitterImage} />}
+
+{/* Hreflang alternates */}
+{
+  alternates.map((alt) => (
+    <link rel="alternate" href={alt.href} hreflang={alt.hreflang} />
+  ))
+}
+
+{/* JSON-LD */}
+{jsonLd && <script type="application/ld+json" set:html={jsonLd} />}

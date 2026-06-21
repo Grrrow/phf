@@ -1,0 +1,54 @@
+{
+  "component": {
+    "name": "navigation_item",
+    "display_name": "Navigation Item",
+    "component_group_name": "Global",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "label": {
+        "type": "text",
+        "translatable": true,
+        "pos": 0
+      },
+      "link": {
+        "type": "multilink",
+        "pos": 1
+      },
+      "open_in_new_tab": {
+        "type": "boolean",
+        "pos": 2
+      },
+      "rel": {
+        "type": "option",
+        "options": [
+          {
+            "name": "none",
+            "value": "none"
+          },
+          {
+            "name": "nofollow",
+            "value": "nofollow"
+          },
+          {
+            "name": "noopener",
+            "value": "noopener"
+          },
+          {
+            "name": "noreferrer",
+            "value": "noreferrer"
+          }
+        ],
+        "pos": 3
+      },
+      "children": {
+        "type": "bloks",
+        "restrict_components": true,
+        "component_whitelist": [
+          "navigation_item"
+        ],
+        "pos": 4
+      }
+    }
+  }
+}

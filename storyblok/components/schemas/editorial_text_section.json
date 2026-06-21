@@ -1,0 +1,93 @@
+{
+  "component": {
+    "name": "editorial_text_section",
+    "display_name": "Editorial Text Section",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "eyebrow": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true,
+        "description": "Texto pequeño (super-título) opcional."
+      },
+      "title": {
+        "type": "text",
+        "pos": 1,
+        "translatable": true,
+        "description": "Título de la sección (ej. 'The Architect of Sound')."
+      },
+      "text": {
+        "type": "richtext",
+        "pos": 2,
+        "translatable": true,
+        "description": "Párrafos del texto narrativo."
+      },
+      "text_width": {
+        "type": "option",
+        "pos": 3,
+        "use_uuid": true,
+        "options": [
+          { "value": "narrow", "name": "Narrow (Estrecho)" },
+          { "value": "medium", "name": "Medium (Recomendado)" },
+          { "value": "wide", "name": "Wide (Ancho)" }
+        ],
+        "default_value": "medium",
+        "translatable": false,
+        "description": "Ancho máximo de lectura para los párrafos."
+      },
+      "alignment": {
+        "type": "option",
+        "pos": 4,
+        "use_uuid": true,
+        "options": [
+          { "value": "left", "name": "Alineado a la Izquierda" },
+          { "value": "center", "name": "Centrado" }
+        ],
+        "default_value": "left",
+        "translatable": false,
+        "description": "Alineación del texto (Título e interior)."
+      },
+      "heading_level": {
+        "type": "option",
+        "pos": 5,
+        "use_uuid": true,
+        "options": [
+          { "value": "h2", "name": "H2" },
+          { "value": "h3", "name": "H3" }
+        ],
+        "default_value": "h2",
+        "translatable": false,
+        "description": "Nivel de encabezado SEO."
+      },
+      "spacing_top": {
+        "type": "option",
+        "pos": 6,
+        "use_uuid": true,
+        "options": [
+          { "value": "none", "name": "Ninguno" },
+          { "value": "small", "name": "Pequeño" },
+          { "value": "medium", "name": "Medio" },
+          { "value": "large", "name": "Grande" }
+        ],
+        "default_value": "small",
+        "translatable": false,
+        "description": "Espaciado superior."
+      },
+      "spacing_bottom": {
+        "type": "option",
+        "pos": 7,
+        "use_uuid": true,
+        "options": [
+          { "value": "none", "name": "Ninguno" },
+          { "value": "small", "name": "Pequeño" },
+          { "value": "medium", "name": "Medio" },
+          { "value": "large", "name": "Grande" }
+        ],
+        "default_value": "large",
+        "translatable": false,
+        "description": "Espaciado inferior."
+      }
+    }
+  }
+}

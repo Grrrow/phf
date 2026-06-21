@@ -1,0 +1,20 @@
+{
+  "component": {
+    "name": "image_text_section",
+    "display_name": "Image Text Section",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true
+      },
+      "description": {
+        "type": "textarea",
+        "pos": 1,
+        "translatable": true
+      }
+    }
+  }
+}

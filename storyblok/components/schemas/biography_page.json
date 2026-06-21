@@ -1,0 +1,61 @@
+{
+  "component": {
+    "name": "biography_page",
+    "display_name": "Biography Page",
+    "is_nestable": false,
+    "is_root": true,
+    "schema": {
+      "seo": {
+        "type": "bloks",
+        "pos": 0,
+        "translatable": false,
+        "maximum": 1,
+        "restrict_components": true,
+        "component_whitelist": [
+          "seo"
+        ],
+        "description": "Configuración SEO de la página."
+      },
+      "body": {
+        "type": "bloks",
+        "pos": 1,
+        "translatable": false,
+        "restrict_components": true,
+        "component_whitelist": [
+          "biography_hero_section",
+          "editorial_image_section",
+          "editorial_text_section",
+          "career_highlights_section"
+        ],
+        "description": "Secciones principales de la biografía. Puedes ordenarlas como quieras."
+      },
+      "page_theme": {
+        "type": "option",
+        "pos": 2,
+        "use_uuid": true,
+        "options": [
+          { "value": "light", "name": "Light" },
+          { "value": "dark", "name": "Dark" },
+          { "value": "editorial", "name": "Editorial (Off-white)" }
+        ],
+        "default_value": "editorial",
+        "translatable": false,
+        "description": "Color de fondo base de la página entera."
+      },
+      "show_header": {
+        "type": "boolean",
+        "pos": 3,
+        "default_value": true,
+        "translatable": false,
+        "description": "Mostrar el header global (menú)."
+      },
+      "show_footer": {
+        "type": "boolean",
+        "pos": 4,
+        "default_value": true,
+        "translatable": false,
+        "description": "Mostrar el footer global al final."
+      }
+    }
+  }
+}

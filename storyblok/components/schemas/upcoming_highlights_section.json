@@ -1,0 +1,87 @@
+{
+  "component": {
+    "name": "upcoming_highlights_section",
+    "display_name": "Upcoming Highlights Section",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "eyebrow": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true
+      },
+      "title": {
+        "type": "text",
+        "pos": 1,
+        "translatable": true
+      },
+      "subtitle": {
+        "type": "textarea",
+        "pos": 2,
+        "translatable": true
+      },
+      "items": {
+        "type": "bloks",
+        "pos": 3,
+        "translatable": false,
+        "restrict_components": true,
+        "component_whitelist": [
+          "event_highlight_item"
+        ]
+      },
+      "cta_label": {
+        "type": "text",
+        "pos": 4,
+        "translatable": true
+      },
+      "cta_link": {
+        "type": "multilink",
+        "pos": 5,
+        "translatable": false
+      },
+      "max_items": {
+        "type": "number",
+        "pos": 6,
+        "translatable": false
+      },
+      "layout_variant": {
+        "type": "option",
+        "pos": 7,
+        "translatable": false,
+        "use_uuid": true,
+        "options": [
+          {
+            "value": "editorial_list",
+            "name": "Editorial List"
+          },
+          {
+            "value": "compact_list",
+            "name": "Compact List"
+          },
+          {
+            "value": "agenda_preview",
+            "name": "Agenda Preview"
+          }
+        ],
+        "default_value": "editorial_list"
+      },
+      "theme": {
+        "type": "option",
+        "pos": 8,
+        "translatable": false,
+        "use_uuid": true,
+        "options": [
+          {
+            "value": "light",
+            "name": "Light"
+          },
+          {
+            "value": "dark",
+            "name": "Dark"
+          }
+        ],
+        "default_value": "light"
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "component": {
+    "name": "works_catalog_page",
+    "display_name": "Works Catalog Page",
+    "is_nestable": false,
+    "is_root": true,
+    "schema": {
+      "seo": {
+        "type": "bloks",
+        "pos": 0,
+        "translatable": false,
+        "maximum": 1,
+        "restrict_components": true,
+        "component_whitelist": [
+          "seo"
+        ],
+        "description": "Configuración SEO de la página."
+      },
+      "title": {
+        "type": "text",
+        "pos": 1,
+        "translatable": true,
+        "description": "Título principal H1 de la página (ej. 'Catalog of Works')."
+      },
+      "intro": {
+        "type": "textarea",
+        "pos": 2,
+        "translatable": true,
+        "description": "Párrafo introductorio debajo del título."
+      },
+      "groups": {
+        "type": "bloks",
+        "pos": 3,
+        "translatable": false,
+        "restrict_components": true,
+        "component_whitelist": [
+          "works_catalog_group"
+        ],
+        "description": "Añade aquí los grupos o categorías de obras."
+      },
+      "page_theme": {
+        "type": "option",
+        "pos": 4,
+        "use_uuid": true,
+        "options": [
+          { "value": "light", "name": "Light" },
+          { "value": "dark", "name": "Dark" },
+          { "value": "editorial", "name": "Editorial (Off-white)" }
+        ],
+        "default_value": "editorial",
+        "translatable": false,
+        "description": "Tema de color base para toda la página."
+      },
+      "show_header": {
+        "type": "boolean",
+        "pos": 5,
+        "default_value": true,
+        "translatable": false,
+        "description": "Mostrar el header global en esta página."
+      },
+      "show_footer": {
+        "type": "boolean",
+        "pos": 6,
+        "default_value": true,
+        "translatable": false,
+        "description": "Mostrar el footer global al final de la página."
+      }
+    }
+  }
+}

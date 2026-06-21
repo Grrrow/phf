@@ -1,0 +1,97 @@
+{
+  "component": {
+    "name": "global_config",
+    "display_name": "Global Configuration",
+    "component_group_name": "Global",
+    "is_root": true,
+    "is_nestable": false,
+    "schema": {
+      "site_identity": {
+        "type": "bloks",
+        "maximum": 1,
+        "restrict_components": true,
+        "component_whitelist": [
+          "site_identity"
+        ],
+        "pos": 0
+      },
+      "header": {
+        "type": "bloks",
+        "maximum": 1,
+        "restrict_components": true,
+        "component_whitelist": [
+          "header_config"
+        ],
+        "pos": 1
+      },
+      "footer": {
+        "type": "bloks",
+        "maximum": 1,
+        "restrict_components": true,
+        "component_whitelist": [
+          "footer_config"
+        ],
+        "pos": 2
+      },
+      "seo_defaults": {
+        "type": "bloks",
+        "maximum": 1,
+        "restrict_components": true,
+        "component_whitelist": [
+          "seo"
+        ],
+        "pos": 3
+      },
+      "contact_info": {
+        "type": "bloks",
+        "maximum": 1,
+        "restrict_components": true,
+        "component_whitelist": [
+          "contact_info"
+        ],
+        "pos": 4
+      },
+      "social_profiles": {
+        "type": "bloks",
+        "restrict_components": true,
+        "component_whitelist": [
+          "social_profile_link"
+        ],
+        "pos": 5
+      },
+      "default_locale": {
+        "type": "option",
+        "options": [
+          {
+            "name": "Español",
+            "value": "es"
+          },
+          {
+            "name": "English",
+            "value": "en"
+          }
+        ],
+        "default_value": "es",
+        "pos": 6
+      },
+      "enable_indexing": {
+        "type": "boolean",
+        "default_value": true,
+        "pos": 7
+      },
+      "enable_language_switcher": {
+        "type": "boolean",
+        "default_value": true,
+        "pos": 8
+      },
+      "analytics_id": {
+        "type": "text",
+        "pos": 9
+      },
+      "google_site_verification": {
+        "type": "text",
+        "pos": 10
+      }
+    }
+  }
+}

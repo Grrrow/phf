@@ -1,0 +1,157 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+const { blok } = Astro.props;
+
+const hasLink = blok.details_link?.cached_url;
+const linkUrl = hasLink ? (blok.details_link.cached_url.startsWith('http') ? blok.details_link.cached_url : `/${blok.details_link.cached_url.replace(/^\/|\/$/g, '')}/`) : null;
+const linkTarget = blok.open_in_new_tab ? '_blank' : '_self';
+const linkRel = blok.open_in_new_tab ? 'noopener noreferrer' : undefined;
+const ariaLabel = `View details for ${blok.title || 'this work'}`;
+---
+
+<article {...storyblokEditable(blok)} class="work-catalog-item">
+  <div class="item-content">
+    
+    <div class="item-main">
+      {blok.title && <h3 class="item-title">{blok.title}</h3>}
+      {blok.description && <p class="item-description">{blok.description}</p>}
+    </div>
+    
+    <div class="item-meta">
+      {blok.year_label && <span class="item-year">{blok.year_label}</span>}
+      {hasLink && blok.details_label && (
+        <a href={linkUrl} target={linkTarget} rel={linkRel} aria-label={ariaLabel} class="item-details-link">
+          {blok.details_label} <span class="arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      )}
+    </div>
+
+  </div>
+</article>
+
+<style>
+  .work-catalog-item {
+    width: 100%;
+    border-top: 1px solid var(--border-light, #E5E5E5);
+    padding: 2rem 0;
+  }
+
+  /* Target the first item to remove the top border if it's the very first one */
+  :global(.items-list > li:first-child) .work-catalog-item {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  :global(.theme-dark) .work-catalog-item {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .item-content {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 3rem;
+    }
+  }
+
+  .item-main {
+    flex: 1 1 auto;
+    max-width: 600px;
+  }
+
+  .item-title {
+    font-family: var(--font-serif, serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.3;
+    color: inherit;
+    margin: 0 0 0.5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .item-title {
+      font-size: 1.75rem;
+    }
+  }
+
+  .item-description {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--on-surface-variant, #666);
+    margin: 0;
+  }
+
+  :global(.theme-dark) .item-description {
+    color: var(--on-primary-variant, #CCC);
+  }
+
+  .item-meta {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 2rem;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 768px) {
+    .item-meta {
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.5rem;
+      text-align: right;
+    }
+  }
+
+  .item-year {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.9rem;
+    color: var(--accent-slate, #666);
+  }
+
+  :global(.theme-dark) .item-year {
+    color: var(--on-primary-variant, #AAA);
+  }
+
+  .item-details-link {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--primary, #111);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  :global(.theme-dark) .item-details-link {
+    color: var(--surface-bright, #FAFAFA);
+  }
+
+  .item-details-link:hover {
+    color: var(--accent-gold, #CBA052);
+  }
+
+  :global(.theme-dark) .item-details-link:hover {
+    color: var(--accent-gold, #CBA052);
+  }
+
+  .arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+
+  .item-details-link:hover .arrow {
+    transform: translateX(4px);
+  }
+</style>

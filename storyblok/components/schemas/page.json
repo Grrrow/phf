@@ -1,0 +1,35 @@
+{
+  "component": {
+    "name": "page",
+    "display_name": "Page",
+    "is_nestable": false,
+    "is_root": true,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true
+      },
+      "description": {
+        "type": "textarea",
+        "pos": 1,
+        "translatable": true
+      },
+      "seo": {
+        "type": "bloks",
+        "pos": 2,
+        "translatable": false,
+        "maximum": 1,
+        "restrict_components": true,
+        "component_whitelist": [
+          "seo"
+        ]
+      },
+      "body": {
+        "type": "bloks",
+        "pos": 3,
+        "translatable": false
+      }
+    }
+  }
+}

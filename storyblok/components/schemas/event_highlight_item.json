@@ -1,0 +1,84 @@
+{
+  "component": {
+    "name": "event_highlight_item",
+    "display_name": "Event Highlight Item",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "date_label": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true
+      },
+      "date_sublabel": {
+        "type": "text",
+        "pos": 1,
+        "translatable": true
+      },
+      "sort_date": {
+        "type": "datetime",
+        "pos": 2,
+        "translatable": false
+      },
+      "title": {
+        "type": "text",
+        "pos": 3,
+        "translatable": true
+      },
+      "subtitle": {
+        "type": "text",
+        "pos": 4,
+        "translatable": true
+      },
+      "location_label": {
+        "type": "text",
+        "pos": 5,
+        "translatable": true
+      },
+      "details_label": {
+        "type": "text",
+        "pos": 6,
+        "translatable": true
+      },
+      "details_link": {
+        "type": "multilink",
+        "pos": 7,
+        "translatable": false
+      },
+      "status": {
+        "type": "option",
+        "pos": 8,
+        "translatable": false,
+        "use_uuid": true,
+        "options": [
+          {
+            "value": "upcoming",
+            "name": "Upcoming"
+          },
+          {
+            "value": "available",
+            "name": "Available"
+          },
+          {
+            "value": "sold_out",
+            "name": "Sold Out"
+          },
+          {
+            "value": "cancelled",
+            "name": "Cancelled"
+          },
+          {
+            "value": "past",
+            "name": "Past"
+          }
+        ],
+        "default_value": "upcoming"
+      },
+      "open_in_new_tab": {
+        "type": "boolean",
+        "pos": 9,
+        "translatable": false
+      }
+    }
+  }
+}

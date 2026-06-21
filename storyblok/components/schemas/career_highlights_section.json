@@ -1,0 +1,69 @@
+{
+  "component": {
+    "name": "career_highlights_section",
+    "display_name": "Career Highlights Section",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "eyebrow": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true,
+        "description": "Texto pequeño opcional."
+      },
+      "title": {
+        "type": "text",
+        "pos": 1,
+        "translatable": true,
+        "description": "Título principal (ej. 'Career Highlights'). Se renderiza como H2."
+      },
+      "subtitle": {
+        "type": "textarea",
+        "pos": 2,
+        "translatable": true,
+        "description": "Texto de apoyo opcional bajo el título."
+      },
+      "items": {
+        "type": "bloks",
+        "pos": 3,
+        "translatable": false,
+        "restrict_components": true,
+        "component_whitelist": [
+          "career_highlight_item"
+        ],
+        "description": "Añade aquí los hitos de la carrera."
+      },
+      "show_decorative_line": {
+        "type": "boolean",
+        "pos": 4,
+        "default_value": true,
+        "translatable": false,
+        "description": "Mostrar la pequeña línea decorativa debajo del título."
+      },
+      "layout_variant": {
+        "type": "option",
+        "pos": 5,
+        "use_uuid": true,
+        "options": [
+          { "value": "editorial_timeline", "name": "Editorial Timeline (Diseño predeterminado)" },
+          { "value": "compact_list", "name": "Compact List" }
+        ],
+        "default_value": "editorial_timeline",
+        "translatable": false,
+        "description": "Variante visual de la lista."
+      },
+      "theme": {
+        "type": "option",
+        "pos": 6,
+        "use_uuid": true,
+        "options": [
+          { "value": "light", "name": "Light" },
+          { "value": "dark", "name": "Dark" }
+        ],
+        "default_value": "light",
+        "translatable": false,
+        "description": "Color del contenedor de este bloque específico."
+      }
+    }
+  }
+}

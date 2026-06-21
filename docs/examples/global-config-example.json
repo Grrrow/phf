@@ -1,0 +1,54 @@
+{
+  "story": {
+    "name": "Global Config",
+    "slug": "global-config",
+    "content": {
+      "component": "global_config",
+      "default_locale": "es",
+      "enable_indexing": true,
+      "enable_language_switcher": true,
+      "site_identity": [
+        {
+          "component": "site_identity",
+          "site_name": "Mar Morán",
+          "site_tagline": "Soprano Internacional",
+          "organization_type": "Person",
+          "person_name": "Mar Morán",
+          "person_job_title": "Soprano"
+        }
+      ],
+      "header": [
+        {
+          "component": "header_config",
+          "logo_alt": "Mar Morán Logo",
+          "show_language_switcher": true,
+          "sticky_header": true,
+          "navigation": [
+            {
+              "component": "navigation_item",
+              "label": "Biografía",
+              "link": {
+                "id": "",
+                "url": "/biografia",
+                "linktype": "url",
+                "fieldtype": "multilink",
+                "cached_url": "biografia"
+              }
+            },
+            {
+              "component": "navigation_item",
+              "label": "Agenda",
+              "link": {
+                "id": "",
+                "url": "/agenda",
+                "linktype": "url",
+                "fieldtype": "multilink",
+                "cached_url": "agenda"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

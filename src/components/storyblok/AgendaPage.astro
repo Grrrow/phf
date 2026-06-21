@@ -1,0 +1,102 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+
+const { blok } = Astro.props;
+
+// Determine theme class
+const themeMapping: Record<string, string> = {
+  light: 'theme-light',
+  dark: 'theme-dark',
+  editorial: 'theme-editorial'
+};
+const themeClass = themeMapping[blok.page_theme || 'editorial'];
+
+const TitleTag = 'h1';
+---
+
+<main {...storyblokEditable(blok)} class={`agenda-page ${themeClass}`}>
+  <div class="agenda-header-container">
+    {blok.title && <TitleTag class="agenda-title">{blok.title}</TitleTag>}
+    {blok.intro && <p class="agenda-intro">{blok.intro}</p>}
+  </div>
+
+  {blok.hero_image && blok.hero_image.length > 0 && (
+    <div class="agenda-hero-image-wrapper">
+      {blok.hero_image.map((nestedBlok: any) => (
+        <StoryblokComponent blok={nestedBlok} />
+      ))}
+    </div>
+  )}
+
+  {blok.events_section && blok.events_section.length > 0 && (
+    <div class="agenda-events-wrapper">
+      {blok.events_section.map((nestedBlok: any) => (
+        <StoryblokComponent blok={nestedBlok} />
+      ))}
+    </div>
+  )}
+</main>
+
+<style>
+  .agenda-page {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: var(--section-stack, 8rem);
+    padding-bottom: 6rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Themes */
+  .theme-editorial {
+    background-color: var(--surface-bright, #FAFAFA); /* Off-white / light gray */
+    color: var(--primary, #111);
+  }
+  .theme-light {
+    background-color: #FFFFFF;
+    color: var(--primary, #111);
+  }
+  .theme-dark {
+    background-color: var(--primary, #111);
+    color: var(--surface-bright, #FAFAFA);
+  }
+
+  .agenda-header-container {
+    max-width: var(--container-max, 1200px);
+    margin: 0 auto;
+    padding: 0 var(--margin-x, 1.5rem);
+    margin-bottom: 4rem;
+  }
+
+  .agenda-title {
+    font-family: var(--font-serif, serif);
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0 0 1.5rem 0;
+    color: inherit;
+    letter-spacing: -0.02em;
+  }
+
+  .agenda-intro {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--on-surface-variant, #444);
+    margin: 0;
+    max-width: 650px;
+  }
+
+  :global(.theme-dark) .agenda-intro {
+    color: var(--on-primary-variant, #CCC);
+  }
+
+  .agenda-hero-image-wrapper {
+    margin-bottom: 6rem;
+    /* We don't restrict width here so editorial_image_section can go full-width if configured that way */
+  }
+
+  .agenda-events-wrapper {
+    width: 100%;
+  }
+</style>

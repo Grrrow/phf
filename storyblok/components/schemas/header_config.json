@@ -1,0 +1,52 @@
+{
+  "component": {
+    "name": "header_config",
+    "display_name": "Header Config",
+    "component_group_name": "Global",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "logo": {
+        "type": "asset",
+        "pos": 0
+      },
+      "logo_alt": {
+        "type": "text",
+        "translatable": true,
+        "pos": 1
+      },
+      "brand_text": {
+        "type": "text",
+        "translatable": true,
+        "pos": 2
+      },
+      "navigation": {
+        "type": "bloks",
+        "restrict_components": true,
+        "component_whitelist": [
+          "navigation_item"
+        ],
+        "pos": 3
+      },
+      "cta_label": {
+        "type": "text",
+        "translatable": true,
+        "pos": 4
+      },
+      "cta_link": {
+        "type": "multilink",
+        "pos": 5
+      },
+      "show_language_switcher": {
+        "type": "boolean",
+        "default_value": true,
+        "pos": 6
+      },
+      "sticky_header": {
+        "type": "boolean",
+        "default_value": true,
+        "pos": 7
+      }
+    }
+  }
+}

@@ -1,0 +1,229 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+const { blok, context = 'default' } = Astro.props;
+
+// Determine if there is a valid link
+const hasLink = blok.details_link && blok.details_link.cached_url;
+const linkUrl = hasLink ? (blok.details_link.cached_url.startsWith('http') ? blok.details_link.cached_url : `/${blok.details_link.cached_url.replace(/^\/|\/$/g, '')}/`) : null;
+const linkTarget = blok.open_in_new_tab ? '_blank' : '_self';
+const linkRel = blok.open_in_new_tab ? 'noopener noreferrer' : undefined;
+const detailsAriaLabel = `View details for ${blok.title || 'event'}`;
+
+const statusClass = blok.status ? `status-${blok.status}` : 'status-upcoming';
+---
+
+<div {...storyblokEditable(blok)} class={`event-highlight-item ${statusClass} context-${context}`}>
+  <div class="event-grid">
+    
+    {/* Column 1: Date */}
+    <div class="event-col-date">
+      {blok.date_label && <div class="event-date-main">{blok.date_label}</div>}
+      {blok.date_sublabel && <div class="event-date-sub">{blok.date_sublabel}</div>}
+    </div>
+
+    {/* Column 2: Content (Title & Subtitle) */}
+    <div class="event-col-content">
+      {blok.title && <h3 class="event-title">{blok.title}</h3>}
+      {blok.subtitle && <p class="event-subtitle">{blok.subtitle}</p>}
+    </div>
+
+    {/* Column 3: Location & Details Link */}
+    <div class="event-col-meta">
+      {blok.location_label && (
+        <div class="event-location">
+          <svg class="icon-pin" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 21C16 17 19 13.5 19 9.5C19 5.35786 15.866 2 12 2C8.13401 2 5 5.35786 5 9.5C5 13.5 8 17 12 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="location-text">{blok.location_label}</span>
+        </div>
+      )}
+
+      {hasLink && blok.details_label && blok.status !== 'sold_out' && (
+        <div class="event-action">
+          <a href={linkUrl} target={linkTarget} rel={linkRel} class="event-details-link" aria-label={detailsAriaLabel}>
+            {blok.details_label}
+          </a>
+        </div>
+      )}
+      
+      {(!hasLink || blok.status === 'sold_out') && blok.details_label && (
+        <div class="event-action">
+          <span class="event-details-text">{blok.details_label}</span>
+        </div>
+      )}
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .event-highlight-item {
+    border-bottom: 1px solid var(--border-light, #E5E5E5);
+    padding: 2.5rem 0;
+  }
+
+  .event-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  /* Date Column */
+  .event-col-date {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .event-date-main {
+    font-family: var(--font-serif, serif);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--primary, #111);
+    line-height: 1.1;
+  }
+
+  .event-date-sub {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-gold, #CBA052);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Content Column */
+  .event-col-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .event-title {
+    font-family: var(--font-serif, serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--primary, #111);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .event-subtitle {
+    font-family: var(--font-serif, serif);
+    font-size: 1rem;
+    color: var(--accent-slate, #666);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Meta Column */
+  .event-col-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .event-location {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-slate, #666);
+  }
+
+  .icon-pin {
+    flex-shrink: 0;
+  }
+
+  .event-details-link {
+    display: inline-block;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-slate, #666);
+    text-decoration: none;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid var(--accent-slate, #666);
+    transition: all 0.3s ease;
+  }
+
+  .event-details-link:hover {
+    color: var(--accent-gold, #CBA052);
+    border-bottom-color: var(--accent-gold, #CBA052);
+  }
+
+  .event-details-text {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-slate, #666);
+  }
+
+  /* Past / Cancelled Status Styling */
+  .status-past .event-title,
+  .status-past .event-date-main,
+  .status-cancelled .event-title,
+  .status-cancelled .event-date-main {
+    color: var(--on-surface-variant, #777);
+  }
+
+  .status-cancelled .event-title {
+    text-decoration: line-through;
+  }
+
+  /* Desktop Grid */
+  @media (min-width: 768px) {
+    .event-grid {
+      grid-template-columns: 2fr 5fr 3fr;
+      gap: 2rem;
+    }
+    
+    .event-highlight-item {
+      padding: 3rem 0;
+    }
+
+    .event-col-meta {
+      align-items: flex-end;
+      text-align: right;
+      gap: 1.5rem;
+    }
+    
+    .event-location {
+      justify-content: flex-end;
+    }
+  }
+
+  /* --- Agenda Context Variants --- */
+  
+  /* Outline button style for Agenda Context */
+  .context-agenda .event-details-link {
+    border: 1px solid var(--accent-slate, #666);
+    padding: 0.6rem 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0; /* Keep it sharp and editorial */
+  }
+
+  .context-agenda .event-details-link:hover {
+    background-color: var(--primary, #111);
+    color: var(--surface-bright, #FAFAFA);
+    border-color: var(--primary, #111);
+  }
+
+  /* Sold Out state is forced to text only above, ensure styling handles opacity */
+  .context-agenda.status-sold_out .event-details-text {
+    opacity: 0.5;
+  }
+</style>

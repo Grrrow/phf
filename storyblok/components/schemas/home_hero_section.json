@@ -1,0 +1,45 @@
+{
+  "component": {
+    "name": "home_hero_section",
+    "display_name": "Home Hero Section",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "eyebrow": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true
+      },
+      "title": {
+        "type": "text",
+        "pos": 1,
+        "translatable": true
+      },
+      "description": {
+        "type": "textarea",
+        "pos": 2,
+        "translatable": true
+      },
+      "cta_text": {
+        "type": "text",
+        "pos": 3,
+        "translatable": true
+      },
+      "cta_link": {
+        "type": "multilink",
+        "pos": 4,
+        "translatable": false
+      },
+      "image": {
+        "type": "asset",
+        "pos": 5,
+        "translatable": false
+      },
+      "image_alt": {
+        "type": "text",
+        "pos": 6,
+        "translatable": true
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+
+const { blok } = Astro.props;
+
+// Determine theme class
+const themeMapping: Record<string, string> = {
+  light: 'theme-light',
+  dark: 'theme-dark',
+  editorial: 'theme-editorial'
+};
+const themeClass = themeMapping[blok.page_theme || 'editorial'];
+---
+
+<main {...storyblokEditable(blok)} class={`biography-page ${themeClass}`}>
+  <div class="biography-blocks">
+    {blok.body && blok.body.map((nestedBlok: any) => (
+      <StoryblokComponent blok={nestedBlok} />
+    ))}
+  </div>
+</main>
+
+<style>
+  .biography-page {
+    width: 100%;
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* We don't add heavy padding here because the individual sections handle their own top/bottom spacing to allow full-width bleeds if needed */
+  }
+
+  /* Themes */
+  .theme-editorial {
+    background-color: var(--surface-bright, #FAFAFA); /* Off-white / light gray */
+    color: var(--primary, #111);
+  }
+  .theme-light {
+    background-color: #FFFFFF;
+    color: var(--primary, #111);
+  }
+  .theme-dark {
+    background-color: var(--primary, #111);
+    color: var(--surface-bright, #FAFAFA);
+  }
+
+  .biography-blocks {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+</style>

@@ -1,0 +1,149 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import StoryblokImage from '../media/StoryblokImage.astro';
+
+const { blok } = Astro.props;
+
+if (!blok.image?.filename) {
+  return null;
+}
+
+// Logic Variables
+const isDecorative = blok.image_is_decorative === true;
+const altText = isDecorative ? "" : (blok.image_alt || blok.caption || "Editorial photography");
+const widthVariant = blok.image_width || 'medium';
+const treatment = blok.image_treatment || 'default';
+const aspectRatio = blok.aspect_ratio || 'auto';
+
+// Spacing
+const spaceTop = blok.spacing_top || 'large';
+const spaceBottom = blok.spacing_bottom || 'medium';
+
+// Width configurations based on selection
+let widthClass = 'width-medium';
+let sizesAttribute = "(min-width: 1024px) 65vw, 100vw";
+
+if (widthVariant === 'narrow') {
+  widthClass = 'width-narrow';
+  sizesAttribute = "(min-width: 1024px) 50vw, 100vw";
+} else if (widthVariant === 'wide') {
+  widthClass = 'width-wide';
+  sizesAttribute = "(min-width: 1024px) 85vw, 100vw";
+} else if (widthVariant === 'full') {
+  widthClass = 'width-full';
+  sizesAttribute = "100vw";
+}
+
+// Map aspect ratio for StoryblokImage optimization
+let arProps: any = {};
+if (aspectRatio === 'landscape') arProps = { aspectRatio: '16:9' };
+else if (aspectRatio === 'portrait') arProps = { aspectRatio: '4:5' };
+else if (aspectRatio === 'square') arProps = { aspectRatio: '1:1' };
+else if (aspectRatio === 'cinema') arProps = { aspectRatio: '21:9' };
+
+---
+
+<section 
+  {...storyblokEditable(blok)} 
+  class={`editorial-image-section pt-${spaceTop} pb-${spaceBottom}`}
+>
+  <div class={`container ${widthClass}`}>
+    <figure class={`image-figure treatment-${treatment} ar-${aspectRatio}`}>
+      
+      <StoryblokImage
+        src={blok.image.filename}
+        alt={altText}
+        width={1440}
+        {...arProps}
+        loading="lazy"
+        decoding="async"
+        sizes={sizesAttribute}
+        class="editorial-img"
+      />
+
+      {blok.caption && (
+        <figcaption class="image-caption">{blok.caption}</figcaption>
+      )}
+
+    </figure>
+  </div>
+</section>
+
+<style>
+  .editorial-image-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .container {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Non-full widths need margin and padding protection */
+  .width-narrow, .width-medium, .width-wide {
+    padding: 0 var(--margin-x, 1.5rem);
+  }
+
+  .width-narrow { max-width: 800px; }
+  .width-medium { max-width: 1024px; }
+  .width-wide { max-width: 1440px; }
+  .width-full { 
+    max-width: 100%; 
+    padding: 0;
+  }
+
+  .image-figure {
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .editorial-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Aspect Ratios via CSS if native is insufficient or content dictates */
+  .ar-landscape .editorial-img { aspect-ratio: 16/9; }
+  .ar-portrait .editorial-img { aspect-ratio: 4/5; }
+  .ar-square .editorial-img { aspect-ratio: 1/1; }
+  .ar-cinema .editorial-img { aspect-ratio: 21/9; }
+
+  /* Treatments */
+  .treatment-black_white .editorial-img {
+    filter: grayscale(100%);
+  }
+  .treatment-warm .editorial-img {
+    filter: sepia(0.3) contrast(1.05);
+  }
+
+  .image-caption {
+    margin-top: 1rem;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.85rem;
+    color: var(--on-surface-variant, #666);
+    text-align: center;
+    max-width: 800px;
+  }
+
+  :global(.theme-dark) .image-caption {
+    color: var(--on-primary-variant, #AAA);
+  }
+
+  /* Vertical Spacing Utility Classes */
+  .pt-none { padding-top: 0; }
+  .pt-small { padding-top: 3rem; }
+  .pt-medium { padding-top: 6rem; }
+  .pt-large { padding-top: 9rem; }
+
+  .pb-none { padding-bottom: 0; }
+  .pb-small { padding-bottom: 3rem; }
+  .pb-medium { padding-bottom: 6rem; }
+  .pb-large { padding-bottom: 9rem; }
+</style>

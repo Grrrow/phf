@@ -1,0 +1,82 @@
+{
+  "component": {
+    "name": "agenda_page",
+    "display_name": "Agenda Page",
+    "is_nestable": false,
+    "is_root": true,
+    "schema": {
+      "seo": {
+        "type": "bloks",
+        "pos": 0,
+        "translatable": false,
+        "maximum": 1,
+        "restrict_components": true,
+        "component_whitelist": [
+          "seo"
+        ],
+        "description": "Configuración SEO de la página."
+      },
+      "title": {
+        "type": "text",
+        "pos": 1,
+        "translatable": true,
+        "description": "Título principal de la página (ej. 'Agenda'). Se renderiza como H1."
+      },
+      "intro": {
+        "type": "textarea",
+        "pos": 2,
+        "translatable": true,
+        "description": "Texto descriptivo bajo el título."
+      },
+      "hero_image": {
+        "type": "bloks",
+        "pos": 3,
+        "translatable": false,
+        "maximum": 1,
+        "restrict_components": true,
+        "component_whitelist": [
+          "editorial_image_section"
+        ],
+        "description": "Fotografía editorial de cabecera. Utiliza el bloque 'Editorial Image Section'."
+      },
+      "events_section": {
+        "type": "bloks",
+        "pos": 4,
+        "translatable": false,
+        "maximum": 1,
+        "restrict_components": true,
+        "component_whitelist": [
+          "agenda_events_section"
+        ],
+        "description": "Contenedor de la lista de eventos. Utiliza el bloque 'Agenda Events Section'."
+      },
+      "page_theme": {
+        "type": "option",
+        "pos": 5,
+        "use_uuid": true,
+        "options": [
+          { "value": "light", "name": "Light" },
+          { "value": "dark", "name": "Dark" },
+          { "value": "editorial", "name": "Editorial (Off-white)" }
+        ],
+        "default_value": "editorial",
+        "translatable": false,
+        "description": "Color de fondo base de la página entera."
+      },
+      "show_header": {
+        "type": "boolean",
+        "pos": 6,
+        "default_value": true,
+        "translatable": false,
+        "description": "Mostrar el header global (menú)."
+      },
+      "show_footer": {
+        "type": "boolean",
+        "pos": 7,
+        "default_value": true,
+        "translatable": false,
+        "description": "Mostrar el footer global al final."
+      }
+    }
+  }
+}

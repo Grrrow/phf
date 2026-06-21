@@ -1,0 +1,90 @@
+{
+  "component": {
+    "name": "biography_hero_section",
+    "display_name": "Biography Hero Section",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "eyebrow": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true,
+        "description": "Texto pequeño opcional sobre el título principal."
+      },
+      "title": {
+        "type": "text",
+        "pos": 1,
+        "translatable": true,
+        "description": "Título principal (ej. 'A Life in Movement.')."
+      },
+      "intro": {
+        "type": "textarea",
+        "pos": 2,
+        "translatable": true,
+        "description": "Texto introductorio descriptivo."
+      },
+      "image": {
+        "type": "asset",
+        "pos": 3,
+        "translatable": false,
+        "description": "Imagen de retrato principal."
+      },
+      "image_alt": {
+        "type": "text",
+        "pos": 4,
+        "translatable": true,
+        "description": "Texto alternativo para SEO/Accesibilidad."
+      },
+      "image_is_decorative": {
+        "type": "boolean",
+        "pos": 5,
+        "default_value": false,
+        "translatable": false,
+        "description": "Marcar si la imagen es puramente estética y no necesita leerse."
+      },
+      "image_position": {
+        "type": "option",
+        "pos": 6,
+        "use_uuid": true,
+        "options": [
+          { "value": "right", "name": "Derecha" },
+          { "value": "left", "name": "Izquierda" }
+        ],
+        "default_value": "right",
+        "translatable": false,
+        "description": "Posición de la imagen en Desktop."
+      },
+      "image_treatment": {
+        "type": "option",
+        "pos": 7,
+        "use_uuid": true,
+        "options": [
+          { "value": "default", "name": "Color Original" },
+          { "value": "black_white", "name": "Blanco y Negro (Grayscale)" }
+        ],
+        "default_value": "black_white",
+        "translatable": false,
+        "description": "Filtro visual a aplicar sobre la imagen."
+      },
+      "heading_level": {
+        "type": "option",
+        "pos": 8,
+        "use_uuid": true,
+        "options": [
+          { "value": "h1", "name": "H1" },
+          { "value": "h2", "name": "H2" }
+        ],
+        "default_value": "h1",
+        "translatable": false,
+        "description": "Nivel SEO del título. Usar H1 si es la primera sección de la página."
+      },
+      "is_lcp": {
+        "type": "boolean",
+        "pos": 9,
+        "default_value": true,
+        "translatable": false,
+        "description": "OPTIMIZACIÓN SEO: Marcar como TRUE si esta imagen será lo primero que vea el usuario al cargar la web."
+      }
+    }
+  }
+}

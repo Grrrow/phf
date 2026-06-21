@@ -1,0 +1,107 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+
+const { blok } = Astro.props;
+
+const theme = blok.theme || 'light';
+const themeClass = theme === 'dark' ? 'agenda-theme-dark' : 'agenda-theme-light';
+const layoutVariant = blok.layout_variant || 'full_agenda_list';
+
+const items = blok.items || [];
+const hasItems = items.length > 0;
+---
+
+<section {...storyblokEditable(blok)} class={`agenda-events-section ${themeClass}`}>
+  <div class="container">
+    
+    {(blok.eyebrow || blok.title || blok.subtitle) && (
+      <header class="section-header">
+        {blok.eyebrow && <span class="eyebrow">{blok.eyebrow}</span>}
+        {blok.title && <h2 class="title">{blok.title}</h2>}
+        {blok.subtitle && <p class="subtitle">{blok.subtitle}</p>}
+      </header>
+    )}
+
+    {hasItems ? (
+      <div class={`agenda-list variant-${layoutVariant}`}>
+        {items.map((itemBlok: any) => (
+          <StoryblokComponent blok={itemBlok} context="agenda" />
+        ))}
+      </div>
+    ) : (
+      <div class="empty-state">
+        <p>{blok.empty_state_text || 'No upcoming events at this time.'}</p>
+      </div>
+    )}
+
+  </div>
+</section>
+
+<style>
+  .agenda-events-section {
+    width: 100%;
+    /* Extra spacing around the list if needed, parent AgendaPage already handles main spacing */
+  }
+
+  .container {
+    max-width: var(--container-max, 1200px);
+    margin: 0 auto;
+    padding: 0 var(--margin-x, 1.5rem);
+  }
+
+  .agenda-theme-light {
+    background-color: transparent;
+  }
+  .agenda-theme-dark {
+    background-color: transparent;
+  }
+
+  .section-header {
+    margin-bottom: 3rem;
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-gold, #CBA052);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .title {
+    font-family: var(--font-serif, serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0 0 1rem 0;
+    color: inherit;
+  }
+
+  .subtitle {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--on-surface-variant, #555);
+    margin: 0;
+    max-width: 700px;
+  }
+
+  .agenda-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* Ensure borders collapse beautifully */
+  }
+
+  .empty-state {
+    padding: 4rem 0;
+    text-align: center;
+    font-family: var(--font-sans, sans-serif);
+    color: var(--on-surface-variant, #666);
+    font-style: italic;
+  }
+</style>

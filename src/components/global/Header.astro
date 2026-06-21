@@ -1,0 +1,284 @@
+---
+import type { LocaleCode } from "../../i18n/config";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import { getAbsoluteAssetUrl } from "../../utils/urls";
+
+export interface Props {
+  locale: LocaleCode;
+  currentPath: string;
+  globalConfig?: any;
+  alternates?: { href: string; hreflang: string }[];
+}
+
+const { locale, currentPath, globalConfig, alternates = [] } = Astro.props;
+const headerConfig = globalConfig?.header?.[0] || {};
+const logoUrl = getAbsoluteAssetUrl(headerConfig?.logo?.filename);
+const logoAlt = headerConfig?.logo_alt || "Pedro Halffter";
+const brandText = headerConfig?.brand_text || "PEDRO HALFFTER";
+const navigation = headerConfig?.navigation || [];
+const showLanguageSwitcher = headerConfig?.show_language_switcher ?? true;
+const stickyHeader = headerConfig?.sticky_header ?? true;
+const isHome = currentPath === "/" || currentPath === "/es/" || currentPath === "/es" || currentPath === "";
+---
+
+<header class={`global-header ${stickyHeader ? "sticky" : ""}`}>
+  <div class="header-container">
+    <div class="logo">
+      <a href={locale === "es" ? "/es/" : "/"}>
+        {
+          logoUrl ? (
+            <img src={logoUrl} alt={logoAlt} />
+          ) : (
+            <span class="brand-text">{brandText}</span>
+          )
+        }
+      </a>
+    </div>
+
+    {!isHome && (
+      <>
+        <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+        <label
+          for="menu-toggle"
+          class="menu-button"
+          aria-label="Abrir menú de navegación"
+        >
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </label>
+
+        <nav class="main-nav" aria-label="Main Navigation">
+          <ul>
+            {
+              navigation.map((item: any) => {
+                let linkHref = "";
+                if (item.link?.cached_url) {
+                  if (item.link.cached_url.startsWith("http")) {
+                    linkHref = item.link.cached_url;
+                  } else {
+                    const cleaned = item.link.cached_url
+                      .split("/")
+                      .filter(Boolean)
+                      .join("/");
+                    linkHref = cleaned ? `/${cleaned}/` : "/";
+                  }
+                } else {
+                  linkHref = "#";
+                }
+
+                const normLink = linkHref.split("/").filter(Boolean).join("/");
+                const normCurrent = currentPath
+                  .split("/")
+                  .filter(Boolean)
+                  .join("/");
+                const isActive =
+                  normLink === ""
+                    ? normCurrent === "" || normCurrent === "es"
+                    : normCurrent === normLink;
+
+                return (
+                  <li>
+                    <a
+                      href={linkHref}
+                      target={item.open_in_new_tab ? "_blank" : undefined}
+                      rel={item.rel !== "none" ? item.rel : undefined}
+                      class={isActive ? "active" : ""}
+                      aria-current={isActive ? "page" : undefined}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </nav>
+      </>
+    )}
+
+    <div class="header-actions">
+      {
+        showLanguageSwitcher && (
+          <LanguageSwitcher
+            currentLocale={locale}
+            currentPath={currentPath}
+            alternates={alternates}
+          />
+        )
+      }
+    </div>
+  </div>
+</header>
+
+<style>
+  .global-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #f5f5f5;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .global-header.sticky {
+    position: sticky;
+    top: 0;
+  }
+
+  .header-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 1.75rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
+  /* Logo styling */
+  .logo a {
+    text-decoration: none;
+    color: #1a1a1a;
+  }
+
+  .brand-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-family: inherit;
+  }
+
+  .logo img {
+    height: 40px;
+    width: auto;
+    display: block;
+  }
+
+  /* Navigation centered */
+  .main-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .main-nav a {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    text-decoration: none;
+    color: #767676; /* gris inactivo */
+    transition:
+      color 0.3s ease,
+      border-color 0.3s ease;
+    padding: 0.5rem 0;
+    border-bottom: 1.5px solid transparent;
+  }
+
+  .main-nav a:hover,
+  .main-nav a:focus {
+    color: #1a1a1a;
+  }
+
+  .main-nav a.active {
+    color: #cca43b; /* dorado/naranja suave */
+    border-bottom-color: #cca43b; /* subrayado fino */
+  }
+
+  /* Right actions */
+  .header-actions {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Responsive & Hamburger menu */
+  .menu-toggle {
+    display: none;
+  }
+
+  .menu-button {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+    z-index: 1010;
+  }
+
+  .hamburger-line {
+    width: 22px;
+    height: 1.5px;
+    background-color: #1a1a1a;
+    transition: all 0.3s ease;
+  }
+
+  @media (max-width: 1024px) {
+    .header-container {
+      padding: 1.25rem 2rem;
+    }
+
+    .menu-button {
+      display: flex;
+    }
+
+    .main-nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: #ffffff;
+      border-bottom: 1px solid #eaeaea;
+      flex-direction: column;
+      padding: 1.5rem 0;
+      display: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+      z-index: 999;
+    }
+
+    .main-nav ul {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .main-nav a {
+      font-size: 0.8rem;
+    }
+
+    .menu-toggle:checked ~ .main-nav {
+      display: flex;
+    }
+
+    /* Animate hamburger lines on toggle */
+    .menu-toggle:checked ~ .menu-button .hamburger-line:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+
+    .menu-toggle:checked ~ .menu-button .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle:checked ~ .menu-button .hamburger-line:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header-container {
+      padding: 1rem 1.5rem;
+    }
+
+    .brand-text {
+      font-size: 0.95rem;
+      letter-spacing: 0.2em;
+    }
+  }
+</style>

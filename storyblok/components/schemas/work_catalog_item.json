@@ -1,0 +1,53 @@
+{
+  "component": {
+    "name": "work_catalog_item",
+    "display_name": "Work Catalog Item",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true,
+        "description": "Título de la obra."
+      },
+      "description": {
+        "type": "textarea",
+        "pos": 1,
+        "translatable": true,
+        "description": "Breve descripción, orquestación o notas (opcional)."
+      },
+      "year_label": {
+        "type": "text",
+        "pos": 2,
+        "translatable": true,
+        "description": "Etiqueta del año (ej. '2022', '2015-2017', 'rev. 2024'). Se alinea a la derecha."
+      },
+      "details_label": {
+        "type": "text",
+        "pos": 3,
+        "translatable": true,
+        "description": "Texto del botón de detalles (ej. 'Details →')."
+      },
+      "details_link": {
+        "type": "multilink",
+        "pos": 4,
+        "translatable": false,
+        "description": "Enlace a la página de la obra o plataforma externa."
+      },
+      "sort_year": {
+        "type": "number",
+        "pos": 5,
+        "translatable": false,
+        "description": "Campo numérico oculto por si en el futuro se necesita ordenar programáticamente."
+      },
+      "open_in_new_tab": {
+        "type": "boolean",
+        "pos": 6,
+        "default_value": false,
+        "translatable": false,
+        "description": "Abre el enlace de detalles en una pestaña nueva."
+      }
+    }
+  }
+}
