@@ -53,7 +53,7 @@ const ctaHref = blok.cta_link?.cached_url ? (blok.cta_link.cached_url.startsWith
     background-color: var(--surface-bright); /* Fondo gris muy claro / blanco roto */
     width: 100%;
     padding-top: 2rem; /* Menos aire arriba para que quede más integrado con la cabecera */
-    padding-bottom: var(--section-stack);
+    padding-bottom: 1rem; /* Reducir aire general inferior */
     overflow: hidden;
   }
 
@@ -177,7 +177,7 @@ const ctaHref = blok.cta_link?.cached_url ? (blok.cta_link.cached_url.startsWith
 
     .home-hero-section {
       padding-top: 3rem; /* Ajustado el aire en escritorio */
-      padding-bottom: calc(var(--section-stack) * 1.5);
+      padding-bottom: 2rem; /* Reducir muchísimo el aire inferior porque se suma a la siguiente sección */
     }
   }
 
