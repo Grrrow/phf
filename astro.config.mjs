@@ -13,7 +13,7 @@ export default defineConfig({
   site: 'https://pedrohalfftercaro.com',
   integrations: [
     storyblok({
-      accessToken: env.STORYBLOK_TOKEN,
+      accessToken: process.env.STORYBLOK_TOKEN || env.STORYBLOK_TOKEN,
       components: storyblokComponents,
     }),
     sitemap({

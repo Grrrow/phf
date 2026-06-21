@@ -47,12 +47,27 @@
   --font-serif: 'Noto Serif', serif;
   --font-sans: 'Manrope', sans-serif;
 
-  /* Spacing */
+  /* Spacing (Mobile First) */
   --container-max: 1280px;
-  --gutter: 32px;
-  --margin-x: 64px;
-  --section-stack: 120px;
+  --gutter: 24px;
+  --margin-x: 20px;
+  --section-stack: 60px;
   --element-gap: 24px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --margin-x: 48px;
+    --section-stack: 90px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --margin-x: 64px;
+    --section-stack: 120px;
+    --gutter: 32px;
+  }
 }
 
 /* Reset & Base Styles */
