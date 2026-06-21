@@ -21,7 +21,7 @@ const t = useTranslations(currentLocale);
 
   {
     isHome && (
-      <section class="home-contact-section">
+      <section class="home-contact-section reveal-contact">
         <div class="contact-container">
           <h2 class="contact-title">{t("contact.title")}</h2>
           <p class="contact-subtitle">{t("contact.subtitle")}</p>
@@ -31,8 +31,8 @@ const t = useTranslations(currentLocale);
               <span class="contact-eyebrow">{t("contact.general")}</span>
               <h3 class="contact-name">Pedro Halffter</h3>
               <p class="contact-detail">Madrid, Spain</p>
-              <a href="mailto:contact@pedrohalffter.com" class="contact-action">
-                contact@pedrohalffter.com
+              <a href="mailto:pedrohalffter@gmail.com" class="contact-action">
+                pedrohalffter@gmail.com
               </a>
             </div>
           </div>
@@ -42,11 +42,43 @@ const t = useTranslations(currentLocale);
   }
 </main>
 
+<script>
+  function initContactObserver() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    const contactSection = document.querySelector('.reveal-contact');
+    if (contactSection) observer.observe(contactSection);
+  }
+
+  initContactObserver();
+  document.addEventListener('astro:page-load', initContactObserver);
+</script>
+
 <style>
   .home-contact-section {
     padding: 6rem 1.5rem;
     background-color: var(--surface-bright, #fafafa);
     border-top: 1px solid var(--border-light, #e5e5e5);
+  }
+
+  /* Animación de entrada orgánica (Fade In) */
+  .reveal-contact {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-contact.revealed {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .contact-container {
