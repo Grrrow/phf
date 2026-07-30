@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import { storyblok } from '@storyblok/astro';
 import sitemap from '@astrojs/sitemap';
 import { loadEnv } from 'vite';
-import mkcert from 'vite-plugin-mkcert';
+import basicSsl from '@vitejs/plugin-basic-ssl';
 import { storyblokComponents } from './src/storyblok/components.ts';
 
 const env = loadEnv("", process.cwd(), 'STORYBLOK');
@@ -27,7 +27,7 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [mkcert()],
+    plugins: [basicSsl()],
     server: {
       https: true,
       headers: {

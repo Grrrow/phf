@@ -1,0 +1,61 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+const { blok } = Astro.props;
+
+const level = blok.level || 'primary';
+---
+
+<div {...storyblokEditable(blok)} class={`works-catalog-separator level-${level}`}>
+  {level === 'primary' ? (
+    <h3 class="separator-title">{blok.title}</h3>
+  ) : (
+    <h4 class="separator-title">{blok.title}</h4>
+  )}
+</div>
+
+<style>
+  .works-catalog-separator {
+    width: 100%;
+    padding-top: 4rem; /* Huge separation to clearly group sub-items */
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-light, #E5E5E5);
+  }
+
+  /* Si es el primer elemento de la lista, lo alineamos exactamente con el título y la línea de la izquierda */
+  :global(.items-list > li:first-child) .works-catalog-separator {
+    padding-top: 1.5rem; /* 1.5rem compensa la diferencia de altura entre el título enorme (3rem) y este título (1.5rem) para que la línea inferior coincida */
+  }
+
+  :global(.theme-dark) .works-catalog-separator {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .separator-title {
+    font-family: var(--font-sans, sans-serif);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent-gold, #CBA052);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  :global(.theme-dark) .separator-title {
+    color: var(--surface-bright, #FAFAFA);
+  }
+
+  .level-primary .separator-title {
+    font-size: 1rem;
+  }
+
+  .level-secondary .separator-title {
+    font-size: 0.8rem;
+    color: var(--on-surface-variant, #666);
+  }
+
+  :global(.theme-dark) .level-secondary .separator-title {
+    color: var(--on-primary-variant, #CCC);
+  }
+</style>

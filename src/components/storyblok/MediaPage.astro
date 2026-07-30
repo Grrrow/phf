@@ -1,0 +1,511 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+
+const { blok } = Astro.props;
+
+// Determine theme classes
+const themeMapping: Record<string, string> = {
+  light: 'theme-light',
+  dark: 'theme-dark',
+  editorial: 'theme-editorial'
+};
+const themeClass = themeMapping[blok.page_theme || 'editorial'];
+
+const isEs = Astro.url.pathname.startsWith('/es/') || Astro.url.pathname === '/es';
+const defaultCategories = isEs ? 'VÍDEOS, DISCOGRAFÍA, FOTOS' : 'VIDEOS, DISCOGRAPHY, PHOTOS';
+const categoriesRaw = blok.categories || defaultCategories;
+const categoryList = categoriesRaw
+  .split(',')
+  .map((c: string) => c.trim())
+  .filter((c: string) => Boolean(c) && c.toUpperCase() !== 'ALL' && c.toUpperCase() !== 'TODOS');
+
+const featured = blok.featured_media?.[0];
+const mediaItems = blok.media_items || [];
+---
+
+<main {...storyblokEditable(blok)} class={`media-page ${themeClass}`}>
+  <div class="page-container">
+    
+    <header class="page-header">
+      <h1 class="page-title">{blok.title || 'Media'}</h1>
+      {blok.intro && <p class="page-intro">{blok.intro}</p>}
+    </header>
+
+    {categoryList.length > 0 && (
+      <nav class="filter-nav" aria-label="Media Categories">
+        <ul class="filter-list">
+          {categoryList.map((cat: string, idx: number) => (
+            <li>
+              <button 
+                type="button" 
+                class={`filter-btn ${idx === 0 ? 'active' : ''}`}
+                data-filter={cat.toUpperCase()}
+              >
+                {cat}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )}
+
+    {featured && (
+      <section class="featured-section">
+        <StoryblokComponent blok={featured} />
+      </section>
+    )}
+
+    {mediaItems.length > 0 && (
+      <section class="media-section">
+        <div class="media-grid">
+          {mediaItems.map((mediaBlok: any) => (
+            <StoryblokComponent blok={mediaBlok} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {blok.load_more_label && (
+      <div class="load-more-container">
+        <button type="button" class="load-more-btn">
+          {blok.load_more_label}
+        </button>
+      </div>
+    )}
+
+    <!-- Lightbox Carousel Modal for Photo Galleries -->
+    <div id="lightbox-modal" class="lightbox-modal" aria-hidden="true">
+      <div class="lightbox-overlay"></div>
+      <div class="lightbox-container">
+        <button id="lightbox-close" class="lightbox-close" aria-label="Close Lightbox">&times;</button>
+        
+        <button id="lightbox-prev" class="lightbox-nav-btn prev-btn" aria-label="Previous photo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+
+        <div class="lightbox-content">
+          <img id="lightbox-img" src="" alt="Full resolution photo" class="lightbox-image" />
+          <span id="lightbox-counter" class="lightbox-counter">1 / 1</span>
+        </div>
+
+        <button id="lightbox-next" class="lightbox-nav-btn next-btn" aria-label="Next photo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+  function setupMediaFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const mediaCards = document.querySelectorAll('.media-card');
+
+    function applyFilter(filter: string) {
+      const normFilter = filter.trim().toUpperCase().replace(/S$/, '');
+
+      mediaCards.forEach(card => {
+        const cardCat = (card.getAttribute('data-category') || '').trim().toUpperCase();
+        const normCardCat = cardCat.replace(/S$/, '');
+        
+        const isMatch = cardCat === filter || 
+                        filter.includes(cardCat) || 
+                        cardCat.includes(filter) ||
+                        normFilter === normCardCat;
+
+        if (isMatch) {
+          (card as HTMLElement).style.display = '';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = (btn.getAttribute('data-filter') || 'VIDEOS').trim().toUpperCase();
+        applyFilter(filter);
+      });
+    });
+
+    // Apply default active tab filter on load
+    const activeBtn = document.querySelector('.filter-btn.active');
+    if (activeBtn) {
+      const initialFilter = (activeBtn.getAttribute('data-filter') || 'VIDEOS').trim().toUpperCase();
+      applyFilter(initialFilter);
+    }
+  }
+
+  setupMediaFilters();
+  document.addEventListener('astro:page-load', setupMediaFilters);
+
+  // Lightbox Carousel Modal logic
+  function setupLightbox() {
+    const modal = document.getElementById('lightbox-modal');
+    const modalImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const counter = document.getElementById('lightbox-counter');
+    const closeBtn = document.getElementById('lightbox-close');
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+    const overlay = modal?.querySelector('.lightbox-overlay');
+
+    let currentPhotoList: { src: string; alt: string }[] = [];
+    let currentIndex = 0;
+
+    function getVisiblePhotoList() {
+      const photoCards = document.querySelectorAll('.is-photo-card');
+      const list: { src: string; alt: string }[] = [];
+
+      photoCards.forEach(card => {
+        const style = window.getComputedStyle(card);
+        if (style.display !== 'none') {
+          const fullImg = card.getAttribute('data-full-img') || card.querySelector('img')?.src;
+          const alt = card.querySelector('img')?.alt || 'Photo';
+          if (fullImg) {
+            list.push({ src: fullImg, alt });
+          }
+        }
+      });
+      return list;
+    }
+
+    function updatePhoto(index: number) {
+      if (currentPhotoList.length === 0 || !modalImg) return;
+      currentIndex = (index + currentPhotoList.length) % currentPhotoList.length;
+      modalImg.src = currentPhotoList[currentIndex].src;
+      modalImg.alt = currentPhotoList[currentIndex].alt;
+      if (counter) {
+        counter.textContent = `${currentIndex + 1} / ${currentPhotoList.length}`;
+      }
+    }
+
+    // Attach click listeners to all photo cards
+    const photoCards = document.querySelectorAll('.is-photo-card');
+    photoCards.forEach((card) => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentPhotoList = getVisiblePhotoList();
+        const clickedSrc = card.getAttribute('data-full-img') || card.querySelector('img')?.src;
+        const foundIndex = currentPhotoList.findIndex(item => item.src === clickedSrc);
+
+        if (modal && modalImg && currentPhotoList.length > 0) {
+          updatePhoto(foundIndex !== -1 ? foundIndex : 0);
+          modal.classList.add('open');
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+
+    function closeModal() {
+      if (modal) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    }
+
+    prevBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      updatePhoto(currentIndex - 1);
+    });
+
+    nextBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      updatePhoto(currentIndex + 1);
+    });
+
+    closeBtn?.addEventListener('click', closeModal);
+    overlay?.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', (e) => {
+      if (!modal?.classList.contains('open')) return;
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft') updatePhoto(currentIndex - 1);
+      if (e.key === 'ArrowRight') updatePhoto(currentIndex + 1);
+    });
+  }
+
+  setupLightbox();
+  document.addEventListener('astro:page-load', setupLightbox);
+</script>
+
+<style>
+  .media-page {
+    width: 100%;
+    min-height: 100vh;
+    padding: 6rem 0 8rem 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Themes */
+  .theme-editorial {
+    background-color: var(--surface-bright, #FAFAFA);
+    color: var(--primary, #111);
+  }
+  .theme-light {
+    background-color: #FFFFFF;
+    color: var(--primary, #111);
+  }
+  .theme-dark {
+    background-color: var(--primary, #111);
+    color: var(--surface-bright, #FAFAFA);
+  }
+
+  .page-container {
+    max-width: var(--container-max, 1200px);
+    margin: 0 auto;
+    padding: 0 var(--margin-x, 1.5rem);
+  }
+
+  .page-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .page-title {
+    font-family: var(--font-serif, serif);
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.02em;
+  }
+
+  .page-intro {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--on-surface-variant, #555);
+    max-width: 600px;
+    margin: 0;
+  }
+
+  /* Filter Navigation */
+  .filter-nav {
+    margin-bottom: 3.5rem;
+    border-bottom: 1px solid var(--border-light, #E5E5E5);
+    padding-bottom: 1rem;
+  }
+
+  .filter-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .filter-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent-slate, #767676);
+    cursor: pointer;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .filter-btn:hover {
+    color: var(--primary, #111);
+  }
+
+  .filter-btn.active {
+    color: var(--primary, #111);
+  }
+
+  .filter-btn.active::after {
+    content: "";
+    position: absolute;
+    bottom: -1rem;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--primary, #111);
+  }
+
+  /* Sections */
+  .featured-section {
+    margin-bottom: 4rem;
+  }
+
+  .media-grid {
+    column-count: 1;
+    column-gap: 2rem;
+  }
+
+  .media-grid > * {
+    break-inside: avoid;
+    margin-bottom: 2rem;
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+  }
+
+  @media (min-width: 640px) {
+    .media-grid {
+      column-count: 2;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .media-grid {
+      column-count: 3;
+    }
+  }
+
+  /* Load More */
+  .load-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+  }
+
+  .load-more-btn {
+    background: transparent;
+    border: 1px solid var(--border-light, #CCC);
+    padding: 1rem 2.5rem;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--primary, #111);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .load-more-btn:hover {
+    background-color: var(--primary, #111);
+    color: #FFFFFF;
+    border-color: var(--primary, #111);
+  }
+
+  /* Lightbox Modal */
+  .lightbox-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .lightbox-modal.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .lightbox-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(10px);
+  }
+
+  .lightbox-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    z-index: 10000;
+  }
+
+  .lightbox-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 85vw;
+    max-height: 85vh;
+  }
+
+  .lightbox-image {
+    max-width: 85vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 2px;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.6);
+    user-select: none;
+  }
+
+  .lightbox-counter {
+    margin-top: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+  }
+
+  .lightbox-nav-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10001;
+    flex-shrink: 0;
+  }
+
+  .lightbox-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: #FFFFFF;
+    transform: scale(1.05);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 2rem;
+    right: 2.5rem;
+    background: transparent;
+    border: none;
+    color: #FFFFFF;
+    font-size: 2.5rem;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    z-index: 10002;
+  }
+
+  .lightbox-close:hover {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .lightbox-container {
+      padding: 1rem;
+    }
+    .lightbox-nav-btn {
+      width: 40px;
+      height: 40px;
+    }
+  }
+</style>

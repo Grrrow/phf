@@ -1,9 +1,215 @@
 ---
-import { storyblokEditable } from '@storyblok/astro';
+import { storyblokEditable, renderRichText } from '@storyblok/astro';
+import StoryblokImage from '../media/StoryblokImage.astro';
+
 const { blok } = Astro.props;
+const renderedText = blok.text ? renderRichText(blok.text) : '';
+
+const imagePos = blok.image_position || 'left';
+const aspectRatio = blok.image_aspect_ratio || 'portrait';
+
+let arProps: any = {}; // No longer passing aspectRatio to StoryblokImage so it doesn't crop
+
+const layoutClass = imagePos === 'right' ? 'layout-image-right' : 'layout-image-left';
 ---
 
-<section {...storyblokEditable(blok)}>
-  {blok.title && <h2>{blok.title}</h2>}
-  {blok.description && <p>{blok.description}</p>}
+<section {...storyblokEditable(blok)} class="image-text-section pt-large pb-large">
+  <div class={`container ${layoutClass}`}>
+    
+    <div class="visual-col">
+      {blok.image?.filename ? (
+        <figure class={`image-figure ar-${aspectRatio}`}>
+          <StoryblokImage
+            src={blok.image.filename}
+            alt={blok.image.alt || blok.title || 'Image'}
+            width={800}
+            {...arProps}
+            loading="lazy"
+            decoding="async"
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            class="section-img"
+          />
+        </figure>
+      ) : (
+        <div class={`image-placeholder ar-${aspectRatio}`}></div>
+      )}
+    </div>
+
+    <div class="content-col">
+      <div class="text-content">
+        {blok.eyebrow && <span class="eyebrow">{blok.eyebrow}</span>}
+        {blok.title && <h2 class="title">{blok.title}</h2>}
+        
+        {blok.text && (
+          <div class="richtext-wrapper" set:html={renderedText}></div>
+        )}
+      </div>
+    </div>
+
+  </div>
 </section>
+
+<style>
+  .image-text-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .container {
+    width: 100%;
+    max-width: var(--container-max, 1200px);
+    margin: 0 auto;
+    padding: 0 var(--margin-x, 1.5rem);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 992px) {
+    .container {
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+    }
+
+    .layout-image-right .visual-col {
+      order: 2;
+    }
+    
+    .layout-image-right .content-col {
+      order: 1;
+    }
+  }
+
+  /* Image Column */
+  .visual-col {
+    width: 100%;
+  }
+
+  .image-figure {
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .section-img {
+    width: 100%;
+    height: auto;
+    max-height: 85vh;
+    object-fit: contain;
+    display: block;
+  }
+
+  .image-placeholder {
+    width: 100%;
+    background-color: var(--border-light, #EAEAEA);
+  }
+
+  /* We removed forced aspect ratios so images can display their natural proportion */
+
+  /* Content Column */
+  .content-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .text-content {
+    max-width: 500px;
+  }
+
+  .layout-image-right .text-content {
+    margin-left: auto;
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-gold, #CBA052);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .title {
+    font-family: var(--font-serif, serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin: 0 0 2rem 0;
+    color: var(--primary, #111);
+    letter-spacing: -0.01em;
+  }
+
+  .richtext-wrapper {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--on-surface-variant, #444);
+  }
+
+  :global(.theme-dark) .title {
+    color: var(--surface-bright, #FAFAFA);
+  }
+
+  :global(.theme-dark) .richtext-wrapper {
+    color: var(--on-primary-variant, #CCC);
+  }
+
+  .richtext-wrapper :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .richtext-wrapper :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  /* Make bolds elegant */
+  .richtext-wrapper :global(strong), .richtext-wrapper :global(b) {
+    font-weight: 600;
+    color: var(--primary, #111);
+  }
+
+  :global(.theme-dark) .richtext-wrapper :global(strong), 
+  :global(.theme-dark) .richtext-wrapper :global(b) {
+    color: #FFFFFF;
+  }
+
+  /* Friendly and elegant inline links */
+  .richtext-wrapper :global(a) {
+    color: var(--primary, #111);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent-gold, #CBA052);
+    transition: all 0.3s ease;
+    padding-bottom: 1px;
+  }
+
+  :global(.theme-dark) .richtext-wrapper :global(a) {
+    color: var(--surface-bright, #FAFAFA);
+  }
+
+  .richtext-wrapper :global(a:hover) {
+    background-color: var(--accent-gold, #CBA052);
+    color: #fff !important;
+    border-color: transparent;
+    padding: 0 4px;
+    margin: 0 -4px;
+    border-radius: 4px;
+  }
+
+  /* Spacing */
+  .pt-large { padding-top: 6rem; }
+  .pb-large { padding-bottom: 6rem; }
+  
+  @media (min-width: 992px) {
+    .pt-large { padding-top: 8rem; }
+    .pb-large { padding-bottom: 8rem; }
+  }
+</style>

@@ -23,7 +23,8 @@
         "translatable": false,
         "restrict_components": true,
         "component_whitelist": [
-          "work_catalog_item"
+          "work_catalog_item",
+          "works_catalog_separator"
         ],
         "description": "Lista de obras que pertenecen a esta categoría."
       },

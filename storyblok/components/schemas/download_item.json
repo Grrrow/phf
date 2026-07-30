@@ -1,0 +1,20 @@
+{
+  "name": "download_item",
+  "display_name": "Download Item",
+  "component_group_name": "Content",
+  "is_root": false,
+  "is_nestable": true,
+  "schema": {
+    "title": {
+      "type": "text",
+      "pos": 1,
+      "translatable": true,
+      "description": "El nombre del documento a descargar (ej. 'High-Res Portraits')."
+    },
+    "file": {
+      "type": "asset",
+      "pos": 2,
+      "description": "El archivo PDF o documento a descargar."
+    }
+  }
+}

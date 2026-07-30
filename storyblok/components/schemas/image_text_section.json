@@ -1,20 +1,51 @@
 {
-  "component": {
-    "name": "image_text_section",
-    "display_name": "Image Text Section",
-    "is_nestable": true,
-    "is_root": false,
-    "schema": {
-      "title": {
-        "type": "text",
-        "pos": 0,
-        "translatable": true
-      },
-      "description": {
-        "type": "textarea",
-        "pos": 1,
-        "translatable": true
-      }
+  "name": "image_text_section",
+  "display_name": "Image & Text Section",
+  "component_group_name": "Sections",
+  "is_root": false,
+  "is_nestable": true,
+  "schema": {
+    "eyebrow": {
+      "type": "text",
+      "pos": 1,
+      "translatable": true,
+      "description": "Small text above the title."
+    },
+    "title": {
+      "type": "text",
+      "pos": 2,
+      "translatable": true
+    },
+    "text": {
+      "type": "richtext",
+      "pos": 3,
+      "translatable": true
+    },
+    "image": {
+      "type": "asset",
+      "pos": 4,
+      "filetypes": ["images"]
+    },
+    "image_position": {
+      "type": "option",
+      "use_uuid": true,
+      "options": [
+        { "name": "Left", "value": "left" },
+        { "name": "Right", "value": "right" }
+      ],
+      "default_value": "left",
+      "pos": 5
+    },
+    "image_aspect_ratio": {
+      "type": "option",
+      "use_uuid": true,
+      "options": [
+        { "name": "Portrait (4:5)", "value": "portrait" },
+        { "name": "Square (1:1)", "value": "square" },
+        { "name": "Landscape (16:9)", "value": "landscape" }
+      ],
+      "default_value": "portrait",
+      "pos": 6
     }
   }
 }

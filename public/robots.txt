@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pedrohalfftercaro.com/sitemap-index.xml

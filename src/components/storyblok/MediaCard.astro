@@ -1,0 +1,355 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+const { blok } = Astro.props;
+
+const hasLink = blok.cta_link?.cached_url || blok.embed_url;
+let linkUrl = '#';
+
+if (blok.cta_link?.cached_url) {
+  linkUrl = blok.cta_link.cached_url.startsWith('http') 
+    ? blok.cta_link.cached_url 
+    : `/${blok.cta_link.cached_url.replace(/^\/|\/$/g, '')}/`;
+} else if (blok.embed_url) {
+  linkUrl = blok.embed_url;
+}
+
+const isExternal = linkUrl.startsWith('http');
+const category = blok.category?.toUpperCase() || 'VIDEOS';
+const mediaType = blok.media_type || 'video';
+const cardStyle = blok.card_style || 'video_feature';
+const hasMedia = blok.image?.filename;
+
+// Extract YouTube thumbnail fallback if Storyblok image asset is missing
+function getYouTubeId(url: string | undefined): string | null {
+  if (!url) return null;
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+  return match ? match[1] : null;
+}
+
+const ytId = getYouTubeId(blok.embed_url || (blok.cta_link?.cached_url || blok.cta_link?.url));
+const ytThumbnail = ytId ? `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg` : '';
+
+// Storyblok image optimization
+function getOptimizedImageUrl(url: string, width: number, quality: number = 80) {
+  if (!url) return '';
+  if (!url.includes('a.storyblok.com')) return url;
+  return `${url}/m/${width}x0/filters:quality(${quality})`;
+}
+
+const defaultSrc = hasMedia 
+  ? getOptimizedImageUrl(blok.image.filename, cardStyle === 'album_square' ? 500 : 700) 
+  : ytThumbnail;
+
+const fullSrc = hasMedia ? blok.image.filename : ytThumbnail;
+const altText = blok.image_alt || blok.title || 'Media thumbnail';
+const isPhoto = mediaType === 'photo' || cardStyle === 'photo_portrait' || category === 'PHOTOS';
+const isSpotify = linkUrl.includes('spotify') || category === 'DISCOGRAPHY';
+const ctaLabel = blok.cta_label || (isSpotify ? 'LISTEN ON SPOTIFY' : mediaType === 'video' ? 'WATCH VIDEO' : 'EXPLORE');
+
+const hasVisualMedia = Boolean(hasMedia || ytThumbnail);
+
+const CardWrapper = hasLink ? 'a' : 'div';
+const wrapperProps = hasLink ? {
+  href: linkUrl,
+  target: isExternal ? '_blank' : '_self',
+  rel: isExternal ? 'noopener noreferrer' : undefined,
+  class: 'media-card-inner'
+} : {
+  class: 'media-card-inner'
+};
+---
+
+<article 
+  {...storyblokEditable(blok)} 
+  class={`media-card style-${cardStyle} size-${blok.card_size || 'medium'} media-${mediaType} ${isPhoto ? 'is-photo-card' : ''}`}
+  data-category={category}
+  data-full-img={fullSrc}
+>
+  <CardWrapper {...wrapperProps}>
+
+    {hasVisualMedia && (
+      <div class="card-media-wrapper">
+        <img 
+          src={defaultSrc} 
+          alt={altText} 
+          loading="lazy" 
+          class="media-image"
+        />
+
+      {/* Duration Badge (only for videos/audio/releases) */}
+      {blok.duration && !isPhoto && (
+        <span class="duration-badge">{blok.duration}</span>
+      )}
+
+      {/* Media Type Specific Overlays */}
+      {mediaType === 'video' && (
+        <div class="media-overlay play-overlay" aria-hidden="true">
+          <div class="play-button-icon">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="11" fill="rgba(0,0,0,0.4)" stroke="#FFFFFF" stroke-width="1.5"/>
+              <path d="M10 8L16 12L10 16V8Z" fill="#FFFFFF"/>
+            </svg>
+          </div>
+        </div>
+      )}
+
+      {mediaType === 'audio' && (
+        <div class="media-overlay audio-overlay" aria-hidden="true">
+          <div class="audio-wave-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="9" width="3" height="6" rx="1.5" fill="#FFFFFF"/>
+              <rect x="9" y="5" width="3" height="14" rx="1.5" fill="#FFFFFF"/>
+              <rect x="14" y="8" width="3" height="8" rx="1.5" fill="#FFFFFF"/>
+              <rect x="19" y="11" width="3" height="2" rx="1" fill="#FFFFFF"/>
+            </svg>
+          </div>
+        </div>
+      )}
+    </div>
+  )}
+
+    <div class="card-body">
+      <div class="meta-header">
+        {category && <span class="media-category">{category}</span>}
+        {blok.date_label && <span class="media-date">{blok.date_label}</span>}
+      </div>
+
+      {blok.title && <h3 class="media-title">{blok.title}</h3>}
+      {blok.subtitle && <p class="media-subtitle">{blok.subtitle}</p>}
+
+      {hasLink && (
+        <div class="card-footer">
+          <span class={`media-cta ${isSpotify ? 'spotify-cta' : ''}`}>
+            {isSpotify && (
+              <svg class="spotify-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.02 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.48-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.281 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.18-1.38-.72-.18-.6.18-1.2.72-1.38 4.26-1.26 11.28-1.02 15.72 1.62.54.3.72 1.02.42 1.56-.3.42-1.02.6-1.56.3z"/>
+              </svg>
+            )}
+            {ctaLabel} <span class="arrow">&rarr;</span>
+          </span>
+        </div>
+      )}
+    </div>
+
+  </CardWrapper>
+</article>
+
+<style>
+  .media-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #FFFFFF;
+    border: 1px solid var(--border-light, #E5E5E5);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  @media (min-width: 768px) {
+    .media-card.size-large {
+      grid-column: span 2;
+    }
+  }
+
+  .media-card.is-photo-card {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    cursor: zoom-in;
+    height: fit-content;
+    align-self: start;
+  }
+
+  .media-card.is-photo-card .media-card-inner {
+    height: auto;
+  }
+
+  .media-card.is-photo-card .card-body {
+    display: none;
+  }
+
+  .media-card-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* Media Wrapper */
+  .card-media-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--surface-bright, #FAFAFA);
+  }
+
+  .media-card.is-photo-card .card-media-wrapper {
+    aspect-ratio: auto;
+    border-radius: var(--radius-md, 8px);
+  }
+
+  .media-card.is-photo-card .media-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-md, 8px);
+  }
+
+  /* Style Variants Aspect Ratios */
+  .style-video_feature .card-media-wrapper {
+    aspect-ratio: 16 / 9;
+  }
+
+  .style-album_square .card-media-wrapper {
+    aspect-ratio: 1 / 1;
+  }
+
+  .media-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .media-card:hover .media-image {
+    transform: scale(1.04);
+  }
+
+  .placeholder-media {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F0F0F0;
+    color: #888;
+    font-size: 2rem;
+  }
+
+  /* Duration Badge */
+  .duration-badge {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 0.75rem;
+    background: rgba(0, 0, 0, 0.75);
+    color: #FFFFFF;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+    z-index: 2;
+  }
+
+  /* Overlays */
+  .media-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.15);
+    transition: background 0.3s ease;
+  }
+
+  .media-card:hover .media-overlay {
+    background: rgba(0, 0, 0, 0.25);
+  }
+
+  .play-button-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .media-card:hover .play-button-icon {
+    transform: scale(1.12);
+  }
+
+  /* Body Styling */
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .meta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.75rem;
+  }
+
+  .media-category {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-gold, #CBA052);
+  }
+
+  .media-date {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.75rem;
+    color: var(--accent-slate, #767676);
+  }
+
+  .media-title {
+    font-family: var(--font-serif, serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--primary, #111);
+    margin: 0 0 0.5rem 0;
+    transition: color 0.3s ease;
+  }
+
+  .media-card:hover .media-title {
+    color: var(--accent-gold, #CBA052);
+  }
+
+  .media-subtitle {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--on-surface-variant, #555);
+    margin: 0 0 1rem 0;
+  }
+
+  .card-footer {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-light, #E5E5E5);
+  }
+
+  .media-cta {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--primary, #111);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .spotify-cta {
+    color: #1DB954;
+  }
+
+  .spotify-icon {
+    fill: currentColor;
+  }
+
+  .media-cta .arrow {
+    transition: transform 0.3s ease;
+  }
+
+  .media-card:hover .media-cta .arrow {
+    transform: translateX(4px);
+  }
+</style>

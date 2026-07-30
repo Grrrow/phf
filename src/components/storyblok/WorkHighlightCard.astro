@@ -283,7 +283,82 @@ const wrapperProps = hasLink ? {
     display: none;
   }
 
+  /* Release Card Horizontal Layout for Large */
   .style-release_card .card-media {
     aspect-ratio: 1/1; /* Square for album covers */
+    background-color: var(--surface-bright, #FAFAFA);
+  }
+  
+  @media (min-width: 768px) {
+    .style-release_card.size-large .card-inner-wrapper {
+      flex-direction: row;
+      align-items: stretch;
+    }
+    .style-release_card.size-large .card-media {
+      width: 40%;
+      height: auto;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border-light, #E5E5E5);
+    }
+    .style-release_card.size-large .card-content {
+      width: 60%;
+      justify-content: center;
+    }
+    .style-release_card.size-large .card-cta {
+      border: 1px solid var(--border-light, #E5E5E5);
+      padding: 0.75rem 1.25rem;
+      border-radius: 2px;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+    .style-release_card.size-large:hover .card-cta {
+      background-color: var(--primary, #111);
+      color: #FFFFFF;
+      border-color: var(--primary, #111);
+    }
+  }
+
+  /* Media Feature Overlay Layout for Large */
+  @media (min-width: 768px) {
+    .style-media_feature.size-large .card-inner-wrapper {
+      position: relative;
+    }
+    .style-media_feature.size-large .card-media {
+      height: 100%;
+      aspect-ratio: auto;
+      min-height: 400px;
+    }
+    .style-media_feature.size-large .card-media::after {
+      content: "";
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 50%;
+      background: linear-gradient(to top, rgba(255,255,255,0.9), transparent);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .style-media_feature.size-large .card-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 2;
+      background: transparent;
+      padding: 3rem;
+      padding-bottom: 2rem;
+    }
+    /* Move play icon from center to bottom left */
+    .style-media_feature.size-large .media-overlay {
+      background: transparent;
+      justify-content: flex-end;
+      align-items: flex-start;
+      padding: 2rem;
+      z-index: 3;
+    }
+    .style-media_feature.size-large .play-icon svg {
+      fill: rgba(0,0,0,0.8);
+      stroke: #111;
+    }
+    .style-media_feature.size-large:hover .media-overlay {
+      background: transparent;
+    }
   }
 </style>

@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@types/node": "^25.9.3",
+    "@vitejs/plugin-basic-ssl": "^2.3.0",
     "storyblok-js-client": "^7.6.1",
     "tsx": "^4.22.4",
     "vite-plugin-mkcert": "^2.1.0"

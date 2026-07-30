@@ -1,0 +1,93 @@
+{
+  "component": {
+    "name": "media_page",
+    "display_name": "Media Page",
+    "is_nestable": false,
+    "is_root": true,
+    "schema": {
+      "seo": {
+        "type": "bloks",
+        "pos": 0,
+        "translatable": false,
+        "maximum": 1,
+        "restrict_components": true,
+        "component_whitelist": [
+          "seo"
+        ],
+        "description": "Configuración SEO de la página."
+      },
+      "title": {
+        "type": "text",
+        "pos": 1,
+        "translatable": true,
+        "default_value": "Media",
+        "description": "Título principal H1 de la página (ej. 'Media')."
+      },
+      "intro": {
+        "type": "textarea",
+        "pos": 2,
+        "translatable": true,
+        "description": "Texto introductorio de la página de multimedia."
+      },
+      "categories": {
+        "type": "text",
+        "pos": 3,
+        "translatable": true,
+        "default_value": "ALL, VIDEOS, DISCOGRAPHY, PHOTOS",
+        "description": "Categorías separadas por comas para las pestañas de filtro."
+      },
+      "featured_media": {
+        "type": "bloks",
+        "pos": 4,
+        "translatable": false,
+        "maximum": 1,
+        "restrict_components": true,
+        "component_whitelist": [
+          "media_card"
+        ],
+        "description": "Elemento multimedia destacado principal."
+      },
+      "media_items": {
+        "type": "bloks",
+        "pos": 5,
+        "translatable": false,
+        "restrict_components": true,
+        "component_whitelist": [
+          "media_card"
+        ],
+        "description": "Cuadrícula de elementos multimedia."
+      },
+      "load_more_label": {
+        "type": "text",
+        "pos": 6,
+        "translatable": true,
+        "default_value": "LOAD MORE MEDIA",
+        "description": "Texto del botón de cargar más."
+      },
+      "page_theme": {
+        "type": "option",
+        "pos": 7,
+        "use_uuid": true,
+        "options": [
+          { "value": "light", "name": "Light" },
+          { "value": "dark", "name": "Dark" },
+          { "value": "editorial", "name": "Editorial (Off-white)" }
+        ],
+        "default_value": "editorial",
+        "translatable": false
+      },
+      "show_header": {
+        "type": "boolean",
+        "pos": 8,
+        "default_value": true,
+        "translatable": false
+      },
+      "show_footer": {
+        "type": "boolean",
+        "pos": 9,
+        "default_value": true,
+        "translatable": false
+      }
+    }
+  }
+}

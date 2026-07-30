@@ -1,0 +1,47 @@
+{
+  "name": "contact_page",
+  "display_name": "Contact Page",
+  "component_group_name": "Pages",
+  "is_root": true,
+  "is_nestable": false,
+  "schema": {
+    "title": {
+      "type": "text",
+      "pos": 1,
+      "default_value": "Contact & Press",
+      "translatable": true
+    },
+    "subtitle": {
+      "type": "textarea",
+      "pos": 2,
+      "translatable": true
+    },
+    "featured_image": {
+      "type": "asset",
+      "pos": 3,
+      "filetypes": ["images"],
+      "description": "Imagen espectacular que se mostrará en la columna izquierda."
+    },
+    "quote": {
+      "type": "textarea",
+      "pos": 4,
+      "description": "Cita o texto corto que puede aparecer superpuesto a la imagen (opcional)."
+    },
+    "management_email": {
+      "type": "text",
+      "pos": 5,
+      "default_value": "info@pedrohalfftercaro.com"
+    },
+    "press_email": {
+      "type": "text",
+      "pos": 6,
+      "default_value": "info@pedrohalfftercaro.com"
+    },
+    "downloads": {
+      "type": "bloks",
+      "pos": 7,
+      "restrict_components": true,
+      "component_whitelist": ["download_item"]
+    }
+  }
+}

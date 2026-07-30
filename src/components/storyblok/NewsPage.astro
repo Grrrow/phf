@@ -1,0 +1,324 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+
+const { blok } = Astro.props;
+
+// Determine theme classes
+const themeMapping: Record<string, string> = {
+  light: 'theme-light',
+  dark: 'theme-dark',
+  editorial: 'theme-editorial'
+};
+const themeClass = themeMapping[blok.page_theme || 'editorial'];
+
+// Parse categories for filter tabs
+const categoriesRaw = blok.categories || 'ALL, INTERVIEWS, REVIEWS, MULTIMEDIA, ANNOUNCEMENTS';
+const categoryList = categoriesRaw.split(',').map((c: string) => c.trim()).filter(Boolean);
+
+const featured = blok.featured_article?.[0];
+const articles = blok.articles || [];
+---
+
+<main {...storyblokEditable(blok)} class={`news-page ${themeClass}`}>
+  <div class="page-container">
+    
+    <header class="page-header">
+      <h1 class="page-title">{blok.title || 'News & Media'}</h1>
+    </header>
+
+    {categoryList.length > 0 && (
+      <nav class="filter-nav" aria-label="News Categories">
+        <ul class="filter-list">
+          {categoryList.map((cat: string, idx: number) => (
+            <li>
+              <button 
+                type="button" 
+                class={`filter-btn ${idx === 0 ? 'active' : ''}`}
+                data-filter={cat.toUpperCase()}
+              >
+                {cat}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )}
+
+    {featured && (
+      <section class="featured-section">
+        <StoryblokComponent blok={featured} />
+      </section>
+    )}
+
+    {articles.length > 0 && (
+      <section class="articles-section">
+        <div class="articles-grid">
+          {articles.map((articleBlok: any) => (
+            <StoryblokComponent blok={articleBlok} />
+          ))}
+        </div>
+
+        <div id="scroll-sentinel" class="scroll-sentinel">
+          <div class="scroll-loader" aria-label="Loading more articles">
+            <span class="loader-dot"></span>
+            <span class="loader-dot"></span>
+            <span class="loader-dot"></span>
+          </div>
+        </div>
+      </section>
+    )}
+
+  </div>
+</main>
+
+<script>
+  function setupNewsFeed() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const articleCards = Array.from(document.querySelectorAll('.article-card'));
+    const sentinel = document.getElementById('scroll-sentinel');
+    const BATCH_SIZE = 9;
+
+    let currentFilter = 'ALL';
+    let visibleLimit = BATCH_SIZE;
+
+    function updateArticles() {
+      let matchingIndex = 0;
+
+      articleCards.forEach((card) => {
+        const cardCat = (card.getAttribute('data-category') || '').trim().toUpperCase();
+        const normFilter = currentFilter.replace(/S$/, '');
+        const normCardCat = cardCat.replace(/S$/, '');
+
+        const isMatch =
+          currentFilter === 'ALL' ||
+          cardCat === currentFilter ||
+          currentFilter.includes(cardCat) ||
+          cardCat.includes(currentFilter) ||
+          normFilter === normCardCat;
+
+        if (isMatch) {
+          if (matchingIndex < visibleLimit) {
+            (card as HTMLElement).style.display = '';
+            (card as HTMLElement).classList.add('is-visible');
+          } else {
+            (card as HTMLElement).style.display = 'none';
+            (card as HTMLElement).classList.remove('is-visible');
+          }
+          matchingIndex++;
+        } else {
+          (card as HTMLElement).style.display = 'none';
+          (card as HTMLElement).classList.remove('is-visible');
+        }
+      });
+
+      if (sentinel) {
+        if (matchingIndex > visibleLimit) {
+          sentinel.style.display = 'flex';
+        } else {
+          sentinel.style.display = 'none';
+        }
+      }
+    }
+
+    // Filter Buttons Click
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        currentFilter = (btn.getAttribute('data-filter') || 'ALL').trim().toUpperCase();
+        visibleLimit = BATCH_SIZE;
+        updateArticles();
+      });
+    });
+
+    // Infinite Scroll Observer
+    if (sentinel) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            visibleLimit += BATCH_SIZE;
+            updateArticles();
+          }
+        });
+      }, {
+        rootMargin: '300px'
+      });
+
+      observer.observe(sentinel);
+    }
+
+    // Initial call
+    updateArticles();
+  }
+
+  setupNewsFeed();
+  document.addEventListener('astro:page-load', setupNewsFeed);
+</script>
+
+<style>
+  .news-page {
+    width: 100%;
+    min-height: 100vh;
+    padding: 6rem 0 8rem 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Themes */
+  .theme-editorial {
+    background-color: var(--surface-bright, #FAFAFA);
+    color: var(--primary, #111);
+  }
+  .theme-light {
+    background-color: #FFFFFF;
+    color: var(--primary, #111);
+  }
+  .theme-dark {
+    background-color: var(--primary, #111);
+    color: var(--surface-bright, #FAFAFA);
+  }
+
+  .page-container {
+    max-width: var(--container-max, 1200px);
+    margin: 0 auto;
+    padding: 0 var(--margin-x, 1.5rem);
+  }
+
+  .page-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .page-title {
+    font-family: var(--font-serif, serif);
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  /* Filter Navigation */
+  .filter-nav {
+    margin-bottom: 4rem;
+    border-bottom: 1px solid var(--border-light, #E5E5E5);
+    padding-bottom: 1rem;
+  }
+
+  .filter-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .filter-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent-slate, #767676);
+    cursor: pointer;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .filter-btn:hover {
+    color: var(--primary, #111);
+  }
+
+  .filter-btn.active {
+    color: var(--primary, #111);
+  }
+
+  .filter-btn.active::after {
+    content: "";
+    position: absolute;
+    bottom: -1rem;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--primary, #111);
+  }
+
+  /* Sections */
+  .featured-section {
+    margin-bottom: 5rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid var(--border-light, #E5E5E5);
+  }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 4rem 2.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .articles-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  :global(.article-card.is-visible) {
+    animation: fadeInCard 0.5s ease forwards;
+  }
+
+  @keyframes fadeInCard {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Scroll Sentinel & Animated Loader */
+  .scroll-sentinel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0 2rem 0;
+    width: 100%;
+  }
+
+  .scroll-loader {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .loader-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--accent-gold, #CBA052);
+    animation: loaderBounce 1.2s infinite ease-in-out both;
+  }
+
+  .loader-dot:nth-child(1) {
+    animation-delay: -0.32s;
+  }
+  .loader-dot:nth-child(2) {
+    animation-delay: -0.16s;
+  }
+
+  @keyframes loaderBounce {
+    0%, 80%, 100% {
+      transform: scale(0);
+      opacity: 0.3;
+    }
+    40% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+</style>

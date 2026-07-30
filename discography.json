@@ -1,0 +1,316 @@
+{
+  "subject": "Pedro Halffter Caro",
+  "generated_at": "2026-07-30",
+  "scope": "Discografía localizada de Pedro Halffter como director, compositor o artista acreditado.",
+  "total_items": 17,
+  "items": [
+    {
+      "release_date": "2021-11-26",
+      "date_precision": "day",
+      "title": "Jorge Grundman: Piano & Cello Concertos",
+      "release_type": "Álbum",
+      "release_scope": "Discografía principal",
+      "main_composer": "Jorge Grundman",
+      "description": "Álbum con los conciertos para piano y violonchelo de Jorge Grundman, interpretados por Eduardo Frías e Iagoba Fanlo con la Orquesta Sinfónica de Navarra bajo la dirección de Pedro Halffter.",
+      "label": "Sony Classical",
+      "spotify": {
+        "status": "verified",
+        "available": true,
+        "url": "https://open.spotify.com/artist/1hezRwB55hfUDAm0lyrsRC"
+      },
+      "cover": {
+        "available": true,
+        "source_page": "https://music.apple.com/us/album/jorge-grundman-piano-cello-concertos/1596770070"
+      },
+      "recommended_for_website": true
+    },
+    {
+      "release_date": "2021",
+      "date_precision": "year",
+      "title": "VI. Epilogus",
+      "release_type": "Sencillo",
+      "release_scope": "Lanzamiento digital",
+      "main_composer": "Jorge Grundman",
+      "description": "Publicación digital del epílogo del Concierto para violonchelo y orquesta de cuerda op. 76.",
+      "label": "Sony Classical",
+      "spotify": {
+        "status": "verified",
+        "available": true,
+        "url": "https://open.spotify.com/artist/1hezRwB55hfUDAm0lyrsRC"
+      },
+      "recommended_for_website": false
+    },
+    {
+      "release_date": "2014-07-01",
+      "date_precision": "day",
+      "title": "Cristóbal Halffter Orchestrations",
+      "release_type": "Álbum",
+      "release_scope": "Discografía principal",
+      "main_composer": "Cristóbal Halffter",
+      "description": "Monográfico dedicado a las orquestaciones y paráfrasis de Cristóbal Halffter, con obras inspiradas en Cabezón, Cabanilles, Soler, Händel y Albéniz.",
+      "label": "Deutsche Grammophon / Universal Music Spain",
+      "spotify": {
+        "status": "verified",
+        "available": true,
+        "url": "https://open.spotify.com/album/2wjzdhhYjEHnAgJFKWItZl"
+      },
+      "cover": {
+        "available": true,
+        "source_page": "https://open.spotify.com/album/2wjzdhhYjEHnAgJFKWItZl"
+      },
+      "recommended_for_website": true
+    },
+    {
+      "release_date": "2012",
+      "date_precision": "year",
+      "title": "Falcón Sanabria",
+      "release_type": "Álbum colectivo",
+      "release_scope": "Participación discográfica",
+      "main_composer": "Juan José Falcón Sanabria",
+      "description": "Antología de obras orquestales de Juan José Falcón Sanabria interpretadas por la Orquesta Filarmónica de Gran Canaria.",
+      "label": null,
+      "spotify": {
+        "status": "verified",
+        "available": true,
+        "url": "https://open.spotify.com/artist/1hezRwB55hfUDAm0lyrsRC"
+      },
+      "recommended_for_website": false
+    },
+    {
+      "release_date": "2012-01-01",
+      "date_precision": "day",
+      "title": "Panambí",
+      "release_type": "Álbum / compilación digital",
+      "release_scope": "Discografía principal",
+      "main_composer": "Alberto Ginastera",
+      "description": "Registro de las Danzas de Estancia, el ballet completo Panambí y la Obertura para el Fausto criollo con la Orquesta Filarmónica de Gran Canaria.",
+      "label": "Deutsche Grammophon / Universal Music Spain",
+      "spotify": {
+        "status": "verified",
+        "available": true,
+        "url": "https://open.spotify.com/album/29Fuf4aXpdgZoqNCvbwJAY"
+      },
+      "cover": {
+        "available": true,
+        "source_page": "https://open.spotify.com/album/29Fuf4aXpdgZoqNCvbwJAY"
+      },
+      "recommended_for_website": true
+    },
+    {
+      "release_date": "2011-09-01",
+      "date_precision": "day",
+      "title": "Fire and Blood",
+      "release_type": "Álbum",
+      "release_scope": "Discografía principal",
+      "main_composer": "Michael Daugherty",
+      "description": "Álbum con Fire and Blood, Flamingo y Ladder to the Moon, junto al violinista Alexandre Da Costa y la Orchestre Symphonique de Montréal.",
+      "label": "Warner Classics / Analekta-Musicor",
+      "spotify": {
+        "status": "verified",
+        "available": true,
+        "url": "https://open.spotify.com/album/4gacXW2FyuegqDLmpdmDM3"
+      },
+      "cover": {
+        "available": true,
+        "source_page": "https://open.spotify.com/album/4gacXW2FyuegqDLmpdmDM3"
+      },
+      "recommended_for_website": true
+    },
+    {
+      "release_date": "2010-02-26",
+      "date_precision": "day",
+      "title": "Schreker: Nachtstück · Kammersymphonie · Fantastische Ouvertüre",
+      "release_type": "Álbum",
+      "release_scope": "Discografía principal",
+      "main_composer": "Franz Schreker",
+      "description": "Monográfico de Franz Schreker con el Nachtstück de Der ferne Klang, la Kammersymphonie y la Fantastische Ouvertüre op. 15.",
+      "label": "Warner Classics & Jazz",
+      "spotify": {
+        "status": "not_found",
+        "available": false,
+        "url": null
+      },
+      "cover": {
+        "available": true,
+        "source_page": "https://www.jpc.de/jpcng/classic/detail/-/art/Franz-Schreker-1878-1934-Kammersymphonie-f%C3%BCr-23-Soloinstrumente/hnum/6136944"
+      },
+      "recommended_for_website": true
+    },
+    {
+      "release_date": "2009-09-30",
+      "date_precision": "day",
+      "title": "Brahms arr. Schoenberg Transcriptions",
+      "release_type": "Álbum",
+      "release_scope": "Discografía principal",
+      "main_composer": "Johannes Brahms / Arnold Schoenberg",
+      "description": "Orquestaciones de Schoenberg del Cuarteto con piano op. 25 de Brahms y del Preludio y fuga BWV 552 de Bach.",
+      "label": "Warner Classics",
+      "spotify": {
+        "status": "partial",
+        "available": true,
+        "url": "https://open.spotify.com/artist/1hezRwB55hfUDAm0lyrsRC"
+      },
+      "cover": {
+        "available": true,
+        "source_page": "https://www.warnerclassics.com/release/brahms-arr-schoenberg-transcriptions"
+      },
+      "recommended_for_website": true
+    },
+    {
+      "release_date": "2008-04-01",
+      "date_precision": "day",
+      "title": "Korngold: Sinfonia op. 40 & Captain Blood",
+      "release_type": "Álbum",
+      "release_scope": "Discografía principal",
+      "main_composer": "Erich Wolfgang Korngold",
+      "description": "La Sinfonía en fa sostenido mayor op. 40 y la obertura de Captain Blood con la Orquesta Filarmónica de Gran Canaria.",
+      "label": "Warner Music Spain",
+      "spotify": {
+        "status": "verified",
+        "available": true,
+        "url": "https://open.spotify.com/track/6SnRWxqdTtoNBmXrPgrxrS"
+      },
+      "cover": {
+        "available": true,
+        "source_page": "https://music.apple.com/gb/album/korngold-sinfonia-op-40-captain-blood-obertura/278667930"
+      },
+      "recommended_for_website": true
+    },
+    {
+      "release_date": "2007",
+      "date_precision": "year",
+      "title": "Falla: El sombrero de tres picos · Montañesa · La vida breve",
+      "release_type": "Álbum",
+      "release_scope": "Discografía principal",
+      "main_composer": "Manuel de Falla",
+      "description": "Monográfico de Manuel de Falla con El sombrero de tres picos, Montañesa y fragmentos sinfónicos y vocales de La vida breve.",
+      "label": "Warner Music Spain",
+      "spotify": {
+        "status": "not_found",
+        "available": false,
+        "url": null
+      },
+      "recommended_for_website": true
+    },
+    {
+      "release_date": "2006-01-01",
+      "date_precision": "day",
+      "title": "David del Puerto: Boreas",
+      "release_type": "Álbum colectivo",
+      "release_scope": "Participación discográfica",
+      "main_composer": "David del Puerto",
+      "description": "Antología orquestal de David del Puerto. Pedro Halffter dirige Adagio con la Real Filharmonía de Galicia.",
+      "label": "Tritó",
+      "spotify": {
+        "status": "verified",
+        "available": true,
+        "url": "https://open.spotify.com/artist/1hezRwB55hfUDAm0lyrsRC"
+      },
+      "recommended_for_website": false
+    },
+    {
+      "release_date": "2006-01-01",
+      "date_precision": "day",
+      "title": "Querido Néstor II - Canciones de la Isla",
+      "release_type": "Álbum",
+      "release_scope": "Participación discográfica",
+      "main_composer": "Néstor Álamo / repertorio canario",
+      "description": "Álbum de Mestisay con canciones de Néstor Álamo; Pedro Halffter dirige a la Orquesta Filarmónica de Gran Canaria.",
+      "label": "Puentepalo / Altafonte",
+      "spotify": {
+        "status": "verified",
+        "available": true,
+        "url": "https://open.spotify.com/track/03L1N4v0wSFJGlmmdP8Fj4"
+      },
+      "recommended_for_website": false
+    },
+    {
+      "release_date": "2006",
+      "date_precision": "year",
+      "title": "Festival Internacional de Santander, Vol. 9",
+      "release_type": "Álbum en directo",
+      "release_scope": "Registro de archivo",
+      "main_composer": "Manuel de Falla / Joaquín Rodrigo",
+      "description": "Registro en directo de la Real Orquesta Sinfónica de Sevilla con Pedro Halffter.",
+      "label": "Festival Internacional de Santander",
+      "spotify": {
+        "status": "not_found",
+        "available": false,
+        "url": null
+      },
+      "recommended_for_website": false
+    },
+    {
+      "release_date": "2004-09-13",
+      "date_precision": "day",
+      "title": "Cristóbal Halffter: Don Quijote",
+      "release_type": "Ópera completa · 2 CD",
+      "release_scope": "Discografía principal",
+      "main_composer": "Cristóbal Halffter",
+      "description": "Primera grabación mundial de la ópera Don Quijote, con la Orquesta Sinfónica de Madrid y el Coro Nacional de España.",
+      "label": "Glossa",
+      "spotify": {
+        "status": "not_found",
+        "available": false,
+        "url": null
+      },
+      "cover": {
+        "available": true,
+        "source_page": "https://www.allmusic.com/album/crist%C3%B3bal-halffter-don-quixote-mw0001835150"
+      },
+      "recommended_for_website": true
+    },
+    {
+      "release_date": "2004",
+      "date_precision": "year",
+      "title": "Disco institucional del Cabildo de Gran Canaria",
+      "release_type": "CD institucional",
+      "release_scope": "Edición no comercial",
+      "main_composer": "Varios autores",
+      "description": "Edición institucional con motivo de la boda de los Príncipes de Asturias.",
+      "label": "Cabildo de Gran Canaria",
+      "spotify": {
+        "status": "not_found",
+        "available": false,
+        "url": null
+      },
+      "recommended_for_website": false
+    },
+    {
+      "release_date": "1998-03-18",
+      "date_precision": "day",
+      "title": "Halffter: Prelude for Madrid '92 / Daliniana",
+      "release_type": "Álbum",
+      "release_scope": "Discografía principal",
+      "main_composer": "Cristóbal Halffter",
+      "description": "Registro con Preludio para Madrid ’92, Daliniana, Fantasía sobre una sonoridad de G. F. Händel y Veni Creator Spiritus.",
+      "label": "Marco Polo",
+      "spotify": {
+        "status": "verified",
+        "available": true,
+        "url": "https://open.spotify.com/artist/33noXueVp6gjKzpSKUPOXY"
+      },
+      "cover": {
+        "available": true,
+        "source_page": "https://open.spotify.com/artist/33noXueVp6gjKzpSKUPOXY"
+      },
+      "recommended_for_website": true
+    },
+    {
+      "release_date": "1996",
+      "date_precision": "year",
+      "title": "Cristóbal Halffter",
+      "release_type": "Álbum",
+      "release_scope": "Participación discográfica",
+      "main_composer": "Cristóbal Halffter",
+      "description": "Edición de RTVE Música con Daliniana, Mural sonante y Tiempo para espacios.",
+      "label": "RTVE Música",
+      "spotify": {
+        "status": "partial",
+        "available": true,
+        "url": "https://open.spotify.com/artist/33noXueVp6gjKzpSKUPOXY"
+      },
+      "recommended_for_website": false
+    }
+  ]
+}

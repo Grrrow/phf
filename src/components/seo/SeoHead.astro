@@ -63,7 +63,7 @@ const robotsContent = getRobotsContent(noindex, nofollow);
 <meta property="og:description" content={ogDescription || finalDescription} />
 <meta property="og:locale" content={locale} />
 <meta property="og:type" content="website" />
-{ogImage && <meta property="og:image" content={ogImage} />}
+<meta property="og:image" content={ogImage || "https://www.fbbva.es/wp-content/uploads/2018/10/Pedro-Halffter_2018.jpg"} />
 
 {/* Twitter Card */}
 <meta name="twitter:card" content="summary_large_image" />
@@ -72,7 +72,7 @@ const robotsContent = getRobotsContent(noindex, nofollow);
   name="twitter:description"
   content={twitterDescription || ogDescription || finalDescription}
 />
-{twitterImage && <meta name="twitter:image" content={twitterImage} />}
+<meta name="twitter:image" content={twitterImage || ogImage || "https://www.fbbva.es/wp-content/uploads/2018/10/Pedro-Halffter_2018.jpg"} />
 
 {/* Hreflang alternates */}
 {
@@ -81,5 +81,25 @@ const robotsContent = getRobotsContent(noindex, nofollow);
   ))
 }
 
-{/* JSON-LD */}
-{jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
+{/* JSON-LD for Artist/MusicGroup */}
+{jsonLd ? (
+  <script type="application/ld+json" set:html={jsonLd} />
+) : (
+  <script type="application/ld+json">
+    {`
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Pedro Halffter",
+        "jobTitle": "Conductor & Composer",
+        "url": "https://pedrohalfftercaro.com",
+        "sameAs": [
+          "https://www.facebook.com/profile.php?id=100069814851042",
+          "https://www.instagram.com/pedrohalffter/"
+        ],
+        "image": "https://www.fbbva.es/wp-content/uploads/2018/10/Pedro-Halffter_2018.jpg",
+        "description": "Pedro Halffter, reconocido director de orquesta y compositor español. Explora su trayectoria, discografía y vídeos."
+      }
+    `}
+  </script>
+)}

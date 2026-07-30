@@ -6,9 +6,8 @@ const { blok } = Astro.props;
 
 // Extract logic variables
 const headingLevel = blok.heading_level || 'h1';
-const imagePosition = blok.image_position || 'right';
-const isLcp = typeof blok.is_lcp === 'boolean' ? blok.is_lcp : true;
 const imageTreatment = blok.image_treatment || 'black_white';
+const isLcp = typeof blok.is_lcp === 'boolean' ? blok.is_lcp : true;
 
 const TitleTag = headingLevel as any;
 const isDecorative = blok.image_is_decorative === true;
@@ -17,76 +16,93 @@ const altText = isDecorative ? "" : (blok.image_alt || blok.title || "Pedro Half
 const hasImage = !!blok.image?.filename;
 ---
 
-<section {...storyblokEditable(blok)} class={`biography-hero-section pos-${imagePosition}`}>
-  <div class="container">
-    <div class="hero-grid">
-      
-      <div class="hero-text-col">
-        {blok.eyebrow && <span class="eyebrow">{blok.eyebrow}</span>}
-        {blok.title && <TitleTag class="title">{blok.title}</TitleTag>}
-        {blok.intro && <p class="intro">{blok.intro}</p>}
-      </div>
+<section {...storyblokEditable(blok)} class="biography-hero-section">
+  
+  {hasImage && (
+    <div class={`hero-image-wrapper treatment-${imageTreatment}`}>
+      <StoryblokImage
+        src={blok.image.filename}
+        alt={altText}
+        width={1920}
+        height={1080}
+        loading={isLcp ? 'eager' : 'lazy'}
+        fetchpriority={isLcp ? 'high' : 'auto'}
+        sizes="100vw"
+        widths={[768, 1024, 1440, 1920, 2560]}
+        class="hero-img"
+      />
+      <div class="hero-overlay"></div>
+    </div>
+  )}
 
-      {hasImage && (
-        <div class={`hero-image-col treatment-${imageTreatment}`}>
-          <div class="image-wrapper">
-            <StoryblokImage
-              src={blok.image.filename}
-              alt={altText}
-              width={800}
-              height={1000}
-              aspectRatio="4:5"
-              loading={isLcp ? 'eager' : 'lazy'}
-              fetchpriority={isLcp ? 'high' : 'auto'}
-              sizes="(min-width: 1024px) 40vw, 100vw"
-              class="hero-img"
-            />
-          </div>
-        </div>
-      )}
-
+  <div class="hero-content-container">
+    <div class="hero-content">
+      {blok.eyebrow && <span class="eyebrow">{blok.eyebrow}</span>}
+      {blok.title && <TitleTag class="title">{blok.title}</TitleTag>}
+      {blok.intro && <p class="intro">{blok.intro}</p>}
     </div>
   </div>
+
 </section>
 
 <style>
   .biography-hero-section {
+    position: relative;
     width: 100%;
-    padding: var(--section-stack, 8rem) 0 4rem 0;
+    min-height: 70vh;
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center;
+    background-color: var(--primary, #111);
+    overflow: hidden;
   }
 
-  .container {
+  .hero-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%; /* Keep focus on upper part for portraits */
+  }
+
+  /* Image Treatments */
+  .treatment-black_white .hero-img {
+    filter: grayscale(100%) contrast(1.1);
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(17,17,17,0.9) 0%, rgba(17,17,17,0.6) 40%, rgba(17,17,17,0.3) 100%);
+    z-index: 2;
+  }
+
+  .hero-content-container {
+    position: relative;
+    z-index: 3;
+    width: 100%;
     max-width: var(--container-max, 1200px);
     margin: 0 auto;
-    padding: 0 var(--margin-x, 1.5rem);
+    padding: 8rem var(--margin-x, 1.5rem) 4rem var(--margin-x, 1.5rem);
+    display: flex;
+    justify-content: center;
+    text-align: center;
   }
 
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  @media (min-width: 1024px) {
-    .hero-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-    }
-    
-    /* Handle position reversal in desktop */
-    :global(.pos-left) .hero-text-col {
-      order: 2;
-    }
-    :global(.pos-left) .hero-image-col {
-      order: 1;
-    }
-  }
-
-  .hero-text-col {
+  .hero-content {
     display: flex;
     flex-direction: column;
-    max-width: 600px;
+    align-items: center;
+    max-width: 800px;
+    color: #FFFFFF;
   }
 
   .eyebrow {
@@ -94,73 +110,56 @@ const hasImage = !!blok.image?.filename;
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     color: var(--accent-gold, #CBA052);
-    margin-bottom: 1rem;
-    display: block;
+    margin-bottom: 1.5rem;
   }
 
   .title {
     font-family: var(--font-serif, serif);
-    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-size: clamp(3rem, 7vw, 5.5rem);
     font-weight: 400;
     line-height: 1.1;
-    margin: 0 0 2rem 0;
-    color: inherit;
+    color: #FFFFFF;
+    margin: 0 0 1.5rem 0;
     letter-spacing: -0.02em;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.6);
   }
 
   .intro {
-    font-family: var(--font-sans, sans-serif);
-    font-size: 1.125rem;
-    line-height: 1.7;
-    color: var(--on-surface-variant, #444);
+    font-family: var(--font-serif, serif);
+    font-size: clamp(1.125rem, 2vw, 1.35rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
     margin: 0;
+    max-width: 650px;
   }
 
-  :global(.theme-dark) .intro {
-    color: var(--on-primary-variant, #CCC);
-  }
-
-  .hero-image-col {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  @media (min-width: 1024px) {
-    .hero-image-col {
-      justify-content: flex-end;
+  /* Fade Up Animation */
+  @keyframes heroFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
     }
-    :global(.pos-left) .hero-image-col {
-      justify-content: flex-start;
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 
-  .image-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 550px;
-    background-color: var(--surface-light, #EFEFEF);
-    /* Soft border as requested in "Imagen rectangular con marco/borde claro" */
-    border: 8px solid #FFFFFF;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  .hero-content > * {
+    opacity: 0;
+    animation: heroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    will-change: opacity, transform;
   }
 
-  :global(.theme-dark) .image-wrapper {
-    border-color: #222;
-    background-color: #111;
+  .hero-image-wrapper {
+    opacity: 0;
+    animation: heroFadeUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    will-change: opacity, transform;
   }
 
-  .hero-img {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-
-  /* Image Treatments */
-  .treatment-black_white .hero-img {
-    filter: grayscale(100%) contrast(1.1);
-  }
+  .eyebrow { animation-delay: 0.3s; }
+  .title { animation-delay: 0.4s; }
+  .intro { animation-delay: 0.5s; }
 </style>

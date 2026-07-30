@@ -1,0 +1,426 @@
+{
+  "subject": "Pedro Halffter Caro",
+  "generated_at": "2026-07-30",
+  "selection": "Últimos 22 elementos del array original, conservando su orden",
+  "total_items": 22,
+  "items": [
+    {
+      "date": "2018-05-30",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Crítica",
+      "title": "Pedro Halffter dirige Adriana Lecouvreur en el Teatro de la Maestranza",
+      "description": "Crítica de la producción de la ópera de Cilea con Ainhoa Arteta y la Real Orquesta Sinfónica de Sevilla.",
+      "source": "Codalario",
+      "author": "José Amador Morales",
+      "language": "es",
+      "url": "https://www.codalario.com/pedro-halffter/criticas-2018/critica-pedro-halffter-dirige-adriana-lecouvreur-de-cilea-en-el-teatro-de-la-maestranza-de-sevilla_6969_75_21173_0_1_in.html",
+      "image": {
+        "available": true,
+        "source_page": "https://www.codalario.com/pedro-halffter/criticas-2018/critica-pedro-halffter-dirige-adriana-lecouvreur-de-cilea-en-el-teatro-de-la-maestranza-de-sevilla_6969_75_21173_0_1_in.html",
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Crítica especializada de repertorio verista."
+    },
+    {
+      "date": "2018-02-19",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Crítica",
+      "title": "Falstaff en los tiempos del #MeToo",
+      "description": "Reportaje-crítica sobre el Falstaff de Verdi programado y dirigido por Pedro Halffter en el Teatro de la Maestranza.",
+      "source": "El País",
+      "author": "Jesús Ruiz Mantilla",
+      "language": "es",
+      "url": "https://elpais.com/cultura/2018/02/17/actualidad/1518886336_356277.html",
+      "image": {
+        "available": true,
+        "source_page": "https://elpais.com/cultura/2018/02/17/actualidad/1518886336_356277.html",
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Artículo de gran medio y enfoque contemporáneo."
+    },
+    {
+      "date": "2017-11-25",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Perfil",
+      "title": "Pedro Halffter Caro y la importancia de Sevilla en la ópera",
+      "description": "Perfil sobre su proyecto artístico en Sevilla y su colaboración con Joaquín Achúcarro y la Orquesta Nacional de España.",
+      "source": "El País",
+      "author": "Jesús Ruiz Mantilla",
+      "language": "es",
+      "url": "https://elpais.com/cultura/2017/11/25/actualidad/1511597629_876133.html",
+      "image": {
+        "available": true,
+        "source_page": "https://elpais.com/cultura/2017/11/25/actualidad/1511597629_876133.html",
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Perfil importante para la etapa de gestión artística."
+    },
+    {
+      "date": "2017-03-08",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Entrevista",
+      "title": "El Wagner polémico oculta al Wagner músico",
+      "description": "Entrevista sobre Wagner, su influencia y el ciclo de conferencias impartido por Halffter en la Fundación BBVA.",
+      "source": "El Cultural · El Español",
+      "author": "Andrés Seoane",
+      "language": "es",
+      "url": "https://www.elespanol.com/el-cultural/escenarios/20170308/pedro-halffter-wagner-polemico-oculta-musico/199231084_0.html",
+      "image": {
+        "available": true,
+        "source_page": "https://www.elespanol.com/el-cultural/escenarios/20170308/pedro-halffter-wagner-polemico-oculta-musico/199231084_0.html",
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Entrevista esencial sobre su pensamiento wagneriano."
+    },
+    {
+      "date": "2017-03-08",
+      "date_precision": "day",
+      "date_basis": "cycle_start",
+      "type": "Anuncio",
+      "title": "Wagner y su tiempo",
+      "description": "La Fundación BBVA presenta el primer gran ciclo de conferencias al piano de Pedro Halffter.",
+      "source": "Fundación BBVA · Contrapunto",
+      "author": null,
+      "language": "es",
+      "url": "https://www.contrapunto-fbbva.es/noticias/maestro-pedro-halffter-caro-propone-acercamiento-la-esencia-richard-wagner-ciclo-conferencias/",
+      "image": {
+        "available": true,
+        "source_page": "https://www.contrapunto-fbbva.es/noticias/maestro-pedro-halffter-caro-propone-acercamiento-la-esencia-richard-wagner-ciclo-conferencias/",
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Pieza fundacional para su faceta divulgativa."
+    },
+    {
+      "date": "2016-11-25",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Perfil",
+      "title": "Pedro Halffter, un cocinero bachiano",
+      "description": "Perfil personal que conecta su relación cotidiana con Bach, la cocina, la composición y su trabajo en el Teatro de la Maestranza.",
+      "source": "El País Semanal",
+      "author": "Sacha Hormaechea",
+      "language": "es",
+      "url": "https://elpais.com/elpais/2016/11/25/eps/1480028712_148002.html",
+      "image": {
+        "available": true,
+        "source_page": "https://elpais.com/elpais/2016/11/25/eps/1480028712_148002.html",
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Muy útil para humanizar el storytelling."
+    },
+    {
+      "date": "2016-06-18",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Entrevista",
+      "title": "Entrevista a Pedro Halffter",
+      "description": "Conversación en RNE sobre su orquestación de El emperador de la Atlántida y sus proyectos en Madrid y Sevilla.",
+      "source": "RTVE · No es un día cualquiera",
+      "author": null,
+      "language": "es",
+      "url": "https://www.rtve.es/play/audios/no-es-un-dia-cualquiera/no-es-un-dia-cualquiera-pedro-halffter-el-arte-es-mucho-mas-que-un-pasatiempo/3638179/",
+      "image": {
+        "available": true,
+        "source_page": "https://www.rtve.es/play/audios/no-es-un-dia-cualquiera/no-es-un-dia-cualquiera-pedro-halffter-el-arte-es-mucho-mas-que-un-pasatiempo/3638179/",
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Entrevista sonora importante sobre su trabajo como orquestador."
+    },
+    {
+      "date": "2016-02-29",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Crítica",
+      "title": "Pedro Halffter dirige su versión de Tannhäuser al frente de la Filarmónica de Málaga",
+      "description": "Crítica de la versión sinfónico-coral de Tannhäuser presentada en el Teatro Cervantes de Málaga.",
+      "source": "Codalario",
+      "author": "Alejandro Fernández",
+      "language": "es",
+      "url": "https://www.codalario.com/pedro-halffter/criticas-2016/critica-pedro-halffter-dirige-su-version-de-tanhauser-de-wagner-al-frente-de-la-filarmonica-de-malaga_3770_77_10464_0_1_in.html",
+      "image": {
+        "available": true,
+        "source_page": "https://www.codalario.com/pedro-halffter/criticas-2016/critica-pedro-halffter-dirige-su-version-de-tanhauser-de-wagner-al-frente-de-la-filarmonica-de-malaga_3770_77_10464_0_1_in.html",
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Documento relevante para la evolución de su adaptación wagneriana."
+    },
+    {
+      "date": "2015-05-29",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Entrevista",
+      "title": "Mi trabajo con la Sinfónica de Sevilla se empezará a poner en valor cuando pasen años",
+      "description": "Entrevista extensa sobre estética, gestión musical, Sevilla, Gran Canaria, repertorio y su visión del público.",
+      "source": "Codalario",
+      "author": "Aurelio M. Seco",
+      "language": "es",
+      "url": "https://www.codalario.com/pedro-halffter/entrevistas/pedro-halffter--director-mi-trabajo-con-la-sinfonica-de-sevilla-se-empezara-a-poner-en-valor-cuando-pasen-anos._3555_4_9640_0_1_in.html",
+      "image": {
+        "available": true,
+        "source_page": "https://www.codalario.com/pedro-halffter/entrevistas/pedro-halffter--director-mi-trabajo-con-la-sinfonica-de-sevilla-se-empezara-a-poner-en-valor-cuando-pasen-anos._3555_4_9640_0_1_in.html",
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Una de las entrevistas más completas de su trayectoria."
+    },
+    {
+      "date": "2015-03-09",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Anuncio",
+      "title": "El Maestranza acoge el estreno en España de la ópera Doctor Atomic",
+      "description": "Anuncio del estreno español de la ópera de John Adams, con Pedro Halffter al frente de la Real Orquesta Sinfónica de Sevilla.",
+      "source": "El País",
+      "author": "Margot Molina",
+      "language": "es",
+      "url": "https://elpais.com/ccaa/2015/03/09/andalucia/1425917250_614505.html",
+      "image": {
+        "available": true,
+        "source_page": "https://elpais.com/ccaa/2015/03/09/andalucia/1425917250_614505.html",
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Hito de programación contemporánea en España."
+    },
+    {
+      "date": "2015-03",
+      "date_precision": "month",
+      "date_basis": "issue_date",
+      "type": "Crítica",
+      "title": "HALFFTER, C.: Orchestrations",
+      "description": "Crítica discográfica que destaca la versión de Pedro Halffter con la Orquesta Filarmónica de Gran Canaria.",
+      "source": "Revista Ritmo",
+      "author": "Juan Carlos Moreno",
+      "language": "es",
+      "url": "https://www.ritmo.es/discos/discos-recomendados/halffter-c-orchestrations-orquestaciones",
+      "image": {
+        "available": true,
+        "source_page": "https://www.ritmo.es/discos/discos-recomendados/halffter-c-orchestrations-orquestaciones",
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Crítica discográfica positiva y prestigiosa."
+    },
+    {
+      "date": "2014-11-20",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Noticia",
+      "title": "Dirección bicéfala para el Teatro de la Maestranza y la Sinfónica de Sevilla",
+      "description": "Noticia sobre la continuidad de Pedro Halffter como director artístico del Teatro de la Maestranza.",
+      "source": "El País",
+      "author": "Miguel Pérez Martín",
+      "language": "es",
+      "url": "https://elpais.com/cultura/2014/11/20/actualidad/1416472072_519941.html",
+      "image": {
+        "available": true,
+        "source_page": "https://elpais.com/cultura/2014/11/20/actualidad/1416472072_519941.html",
+        "direct_url": null
+      },
+      "recommended_for_website": false,
+      "editorial_note": "Útil como archivo institucional; contiene contexto laboral controvertido."
+    },
+    {
+      "date": "2013-04-25",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Anuncio",
+      "title": "Pedro Halffter protagoniza los Encuentros del Cervantes",
+      "description": "Anuncio de una entrevista pública centrada en su perfil biográfico, creativo y cultural.",
+      "source": "El País",
+      "author": null,
+      "language": "es",
+      "url": "https://elpais.com/cultura/2013/04/25/actualidad/1366888867_281583.html",
+      "image": {
+        "available": true,
+        "source_page": "https://elpais.com/cultura/2013/04/25/actualidad/1366888867_281583.html",
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Buen antecedente de su perfil como conversador y divulgador."
+    },
+    {
+      "date": "2007-05-16",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Crítica",
+      "title": "Paisajes sevillanos",
+      "description": "Crítica de Fidelio en el Teatro de la Maestranza, que destaca el tacto concertador de Pedro Halffter.",
+      "source": "El País",
+      "author": "Juan Ángel Vela del Campo",
+      "language": "es",
+      "url": "https://elpais.com/diario/2007/05/16/cultura/1179266406_850215.html",
+      "image": {
+        "available": false,
+        "source_page": null,
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Crítica histórica con valoración positiva de la dirección."
+    },
+    {
+      "date": "2006-11-09",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Crítica",
+      "title": "Belleza inquietante",
+      "description": "Crítica del estreno español de Der ferne Klang de Schreker, elogiando la eficacia dramática y transparencia de la lectura de Halffter.",
+      "source": "El País",
+      "author": "Juan Ángel Vela del Campo",
+      "language": "es",
+      "url": "https://elpais.com/diario/2006/11/09/cultura/1163026809_850215.html",
+      "image": {
+        "available": false,
+        "source_page": null,
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Una de las críticas históricas más favorables y relevantes."
+    },
+    {
+      "date": "2005-05-26",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Crítica",
+      "title": "Música grande",
+      "description": "Crítica de un concierto con obras de Cristóbal Halffter y Chaikovski dirigido por Pedro Halffter en Valencia.",
+      "source": "El País",
+      "author": "Luis Suñén",
+      "language": "es",
+      "url": "https://elpais.com/diario/2005/05/26/espectaculos/1117058405_850215.html",
+      "image": {
+        "available": false,
+        "source_page": null,
+        "direct_url": null
+      },
+      "recommended_for_website": false,
+      "editorial_note": "Crítica mixta; útil para archivo histórico."
+    },
+    {
+      "date": "2004-07-02",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Anuncio",
+      "title": "El consejo de la Sinfónica de Sevilla nombra director a Pedro Halffter",
+      "description": "Anuncio de su nombramiento como director artístico de la Real Orquesta Sinfónica de Sevilla.",
+      "source": "El País",
+      "author": null,
+      "language": "es",
+      "url": "https://elpais.com/diario/2004/07/02/andalucia/1088720557_850215.html",
+      "image": {
+        "available": false,
+        "source_page": null,
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Hito esencial de su trayectoria institucional."
+    },
+    {
+      "date": "2003-12-30",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Anuncio",
+      "title": "Pedro Halffter, nuevo director de la Filarmónica de Gran Canaria",
+      "description": "Anuncio de su nombramiento como director de la Orquesta Filarmónica de Gran Canaria.",
+      "source": "El País",
+      "author": "Europa Press",
+      "language": "es",
+      "url": "https://elpais.com/diario/2003/12/30/espectaculos/1072738804_850215.html",
+      "image": {
+        "available": false,
+        "source_page": null,
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Hito clave de carrera."
+    },
+    {
+      "date": "2002-03-13",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Perfil",
+      "title": "Cristóbal y Pedro Halffter defienden su música de compromiso",
+      "description": "Reportaje conjunto sobre la independencia estética entre padre e hijo y el estreno de Imágenes de Pedro Halffter.",
+      "source": "El País",
+      "author": "J. R. Marcuello",
+      "language": "es",
+      "url": "https://elpais.com/diario/2002/03/13/espectaculos/1015974001_850215.html",
+      "image": {
+        "available": true,
+        "source_page": "https://elpais.com/diario/2002/03/13/espectaculos/1015974001_850215.html",
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Muy valioso para explicar su identidad como compositor independiente."
+    },
+    {
+      "date": "2001-07-26",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Anuncio",
+      "title": "Antonio Márquez y Estrella Morente ponen el duende del flamenco a La vida breve",
+      "description": "Anuncio del montaje de La vida breve en el Teatro Real, dirigido musicalmente por Pedro Halffter.",
+      "source": "El País",
+      "author": "Rafael F. Bermejo",
+      "language": "es",
+      "url": "https://elpais.com/diario/2001/07/26/espectaculos/996098408_850215.html",
+      "image": {
+        "available": true,
+        "source_page": "https://elpais.com/diario/2001/07/26/espectaculos/996098408_850215.html",
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Hito temprano en el Teatro Real."
+    },
+    {
+      "date": "2000-08-24",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Entrevista",
+      "title": "Los retos de un joven director de orquesta",
+      "description": "Perfil-entrevista sobre sus comienzos, la falta de oportunidades para jóvenes directores y su visión de la vida musical española.",
+      "source": "El País",
+      "author": "Juan J. Gómez",
+      "language": "es",
+      "url": "https://elpais.com/diario/2000/08/24/revistaverano/967068010_850215.html",
+      "image": {
+        "available": false,
+        "source_page": null,
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Documento biográfico temprano de gran interés."
+    },
+    {
+      "date": "1992-05-10",
+      "date_precision": "day",
+      "date_basis": "published",
+      "type": "Crítica",
+      "title": "El nuevo Halffter",
+      "description": "Una de las primeras críticas publicadas sobre Pedro Halffter, con 21 años, destacando seguridad, claridad gestual y sensibilidad musical.",
+      "source": "El País",
+      "author": "Enrique Franco",
+      "language": "es",
+      "url": "https://elpais.com/diario/1992/05/10/cultura/705448809_850215.html",
+      "image": {
+        "available": false,
+        "source_page": null,
+        "direct_url": null
+      },
+      "recommended_for_website": true,
+      "editorial_note": "Excelente pieza para abrir una cronología de prensa."
+    }
+  ]
+}

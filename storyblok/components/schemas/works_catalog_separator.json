@@ -1,0 +1,26 @@
+{
+  "name": "works_catalog_separator",
+  "display_name": "Catalog Separator",
+  "component_group_name": "Subcomponents",
+  "is_root": false,
+  "is_nestable": true,
+  "schema": {
+    "title": {
+      "type": "text",
+      "pos": 1,
+      "translatable": true,
+      "description": "Texto del separador (ej. 'Chamber Opera')."
+    },
+    "level": {
+      "type": "option",
+      "use_uuid": true,
+      "options": [
+        { "name": "Primary (Large)", "value": "primary" },
+        { "name": "Secondary (Small)", "value": "secondary" }
+      ],
+      "default_value": "primary",
+      "pos": 2,
+      "description": "Tamaño del separador."
+    }
+  }
+}

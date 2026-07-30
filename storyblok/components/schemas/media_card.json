@@ -1,0 +1,108 @@
+{
+  "component": {
+    "name": "media_card",
+    "display_name": "Media Card",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "category": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true,
+        "default_value": "VIDEOS",
+        "description": "Categoría (ej. 'VIDEOS', 'AUDIO', 'DISCOGRAPHY', 'PHOTOS')."
+      },
+      "title": {
+        "type": "text",
+        "pos": 1,
+        "translatable": true,
+        "description": "Título del contenido multimedia u obra."
+      },
+      "subtitle": {
+        "type": "text",
+        "pos": 2,
+        "translatable": true,
+        "description": "Subtítulo o créditos (ej. 'Orquesta Sinfónica de Madrid')."
+      },
+      "date_label": {
+        "type": "text",
+        "pos": 3,
+        "translatable": true,
+        "description": "Fecha o año (ej. '2024' o 'Live Recording')."
+      },
+      "duration": {
+        "type": "text",
+        "pos": 4,
+        "translatable": true,
+        "description": "Duración (ej. '45:12' o 'Full Album'). Aparecerá como distintivo."
+      },
+      "image": {
+        "type": "asset",
+        "pos": 5,
+        "translatable": false,
+        "description": "Imagen de miniatura o carátula del disco."
+      },
+      "image_alt": {
+        "type": "text",
+        "pos": 6,
+        "translatable": true
+      },
+      "media_type": {
+        "type": "option",
+        "pos": 7,
+        "use_uuid": true,
+        "options": [
+          { "value": "video", "name": "Video Performance" },
+          { "value": "audio", "name": "Audio Track" },
+          { "value": "release", "name": "Album Release" },
+          { "value": "photo", "name": "Photo Gallery" }
+        ],
+        "default_value": "video",
+        "translatable": false
+      },
+      "embed_url": {
+        "type": "text",
+        "pos": 8,
+        "translatable": false,
+        "description": "URL de YouTube, Vimeo, Spotify o SoundCloud."
+      },
+      "cta_label": {
+        "type": "text",
+        "pos": 9,
+        "translatable": true,
+        "default_value": "WATCH VIDEO",
+        "description": "Texto del botón de acción (ej. 'WATCH VIDEO', 'LISTEN ON SPOTIFY')."
+      },
+      "cta_link": {
+        "type": "multilink",
+        "pos": 10,
+        "translatable": false
+      },
+      "card_style": {
+        "type": "option",
+        "pos": 11,
+        "use_uuid": true,
+        "options": [
+          { "value": "video_feature", "name": "Video Feature (16:9)" },
+          { "value": "album_square", "name": "Album / Release Square (1:1)" },
+          { "value": "photo_portrait", "name": "Photo Portrait (3:4)" }
+        ],
+        "default_value": "video_feature",
+        "translatable": false,
+        "description": "Aspecto visual de la tarjeta."
+      },
+      "card_size": {
+        "type": "option",
+        "pos": 12,
+        "use_uuid": true,
+        "options": [
+          { "value": "medium", "name": "Medium (1 Column)" },
+          { "value": "large", "name": "Large (2 Columns)" }
+        ],
+        "default_value": "medium",
+        "translatable": false,
+        "description": "Tamaño de la tarjeta en la cuadrícula (1 o 2 columnas)."
+      }
+    }
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "component": {
+    "name": "article_card",
+    "display_name": "Article Card",
+    "is_nestable": true,
+    "is_root": false,
+    "schema": {
+      "category": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true,
+        "description": "Categoría (ej. 'ANNOUNCEMENT', 'REVIEW', 'INTERVIEW', 'MULTIMEDIA')."
+      },
+      "date": {
+        "type": "text",
+        "pos": 1,
+        "translatable": true,
+        "description": "Fecha de publicación (ej. 'October 24, 2024')."
+      },
+      "title": {
+        "type": "text",
+        "pos": 2,
+        "translatable": true,
+        "description": "Titular de la noticia o artículo."
+      },
+      "excerpt": {
+        "type": "textarea",
+        "pos": 3,
+        "translatable": true,
+        "description": "Resumen o extracto del artículo."
+      },
+      "image": {
+        "type": "asset",
+        "pos": 4,
+        "translatable": false,
+        "description": "Imagen destacada del artículo."
+      },
+      "image_alt": {
+        "type": "text",
+        "pos": 5,
+        "translatable": true,
+        "description": "Texto alternativo para la imagen (accesibilidad)."
+      },
+      "media_type": {
+        "type": "option",
+        "pos": 6,
+        "use_uuid": true,
+        "options": [
+          { "value": "none", "name": "None" },
+          { "value": "image", "name": "Image" },
+          { "value": "video", "name": "Video" },
+          { "value": "audio", "name": "Audio" }
+        ],
+        "default_value": "image",
+        "translatable": false
+      },
+      "cta_label": {
+        "type": "text",
+        "pos": 7,
+        "translatable": true,
+        "default_value": "READ FULL ARTICLE",
+        "description": "Texto del botón o enlace (ej. 'READ FULL ARTICLE')."
+      },
+      "cta_link": {
+        "type": "multilink",
+        "pos": 8,
+        "translatable": false
+      },
+      "variant": {
+        "type": "option",
+        "pos": 9,
+        "use_uuid": true,
+        "options": [
+          { "value": "standard", "name": "Standard (Grid Card)" },
+          { "value": "featured", "name": "Featured (Hero 2-Column Layout)" }
+        ],
+        "default_value": "standard",
+        "translatable": false,
+        "description": "Formato visual de la tarjeta."
+      }
+    }
+  }
+}
