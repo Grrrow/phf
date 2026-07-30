@@ -22,3 +22,10 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+scripts/*
+./discogrpahy.json
+./news_data.json
+./news_data_2.json
+./photo_inventory.json
+./youtube_media.json
