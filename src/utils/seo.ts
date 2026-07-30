@@ -32,18 +32,20 @@ export function getRobotsContent(noindex: boolean = false, nofollow: boolean = f
 export function mergeSeo(pageSeo: any, globalConfig: any) {
   const globalSeo = globalConfig?.seo_defaults?.[0] || {};
   const siteIdentity = globalConfig?.site_identity?.[0] || {};
-  
-  const siteName = siteIdentity.site_name || 'Mar Morán';
+  const seoBlock = globalConfig?.seo_defaults?.[0] || {};
+
+  const titleTemplate = seoBlock.title_template || '%s | Pedro Halffter';
+  const siteName = siteIdentity.site_name || 'Pedro Halffter';
 
   return {
     siteName,
-    title: pageSeo?.meta_title || globalSeo?.meta_title || '',
-    description: pageSeo?.meta_description || globalSeo?.meta_description || '',
-    og_title: pageSeo?.og_title || globalSeo?.og_title || pageSeo?.meta_title || globalSeo?.meta_title || '',
-    og_description: pageSeo?.og_description || globalSeo?.og_description || pageSeo?.meta_description || globalSeo?.meta_description || '',
+    title: pageSeo?.meta_title || pageSeo?.title || globalSeo?.meta_title || globalSeo?.title || '',
+    description: pageSeo?.meta_description || pageSeo?.description || globalSeo?.meta_description || globalSeo?.description || '',
+    og_title: pageSeo?.og_title || globalSeo?.og_title || pageSeo?.meta_title || pageSeo?.title || globalSeo?.meta_title || globalSeo?.title || '',
+    og_description: pageSeo?.og_description || globalSeo?.og_description || pageSeo?.meta_description || pageSeo?.description || globalSeo?.meta_description || globalSeo?.description || '',
     og_image: pageSeo?.og_image?.filename || globalSeo?.og_image?.filename || siteIdentity.default_og_image?.filename || '',
-    twitter_title: pageSeo?.twitter_title || globalSeo?.twitter_title || pageSeo?.meta_title || globalSeo?.meta_title || '',
-    twitter_description: pageSeo?.twitter_description || globalSeo?.twitter_description || pageSeo?.meta_description || globalSeo?.meta_description || '',
+    twitter_title: pageSeo?.twitter_title || globalSeo?.twitter_title || pageSeo?.meta_title || pageSeo?.title || globalSeo?.meta_title || globalSeo?.title || '',
+    twitter_description: pageSeo?.twitter_description || globalSeo?.twitter_description || pageSeo?.meta_description || pageSeo?.description || globalSeo?.meta_description || globalSeo?.description || '',
     twitter_image: pageSeo?.twitter_image?.filename || globalSeo?.twitter_image?.filename || pageSeo?.og_image?.filename || globalSeo?.og_image?.filename || siteIdentity.default_og_image?.filename || '',
     noindex: pageSeo?.noindex ?? globalSeo?.noindex ?? false,
     nofollow: pageSeo?.nofollow ?? globalSeo?.nofollow ?? false,
