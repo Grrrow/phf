@@ -89,39 +89,41 @@ const pageQuote = (isEs && blok.quote__i18n__es) ? blok.quote__i18n__es : blok.q
           </div>
         </section>
 
-        {/* Press Kit Downloads */}
-        <section class="bento-item press-kit">
-          <h2 class="section-title">{isEs ? 'Descargas de Dossier de Prensa' : 'Press Kit Downloads'}</h2>
-          
-          {downloads.length > 0 ? (
-            <ul class="download-list">
-              {downloads.map((item: any) => {
-                const fileUrl = item.file?.filename || '#';
-                const itemTitle = (isEs && item.title__i18n__es) ? item.title__i18n__es : item.title;
-                return (
-                  <li class="download-item">
-                    <a href={fileUrl} target="_blank" rel="noopener noreferrer" class="download-link">
-                      <span class="download-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
-                          <path d="M14 3v5h5M12 18v-6M9 15l3 3 3-3"/>
-                        </svg>
-                      </span>
-                      <span class="download-title">{itemTitle}</span>
-                      <span class="download-action">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
-                        </svg>
-                      </span>
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          ) : (
-            <p class="empty-state">{isEs ? 'No hay archivos disponibles para descargar.' : 'No files available for download.'}</p>
-          )}
-        </section>
+        {/* Press Kit Downloads - HIDDEN FOR NOW */}
+        {false && (
+          <section class="bento-item press-kit">
+            <h2 class="section-title">{isEs ? 'Descargas de Dossier de Prensa' : 'Press Kit Downloads'}</h2>
+            
+            {downloads.length > 0 ? (
+              <ul class="download-list">
+                {downloads.map((item: any) => {
+                  const fileUrl = item.file?.filename || '#';
+                  const itemTitle = (isEs && item.title__i18n__es) ? item.title__i18n__es : item.title;
+                  return (
+                    <li class="download-item">
+                      <a href={fileUrl} target="_blank" rel="noopener noreferrer" class="download-link">
+                        <span class="download-icon">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
+                            <path d="M14 3v5h5M12 18v-6M9 15l3 3 3-3"/>
+                          </svg>
+                        </span>
+                        <span class="download-title">{itemTitle}</span>
+                        <span class="download-action">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <p class="empty-state">{isEs ? 'No hay archivos disponibles para descargar.' : 'No files available for download.'}</p>
+            )}
+          </section>
+        )}
 
       </div>
     </div>
