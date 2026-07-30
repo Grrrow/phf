@@ -12,7 +12,7 @@ export async function getStaticPaths() {
   let links = [];
   try {
     const { data } = await storyblokApi.get('cdn/links', {
-      version: import.meta.env.DEV ? 'draft' : 'published',
+      version: 'draft',
     });
     links = Object.values(data.links);
   } catch (error) {

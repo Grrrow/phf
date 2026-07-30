@@ -17,6 +17,13 @@ export default defineConfig({
       components: storyblokComponents,
     }),
     sitemap({
+      filter: (page) => {
+        // Exclude internal configuration pages
+        if (page.includes('/settings/')) return false;
+        // Exclude explicit /home routes since we already have the root / and /es/ routes
+        if (page.endsWith('/home/') || page.endsWith('/home')) return false;
+        return true;
+      },
       i18n: {
         defaultLocale: 'en',
         locales: {
