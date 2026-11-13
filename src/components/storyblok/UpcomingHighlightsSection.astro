@@ -1,6 +1,7 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
 import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+import { getUpcomingEvents } from '../../utils/events';
 
 const { blok } = Astro.props;
 
@@ -8,8 +9,10 @@ const { blok } = Astro.props;
 const hasCta = blok.cta_label && blok.cta_link?.cached_url;
 const ctaHref = blok.cta_link?.cached_url ? (blok.cta_link.cached_url.startsWith('http') ? blok.cta_link.cached_url : `/${blok.cta_link.cached_url.replace(/^\/|\/$/g, '')}/`) : '#';
 
-// Handle items and max_items limit natively
-let itemsToRender = blok.items || [];
+// Filter out expired events so only future/upcoming events appear on Home
+const rawItems = blok.items || [];
+let itemsToRender = getUpcomingEvents(rawItems);
+
 if (blok.max_items && parseInt(blok.max_items) > 0) {
   itemsToRender = itemsToRender.slice(0, parseInt(blok.max_items));
 }

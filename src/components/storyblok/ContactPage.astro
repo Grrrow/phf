@@ -15,9 +15,10 @@ function getImageUrl(filename: string | undefined) {
 const featuredImageUrl = getImageUrl(blok.featured_image?.filename);
 const downloads = blok.downloads || [];
 
-const pageTitle = (isEs && blok.title__i18n__es) ? blok.title__i18n__es : (blok.title || (isEs ? 'Contacto y Prensa' : 'Contact & Press'));
-const pageSubtitle = (isEs && blok.subtitle__i18n__es) ? blok.subtitle__i18n__es : blok.subtitle;
+const pageTitle = isEs ? 'Contacto' : 'Contact';
+const pageSubtitle = (isEs && blok.subtitle__i18n__es) ? blok.subtitle__i18n__es : (blok.subtitle || (isEs ? 'Para consultas generales, de dirección de orquesta y prensa.' : 'For general inquiries, conducting engagements, and press.'));
 const pageQuote = (isEs && blok.quote__i18n__es) ? blok.quote__i18n__es : blok.quote;
+const contactEmail = blok.management_email || blok.press_email || 'info@pedrohalfftercaro.com';
 ---
 
 <main {...storyblokEditable(blok)} class="contact-page">
@@ -54,19 +55,12 @@ const pageQuote = (isEs && blok.quote__i18n__es) ? blok.quote__i18n__es : blok.q
         
         {/* Contact Information */}
         <section class="bento-item contact-info">
-          <h2 class="section-title">{isEs ? 'Contacto Directo' : 'Direct Contact'}</h2>
+          <h2 class="section-title">{isEs ? 'Contacto' : 'Contact'}</h2>
           
           <div class="contact-group">
-            <h3 class="contact-role">{isEs ? 'REPRESENTACIÓN Y MANAGEMENT' : 'MANAGEMENT'}</h3>
-            <a href={`mailto:${blok.management_email || 'info@pedrohalfftercaro.com'}`} class="contact-link">
-              {blok.management_email || 'info@pedrohalfftercaro.com'}
-            </a>
-          </div>
-
-          <div class="contact-group">
-            <h3 class="contact-role">{isEs ? 'PRENSA Y RP' : 'PRESS & PR'}</h3>
-            <a href={`mailto:${blok.press_email || 'info@pedrohalfftercaro.com'}`} class="contact-link">
-              {blok.press_email || 'info@pedrohalfftercaro.com'}
+            <h3 class="contact-role">{isEs ? 'CORREO ELECTRÓNICO' : 'EMAIL'}</h3>
+            <a href={`mailto:${contactEmail}`} class="contact-link">
+              {contactEmail}
             </a>
           </div>
 

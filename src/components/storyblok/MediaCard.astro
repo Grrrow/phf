@@ -1,7 +1,9 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
+import { resolveVideoMedia } from '../../utils/media-fixer';
 
-const { blok } = Astro.props;
+const { blok: rawBlok } = Astro.props;
+const blok = resolveVideoMedia(rawBlok);
 
 const hasLink = blok.cta_link?.cached_url || blok.embed_url;
 let linkUrl = '#';
@@ -45,12 +47,13 @@ const fullSrc = hasMedia ? blok.image.filename : ytThumbnail;
 const altText = blok.image_alt || blok.title || 'Media thumbnail';
 const isPhoto = mediaType === 'photo' || cardStyle === 'photo_portrait' || category === 'PHOTOS';
 const isSpotify = linkUrl.includes('spotify') || category === 'DISCOGRAPHY';
+const isVideoFile = typeof linkUrl === 'string' && (/\.(mp4|webm|mov)(\?.*)?$/i.test(linkUrl) || linkUrl.includes('/video/'));
 const ctaLabel = blok.cta_label || (isSpotify ? 'LISTEN ON SPOTIFY' : mediaType === 'video' ? 'WATCH VIDEO' : 'EXPLORE');
 
 const hasVisualMedia = Boolean(hasMedia || ytThumbnail);
 
-const CardWrapper = hasLink ? 'a' : 'div';
-const wrapperProps = hasLink ? {
+const CardWrapper = hasLink && !isVideoFile ? 'a' : 'div';
+const wrapperProps = hasLink && !isVideoFile ? {
   href: linkUrl,
   target: isExternal ? '_blank' : '_self',
   rel: isExternal ? 'noopener noreferrer' : undefined,
@@ -62,9 +65,11 @@ const wrapperProps = hasLink ? {
 
 <article 
   {...storyblokEditable(blok)} 
-  class={`media-card style-${cardStyle} size-${blok.card_size || 'medium'} media-${mediaType} ${isPhoto ? 'is-photo-card' : ''}`}
+  class={`media-card style-${cardStyle} size-${blok.card_size || 'medium'} media-${mediaType} ${isPhoto ? 'is-photo-card' : ''} ${isVideoFile ? 'is-video-card' : ''}`}
   data-category={category}
   data-full-img={fullSrc}
+  data-video-url={isVideoFile ? linkUrl : undefined}
+  data-title={blok.title || ''}
 >
   <CardWrapper {...wrapperProps}>
 
@@ -159,6 +164,10 @@ const wrapperProps = hasLink ? {
     cursor: zoom-in;
     height: fit-content;
     align-self: start;
+  }
+
+  .media-card.is-video-card {
+    cursor: pointer;
   }
 
   .media-card.is-photo-card .media-card-inner {

@@ -88,6 +88,7 @@ const mediaItems = blok.media_items || [];
 
         <div class="lightbox-content">
           <img id="lightbox-img" src="" alt="Full resolution photo" class="lightbox-image" />
+          <video id="lightbox-video" controls playsinline class="lightbox-video" style="display: none;"></video>
           <span id="lightbox-counter" class="lightbox-counter">1 / 1</span>
         </div>
 
@@ -152,6 +153,7 @@ const mediaItems = blok.media_items || [];
   function setupLightbox() {
     const modal = document.getElementById('lightbox-modal');
     const modalImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const modalVideo = document.getElementById('lightbox-video') as HTMLVideoElement;
     const counter = document.getElementById('lightbox-counter');
     const closeBtn = document.getElementById('lightbox-close');
     const prevBtn = document.getElementById('lightbox-prev');
@@ -188,7 +190,7 @@ const mediaItems = blok.media_items || [];
       }
     }
 
-    // Attach click listeners to all photo cards
+    // Attach click listeners to photo cards
     const photoCards = document.querySelectorAll('.is-photo-card');
     photoCards.forEach((card) => {
       card.addEventListener('click', (e) => {
@@ -198,6 +200,15 @@ const mediaItems = blok.media_items || [];
         const foundIndex = currentPhotoList.findIndex(item => item.src === clickedSrc);
 
         if (modal && modalImg && currentPhotoList.length > 0) {
+          if (modalVideo) {
+            modalVideo.pause();
+            modalVideo.src = '';
+            modalVideo.style.display = 'none';
+          }
+          modalImg.style.display = 'block';
+          if (prevBtn) prevBtn.style.display = '';
+          if (nextBtn) nextBtn.style.display = '';
+
           updatePhoto(foundIndex !== -1 ? foundIndex : 0);
           modal.classList.add('open');
           modal.setAttribute('aria-hidden', 'false');
@@ -206,8 +217,35 @@ const mediaItems = blok.media_items || [];
       });
     });
 
+    // Attach click listeners to direct video cards (.is-video-card)
+    const videoCards = document.querySelectorAll('.is-video-card');
+    videoCards.forEach((card) => {
+      card.addEventListener('click', (e) => {
+        const videoUrl = card.getAttribute('data-video-url');
+        if (videoUrl && modal && modalVideo) {
+          e.preventDefault();
+          if (modalImg) modalImg.style.display = 'none';
+          modalVideo.style.display = 'block';
+          modalVideo.src = videoUrl;
+
+          if (prevBtn) prevBtn.style.display = 'none';
+          if (nextBtn) nextBtn.style.display = 'none';
+          if (counter) counter.textContent = card.getAttribute('data-title') || '';
+
+          modal.classList.add('open');
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+          modalVideo.play().catch(() => {});
+        }
+      });
+    });
+
     function closeModal() {
       if (modal) {
+        if (modalVideo) {
+          modalVideo.pause();
+          modalVideo.src = '';
+        }
         modal.classList.remove('open');
         modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
@@ -448,6 +486,15 @@ const mediaItems = blok.media_items || [];
     border-radius: 2px;
     box-shadow: 0 24px 48px rgba(0,0,0,0.6);
     user-select: none;
+  }
+
+  .lightbox-video {
+    max-width: 85vw;
+    max-height: 80vh;
+    border-radius: 4px;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.6);
+    outline: none;
+    background-color: #000;
   }
 
   .lightbox-counter {

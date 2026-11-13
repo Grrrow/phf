@@ -37,11 +37,11 @@ async function main() {
   console.log("Current contact content:", JSON.stringify(content, null, 2));
 
   // Update contact page copies in English & Spanish
-  content.title = "Contact & Management";
-  content.title__i18n__es = "Contacto y Representación";
+  content.title = "Contact";
+  content.title__i18n__es = "Contacto";
 
-  content.subtitle = "For worldwide general management, press inquiries, or direct engagement requests, please reach out via the official channels below.";
-  content.subtitle__i18n__es = "Para representación general internacional, consultas de prensa o solicitudes de contratación directa, por favor póngase en contacto a través de los canales oficiales indicados a continuación.";
+  content.subtitle = "For inquiries regarding concerts, conducting engagements, and press, please reach out via the official channel below.";
+  content.subtitle__i18n__es = "Para consultas sobre conciertos, dirección de orquesta y prensa, por favor póngase en contacto a través del canal oficial indicado a continuación.";
 
   if (content.quote) {
     content.quote__i18n__es = content.quote;

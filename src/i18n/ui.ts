@@ -2,14 +2,14 @@ import { defaultLocale, type LocaleCode } from './config';
 
 export const ui = {
   es: {
-    'contact.title': 'Contacto & Contratación',
-    'contact.subtitle': 'Para todas las consultas sobre dirección de orquesta, encargos y prensa.',
-    'contact.general': 'Consultas Generales',
+    'contact.title': 'Contacto',
+    'contact.subtitle': 'Para consultas generales, dirección de orquesta y prensa.',
+    'contact.general': 'Contacto',
   },
   en: {
-    'contact.title': 'Contact & Booking',
-    'contact.subtitle': 'For all inquiries regarding conducting engagements, commissions, and press.',
-    'contact.general': 'General Inquiries',
+    'contact.title': 'Contact',
+    'contact.subtitle': 'For general inquiries, conducting engagements, and press.',
+    'contact.general': 'Contact',
   },
 } as const;
 

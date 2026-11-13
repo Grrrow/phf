@@ -1,20 +1,28 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
 import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+import { getUpcomingEvents, getPastEvents } from '../../utils/events';
 
 const { blok } = Astro.props;
+
+const isEs = Astro.url.pathname.startsWith('/es/') || Astro.url.pathname === '/es';
 
 const theme = blok.theme || 'light';
 const themeClass = theme === 'dark' ? 'agenda-theme-dark' : 'agenda-theme-light';
 const layoutVariant = blok.layout_variant || 'full_agenda_list';
 
-const items = blok.items || [];
-const hasItems = items.length > 0;
+const rawItems = blok.items || [];
+const upcomingItems = getUpcomingEvents(rawItems);
+const pastItems = getPastEvents(rawItems, 10, isEs);
+
+const hasUpcoming = upcomingItems.length > 0;
+const hasPast = pastItems.length > 0;
 ---
 
 <section {...storyblokEditable(blok)} class={`agenda-events-section ${themeClass}`}>
   <div class="container">
     
+    {/* UPCOMING EVENTS */}
     {(blok.eyebrow || blok.title || blok.subtitle) && (
       <header class="section-header">
         {blok.eyebrow && <span class="eyebrow">{blok.eyebrow}</span>}
@@ -23,15 +31,32 @@ const hasItems = items.length > 0;
       </header>
     )}
 
-    {hasItems ? (
+    {hasUpcoming ? (
       <div class={`agenda-list variant-${layoutVariant}`}>
-        {items.map((itemBlok: any) => (
+        {upcomingItems.map((itemBlok: any) => (
           <StoryblokComponent blok={itemBlok} context="agenda" />
         ))}
       </div>
     ) : (
       <div class="empty-state">
-        <p>{blok.empty_state_text || 'No upcoming events at this time.'}</p>
+        <p>{isEs ? 'No hay eventos próximos en este momento.' : (blok.empty_state_text || 'No upcoming events at this time.')}</p>
+      </div>
+    )}
+
+    {/* PAST EVENTS SECTION */}
+    {hasPast && (
+      <div class="past-events-section">
+        <header class="section-header past-header">
+          <span class="eyebrow">{isEs ? 'HISTÓRICO' : 'ARCHIVE'}</span>
+          <h2 class="title">{isEs ? 'Eventos Pasados' : 'Past Events'}</h2>
+          <p class="subtitle">{isEs ? 'Últimos conciertos y representaciones realizadas' : 'Recent performances and past engagements'}</p>
+        </header>
+
+        <div class={`agenda-list variant-${layoutVariant} past-agenda-list`}>
+          {pastItems.map((itemBlok: any) => (
+            <StoryblokComponent blok={itemBlok} context="agenda" />
+          ))}
+        </div>
       </div>
     )}
 
@@ -41,7 +66,6 @@ const hasItems = items.length > 0;
 <style>
   .agenda-events-section {
     width: 100%;
-    /* Extra spacing around the list if needed, parent AgendaPage already handles main spacing */
   }
 
   .container {
@@ -59,6 +83,16 @@ const hasItems = items.length > 0;
 
   .section-header {
     margin-bottom: 3rem;
+  }
+
+  .past-events-section {
+    margin-top: 6rem;
+    padding-top: 4rem;
+    border-top: 1px solid var(--border-light, #E5E5E5);
+  }
+
+  .past-header {
+    margin-bottom: 2rem;
   }
 
   .eyebrow {
@@ -94,7 +128,6 @@ const hasItems = items.length > 0;
     display: flex;
     flex-direction: column;
     width: 100%;
-    /* Ensure borders collapse beautifully */
   }
 
   .empty-state {
